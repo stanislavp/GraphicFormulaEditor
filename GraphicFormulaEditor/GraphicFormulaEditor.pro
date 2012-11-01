@@ -14,3 +14,13 @@ TEMPLATE = app
 FORMS    += MainWindow.ui
 
 include (Config/files.pri)
+
+HEADERS += \
+    GraphicSystem/src/rowmoving.h \
+    GraphicSystem/CursorPosition.h
+
+SOURCES += \
+    GraphicSystem/src/rowmoving.cpp \
+    GraphicSystem/rowMoving.cpp \
+    GraphicSystem/RowMoving.cpp \
+    GraphicSystem/src/CursorPosition.cpp
