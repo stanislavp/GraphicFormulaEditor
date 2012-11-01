@@ -1,20 +1,20 @@
-#include <cstddef>
+#include <QPoint>
 
 #pragma once
 
 /**
- * Класс CursorPosition определяет позицию курсора в строке.
- * Позволяет перемещаться по строке.
+ * Класс CursorPosition определяет позицию курсора.
+ *
  */
 
 // рисовать его, нет? хз. По сути надо.
 
 class CursorPosition {
 public:
-    CursorPosition(size_t position = 0): position(position) {
+    CursorPosition(const QPoint& position = QPoint()): position(position) {
     }
 
-    void getPosition();
+    QPoint getPosition();
 
     void moveLeft();
     void moveRight();
@@ -22,5 +22,5 @@ public:
     //void draw();
 
 private:
-    size_t position;
+    QPoint position;
 };

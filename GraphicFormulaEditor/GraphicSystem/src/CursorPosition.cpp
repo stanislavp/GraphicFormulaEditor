@@ -1,15 +1,15 @@
 #include "../CursorPosition.h"
 
-void CursorPosition::getPosition() {
+QPoint CursorPosition::getPosition() {
     return position;
 }
 
 void CursorPosition::moveLeft() {
     // проверки на начало строки
-    --position;
+    // cldbu c учетом масштаба
 }
 
 void CursorPosition::moveRight() {
     //проверки на конец строки
-    ++position;
+    // сдвиг с учетом масштаба
 }
