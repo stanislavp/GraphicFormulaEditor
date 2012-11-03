@@ -23,7 +23,7 @@ void Operation::Draw(QGraphicsScenePtr scene)
 {
 	if(scene && text_)
 	{
-		text_->setPos(position_);
+	text_->setPos(position_);
 		scene->addItem(text_.get());
 	}
 }

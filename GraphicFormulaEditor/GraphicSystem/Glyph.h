@@ -74,6 +74,9 @@ public:
 	virtual GlyphPtr Parent() throw();
 
 	virtual ~Glyph();
+
+protected:
+    size_t topMargin;
 };
 
 

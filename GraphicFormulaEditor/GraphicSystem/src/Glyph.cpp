@@ -3,7 +3,7 @@
 namespace Graphic
 {
 
-Glyph::Glyph()
+Glyph::Glyph(): topMargin(0)
 {
 
 }

@@ -9,18 +9,24 @@
 
 // рисовать его, нет? хз. По сути надо.
 
-class CursorPosition {
-public:
-    CursorPosition(const QPoint& position = QPoint()): position(position) {
-    }
+namespace Graphic {
 
-    QPoint getPosition();
+    class CursorPosition {
+    public:
+        CursorPosition(const QPoint& position = QPoint()): position(position) {
+        }
 
-    void moveLeft();
-    void moveRight();
+        QPoint getPosition();
 
-    //void draw();
+        void moveLeft();
+        void moveRight();
 
-private:
-    QPoint position;
-};
+
+
+        //void draw();
+
+    private:
+        QPoint position;
+    };
+
+}

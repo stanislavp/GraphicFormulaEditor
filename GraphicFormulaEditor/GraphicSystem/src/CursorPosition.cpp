@@ -1,15 +1,19 @@
 #include "../CursorPosition.h"
 
-QPoint CursorPosition::getPosition() {
-    return position;
-}
+namespace Graphic {
 
-void CursorPosition::moveLeft() {
-    // проверки на начало строки
-    // cldbu c учетом масштаба
-}
+    QPoint CursorPosition::getPosition() {
+        return position;
+    }
 
-void CursorPosition::moveRight() {
-    //проверки на конец строки
-    // сдвиг с учетом масштаба
+    void CursorPosition::moveLeft() {
+        // проверки на начало строки
+        // cldbu c учетом масштаба
+    }
+
+    void CursorPosition::moveRight() {
+        //проверки на конец строки
+        // сдвиг с учетом масштаба
+    }
+
 }
