@@ -14,9 +14,3 @@ TEMPLATE = app
 FORMS    += MainWindow.ui
 
 include (Config/files.pri)
-
-HEADERS += \
-    GraphicSystem/CursorPosition.h
-
-SOURCES += \
-    GraphicSystem/src/CursorPosition.cpp

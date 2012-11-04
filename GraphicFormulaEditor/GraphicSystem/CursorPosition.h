@@ -1,6 +1,6 @@
-#include <QPoint>
-
 #pragma once
+
+#include <QPoint>
 
 /**
  * Класс CursorPosition определяет позицию курсора.
