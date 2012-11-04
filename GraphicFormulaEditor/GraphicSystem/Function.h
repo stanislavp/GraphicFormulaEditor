@@ -2,6 +2,7 @@
 
 //! Own
 #include "Composite.h"
+#include "BracketsPair.h"
 
 namespace Graphic
 {
@@ -9,13 +10,19 @@ namespace Graphic
 class Function : public Composite
 {
 public:
-	Function(GlyphPtr parent = GlyphPtr());
+	Function(const QString &name, GlyphPtr parent = GlyphPtr(), QPoint position = QPoint());
 
 	//! Рисует глиф на сцене
 	virtual void Draw(QGraphicsScenePtr scene);
 
 	//! Возвращает максимальную прямоугольную область, занимаемую глифом
 	virtual QRect Bound();
+
+	// Устанавливает позицию глифа
+	virtual void SetPosition(const QPoint &point);
+
+	// Возвращает позицию глифа
+	virtual QPoint GetPosition();
 
 	//! Определяет пересечение точки с областью глифа
 	virtual GlyphPtr Intersects(const QPoint &point);

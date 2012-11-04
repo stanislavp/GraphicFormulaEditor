@@ -25,16 +25,18 @@ void Composite::Draw(QGraphicsScenePtr scene)
 
 QRect Composite::Bound()
 {
-	int top = std::numeric_limits<int>::max(),
+	/*int top = std::numeric_limits<int>::max(),
 			left = std::numeric_limits<int>::max(),
 			right = std::numeric_limits<int>::min(),
-			bottom = std::numeric_limits<int>::min();
+			bottom = std::numeric_limits<int>::min();*/
+
+    int width = 0, height = 0;
 
 	for(Content::const_iterator _it(contents_.begin()); _it != contents_.end(); ++_it)
 	{
 		QRect _bound = (*_it)->Bound();
 
-		if(_bound.top() < top)
+		/*if(_bound.top() < top)
 			top = _bound.top();
 
 		if(_bound.left() < left)
@@ -44,10 +46,15 @@ QRect Composite::Bound()
 			right = _bound.right();
 
 		if(_bound.bottom() > bottom)
-			bottom = _bound.bottom();
+			bottom = _bound.bottom();*/
+
+		width += _bound.width();
+		height += _bound.height();
 	}
 
-	return QRect(left, top, std::abs(right - left), std::abs(top - bottom));
+	return QRect(0, 0, width, height);
+
+	//return QRect(left, top, std::abs(right - left), std::abs(top - bottom));
 }
 
 GlyphPtr Composite::Intersects(const QPoint &point)

@@ -15,6 +15,8 @@
 #include "GraphicSystem/Row.h"
 #include "GraphicSystem/Operation.h"
 #include "GraphicSystem/Space.h"
+#include "GraphicSystem/BracketsPair.h"
+#include "GraphicSystem/Function.h"
 
 //! STL
 #include <vector>

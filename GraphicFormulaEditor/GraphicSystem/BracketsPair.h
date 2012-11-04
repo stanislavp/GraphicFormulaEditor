@@ -2,6 +2,8 @@
 
 //! Own
 #include "Composite.h"
+#include "Variable.h"
+#include "Row.h"
 
 namespace Graphic
 {
@@ -10,6 +12,7 @@ class BracketsPair : public Composite
 {
 public:
 	BracketsPair(GlyphPtr parent = GlyphPtr());
+	BracketsPair(GlyphPtr parent, QPoint position = QPoint());
 
 	//! Рисует глиф на сцене
 	virtual void Draw(QGraphicsScenePtr scene);

@@ -10,6 +10,7 @@
 
 CC            = gcc
 CXX           = g++
+<<<<<<< HEAD
 DEFINES       = -DQT_WEBKIT -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT $(DEFINES)
 CXXFLAGS      = -pipe -g -Wall -W -D_REENTRANT $(DEFINES)
@@ -17,6 +18,15 @@ INCPATH       = -I/usr/share/qt4/mkspecs/linux-g++ -I. -I/usr/include/qt4/QtCore
 LINK          = g++
 LFLAGS        = 
 LIBS          = $(SUBLIBS)  -L/usr/lib/x86_64-linux-gnu -lQtGui -lQtCore -lpthread 
+=======
+DEFINES       = -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED
+CFLAGS        = -m64 -pipe -O2 -Wall -W -D_REENTRANT $(DEFINES)
+CXXFLAGS      = -m64 -pipe -O2 -Wall -W -D_REENTRANT $(DEFINES)
+INCPATH       = -I/usr/share/qt4/mkspecs/default -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I.
+LINK          = g++
+LFLAGS        = -m64 -Wl,-O1
+LIBS          = $(SUBLIBS)  -L/usr/lib64 -lQtGui -L/usr/lib64 -L/usr/X11R6/lib64 -lQtCore -lpthread 
+>>>>>>> Added implementation of BracketsPair and Function
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /usr/bin/qmake-qt4
@@ -75,7 +85,6 @@ DIST          = /usr/share/qt4/mkspecs/common/unix.conf \
 		/usr/share/qt4/mkspecs/common/g++-base.conf \
 		/usr/share/qt4/mkspecs/common/g++-unix.conf \
 		/usr/share/qt4/mkspecs/qconfig.pri \
-		/usr/share/qt4/mkspecs/modules/qt_webkit_version.pri \
 		/usr/share/qt4/mkspecs/features/qt_functions.prf \
 		/usr/share/qt4/mkspecs/features/qt_config.prf \
 		/usr/share/qt4/mkspecs/features/exclusive_builds.prf \
@@ -127,14 +136,17 @@ $(TARGET): ui_MainWindow.h $(OBJECTS)
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 	{ test -n "$(DESTDIR)" && DESTDIR="$(DESTDIR)" || DESTDIR=.; } && test $$(gdb --version | sed -e 's,[^0-9]\+\([0-9]\)\.\([0-9]\).*,\1\2,;q') -gt 72 && gdb --nx --batch --quiet -ex 'set confirm off' -ex "save gdb-index $$DESTDIR" -ex quit '$(TARGET)' && test -f $(TARGET).gdb-index && objcopy --add-section '.gdb_index=$(TARGET).gdb-index' --set-section-flags '.gdb_index=readonly' '$(TARGET)' '$(TARGET)' && rm -f $(TARGET).gdb-index || true
 
+<<<<<<< HEAD
 Makefile: GraphicFormulaEditor.pro  /usr/share/qt4/mkspecs/linux-g++/qmake.conf /usr/share/qt4/mkspecs/common/unix.conf \
+=======
+Makefile: GraphicFormulaEditor.pro  /usr/share/qt4/mkspecs/default/qmake.conf /usr/share/qt4/mkspecs/common/unix.conf \
+>>>>>>> Added implementation of BracketsPair and Function
 		/usr/share/qt4/mkspecs/common/linux.conf \
 		/usr/share/qt4/mkspecs/common/gcc-base.conf \
 		/usr/share/qt4/mkspecs/common/gcc-base-unix.conf \
 		/usr/share/qt4/mkspecs/common/g++-base.conf \
 		/usr/share/qt4/mkspecs/common/g++-unix.conf \
 		/usr/share/qt4/mkspecs/qconfig.pri \
-		/usr/share/qt4/mkspecs/modules/qt_webkit_version.pri \
 		/usr/share/qt4/mkspecs/features/qt_functions.prf \
 		/usr/share/qt4/mkspecs/features/qt_config.prf \
 		/usr/share/qt4/mkspecs/features/exclusive_builds.prf \
@@ -153,9 +165,15 @@ Makefile: GraphicFormulaEditor.pro  /usr/share/qt4/mkspecs/linux-g++/qmake.conf 
 		/usr/share/qt4/mkspecs/features/yacc.prf \
 		/usr/share/qt4/mkspecs/features/lex.prf \
 		/usr/share/qt4/mkspecs/features/include_source_dir.prf \
+<<<<<<< HEAD
 		/usr/lib/x86_64-linux-gnu/libQtGui.prl \
 		/usr/lib/x86_64-linux-gnu/libQtCore.prl
 	$(QMAKE) -spec /usr/share/qt4/mkspecs/linux-g++ CONFIG+=debug CONFIG+=declarative_debug -o Makefile GraphicFormulaEditor.pro
+=======
+		/usr/lib64/libQtGui.prl \
+		/usr/lib64/libQtCore.prl
+	$(QMAKE) -o Makefile GraphicFormulaEditor.pro
+>>>>>>> Added implementation of BracketsPair and Function
 /usr/share/qt4/mkspecs/common/unix.conf:
 /usr/share/qt4/mkspecs/common/linux.conf:
 /usr/share/qt4/mkspecs/common/gcc-base.conf:
@@ -163,7 +181,6 @@ Makefile: GraphicFormulaEditor.pro  /usr/share/qt4/mkspecs/linux-g++/qmake.conf 
 /usr/share/qt4/mkspecs/common/g++-base.conf:
 /usr/share/qt4/mkspecs/common/g++-unix.conf:
 /usr/share/qt4/mkspecs/qconfig.pri:
-/usr/share/qt4/mkspecs/modules/qt_webkit_version.pri:
 /usr/share/qt4/mkspecs/features/qt_functions.prf:
 /usr/share/qt4/mkspecs/features/qt_config.prf:
 /usr/share/qt4/mkspecs/features/exclusive_builds.prf:
@@ -182,8 +199,8 @@ Config/files.pri:
 /usr/share/qt4/mkspecs/features/yacc.prf:
 /usr/share/qt4/mkspecs/features/lex.prf:
 /usr/share/qt4/mkspecs/features/include_source_dir.prf:
-/usr/lib/x86_64-linux-gnu/libQtGui.prl:
-/usr/lib/x86_64-linux-gnu/libQtCore.prl:
+/usr/lib64/libQtGui.prl:
+/usr/lib64/libQtCore.prl:
 qmake:  FORCE
 	@$(QMAKE) -spec /usr/share/qt4/mkspecs/linux-g++ CONFIG+=debug CONFIG+=declarative_debug -o Makefile GraphicFormulaEditor.pro
 
@@ -219,8 +236,10 @@ moc_MainWindow.cpp: GraphicSystem/Glyph.h \
 		GraphicSystem/Composite.h \
 		GraphicSystem/Operation.h \
 		GraphicSystem/Space.h \
+		GraphicSystem/BracketsPair.h \
+		GraphicSystem/Function.h \
 		MainWindow.h
-	/usr/bin/moc-qt4 $(DEFINES) $(INCPATH) MainWindow.h -o moc_MainWindow.cpp
+	/usr/bin/moc $(DEFINES) $(INCPATH) MainWindow.h -o moc_MainWindow.cpp
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
@@ -233,7 +252,7 @@ compiler_uic_make_all: ui_MainWindow.h
 compiler_uic_clean:
 	-$(DEL_FILE) ui_MainWindow.h
 ui_MainWindow.h: MainWindow.ui
-	/usr/bin/uic-qt4 MainWindow.ui -o ui_MainWindow.h
+	/usr/bin/uic MainWindow.ui -o ui_MainWindow.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -251,7 +270,9 @@ main.o: main.cpp MainWindow.h \
 		GraphicSystem/Row.h \
 		GraphicSystem/Composite.h \
 		GraphicSystem/Operation.h \
-		GraphicSystem/Space.h
+		GraphicSystem/Space.h \
+		GraphicSystem/BracketsPair.h \
+		GraphicSystem/Function.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 MainWindow.o: MainWindow.cpp MainWindow.h \
@@ -261,6 +282,8 @@ MainWindow.o: MainWindow.cpp MainWindow.h \
 		GraphicSystem/Composite.h \
 		GraphicSystem/Operation.h \
 		GraphicSystem/Space.h \
+		GraphicSystem/BracketsPair.h \
+		GraphicSystem/Function.h \
 		ui_MainWindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MainWindow.o MainWindow.cpp
 
@@ -292,7 +315,10 @@ Glyph.o: GraphicSystem/src/Glyph.cpp GraphicSystem/Glyph.h
 
 Function.o: GraphicSystem/src/Function.cpp GraphicSystem/Function.h \
 		GraphicSystem/Composite.h \
-		GraphicSystem/Glyph.h
+		GraphicSystem/Glyph.h \
+		GraphicSystem/BracketsPair.h \
+		GraphicSystem/Variable.h \
+		GraphicSystem/Row.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Function.o GraphicSystem/src/Function.cpp
 
 Fraction.o: GraphicSystem/src/Fraction.cpp GraphicSystem/Fraction.h \
@@ -306,7 +332,9 @@ Composite.o: GraphicSystem/src/Composite.cpp GraphicSystem/Composite.h \
 
 BracketsPair.o: GraphicSystem/src/BracketsPair.cpp GraphicSystem/BracketsPair.h \
 		GraphicSystem/Composite.h \
-		GraphicSystem/Glyph.h
+		GraphicSystem/Glyph.h \
+		GraphicSystem/Variable.h \
+		GraphicSystem/Row.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o BracketsPair.o GraphicSystem/src/BracketsPair.cpp
 
 moc_MainWindow.o: moc_MainWindow.cpp 
