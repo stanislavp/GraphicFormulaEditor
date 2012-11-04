@@ -63,14 +63,4 @@ void LeveledExpression::Remove(size_t position)
 
 }
 
-/**
- * Возвращает родителя глифа.
- * Пустой указатель, если родителя нет.
- */
-GlyphPtr LeveledExpression::Parent() throw()
-{
-
-}
-
-
 }
