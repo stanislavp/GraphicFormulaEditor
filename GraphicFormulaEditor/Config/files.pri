@@ -9,6 +9,7 @@ SOURCES += main.cpp\
     GraphicSystem/src/Function.cpp \
     GraphicSystem/src/Fraction.cpp \
     GraphicSystem/src/Composite.cpp \
+    GraphicSystem/src/IteratorBacklight.cpp \
     GraphicSystem/src/BracketsPair.cpp
 
 HEADERS  += MainWindow.h \
@@ -21,6 +22,7 @@ HEADERS  += MainWindow.h \
     GraphicSystem/Function.h \
     GraphicSystem/Fraction.h \
     GraphicSystem/Composite.h \
+    GraphicSystem/IteratorBacklight.h \
     GraphicSystem/BracketsPair.h
 
 OTHER_FILES += \

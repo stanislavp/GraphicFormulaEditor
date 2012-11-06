@@ -18,6 +18,7 @@
 #include "GraphicSystem/BracketsPair.h"
 #include "GraphicSystem/Function.h"
 #include "GraphicSystem/Fraction.h"
+#include "GraphicSystem/IteratorBacklight.h"
 
 //! STL
 #include <vector>
@@ -39,6 +40,10 @@ public:
 private:
 	//! SHARED PTR ЖЕ :) Нужно хранить!
 	std::vector<Graphic::GlyphPtr> glyphs_;
+
+	//! Для теста.
+	std::vector<Graphic::IteratorBacklightPtr> backlights_;
+
 	boost::shared_ptr<QGraphicsScene> scene_;
 	Ui::MainWindow *ui;
 };

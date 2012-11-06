@@ -41,7 +41,7 @@ QRect BracketsPair::Bound()
         height = max(height, result.height());
     }
 
-    return QRect(frontBracket_->GetPosition().x(), frontBracket_->GetPosition().y(), width, height);
+    return QRect(0, 0, width, height);
 }
 
 GlyphPtr BracketsPair::Intersects(const QPoint &point)

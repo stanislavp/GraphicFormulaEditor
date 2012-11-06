@@ -94,6 +94,19 @@ void MainWindow::__try__()
 
 	row->Draw(scene_);
 
+	/**
+	 * IteratorBacklight TEST
+	 */
+
+	Graphic::IteratorBacklightPtr _ib(new IteratorBacklight(frac1));
+	backlights_.push_back(_ib);
+	_ib->SetGlyph(func1);
+
+	_ib->Draw(scene_);
+
+	/**
+	*/
+
 	ui->FormulaView->setScene(scene_.get());
 
 }

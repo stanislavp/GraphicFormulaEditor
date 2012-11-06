@@ -29,7 +29,7 @@ QRect Function::Bound()
     width += result.width();
     height = max(height, result.height());
 
-    return QRect(name_->GetPosition().x(), name_->GetPosition().y(), width, height);
+    return QRect(0, 0, width, height);
 }
 
 void Function::SetPosition(const QPoint &point)
