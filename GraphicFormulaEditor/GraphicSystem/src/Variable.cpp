@@ -42,9 +42,13 @@ GlyphPtr Variable::Intersects(const QPoint &point)
 {
 	if(text_)
 	{
-		QRect _bound = text_->boundingRect().toRect();
-		if(_bound.contains(point))
-			return VariablePtr(this);
+		QRect _textBound = text_->boundingRect().toRect();
+		QRect tempBound(position_.x(),
+						position_.y(),
+						_textBound.width(),
+						_textBound.height());
+		if(tempBound.contains(point))
+			return Graphic::VariablePtr(this);
 	}
 	return GlyphPtr();
 }

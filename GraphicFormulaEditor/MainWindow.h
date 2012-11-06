@@ -5,6 +5,7 @@
 
 //! QT
 #include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
 
 //! Boost
 #include <boost/shared_ptr.hpp>
@@ -23,6 +24,32 @@
 //! STL
 #include <vector>
 
+//! TEMP
+#include <iostream>
+
+class GraphicsScene : public QGraphicsScene
+{
+	Q_OBJECT
+public:
+	GraphicsScene(QObject* parent = 0) : QGraphicsScene(parent)
+	{
+
+	}
+protected:
+	void mousePressEvent(QGraphicsSceneMouseEvent* event)
+	{
+		QPoint position = event->scenePos().toPoint();
+		std::cerr << "X: " << position.x();
+		std::cerr << " Y: " << position.y();
+		std::cerr << std::endl;
+
+		emit clickOver(position);
+	}
+
+signals:
+	void clickOver(QPoint point);
+};
+
 namespace Ui {
 class MainWindow;
 }
@@ -36,15 +63,21 @@ public:
 	~MainWindow();
 
 	void __try__();
+
+public slots:
+	void FindGlyph(QPoint point);
 	
 private:
 	//! SHARED PTR ЖЕ :) Нужно хранить!
 	std::vector<Graphic::GlyphPtr> glyphs_;
 
+	//! Row
+	Graphic::GlyphPtr mainGlyph_;
+
 	//! Для теста.
 	std::vector<Graphic::IteratorBacklightPtr> backlights_;
 
-	boost::shared_ptr<QGraphicsScene> scene_;
+	boost::shared_ptr<GraphicsScene> scene_;
 	Ui::MainWindow *ui;
 };
 

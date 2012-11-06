@@ -6,7 +6,10 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
-	scene_.reset(new QGraphicsScene());
+	scene_.reset(new GraphicsScene());
+	mainGlyph_.reset(new Graphic::Row());
+
+	connect(scene_.get(), SIGNAL(clickOver(QPoint)), this, SLOT(FindGlyph(QPoint)));
 }
 
 MainWindow::~MainWindow()
@@ -14,13 +17,18 @@ MainWindow::~MainWindow()
 	delete ui;
 }
 
+void MainWindow::FindGlyph(QPoint point)
+{
+	//! Find
+	std::cerr << "Confirm" << std::endl;
+	mainGlyph_->Intersects(point);
+}
+
 void MainWindow::__try__()
 {
 	using namespace Graphic;
 
-	GlyphPtr row(new Row());
-	row->SetPosition(QPoint(100, 100));
-	glyphs_.push_back(row);
+	mainGlyph_->SetPosition(QPoint(100, 100));
 
 	GlyphPtr variable(new Variable(GlyphPtr()));
 	glyphs_.push_back(variable);
@@ -72,18 +80,18 @@ void MainWindow::__try__()
         // операция в числителе frac1
         GlyphPtr operation3(GlyphPtr(new Operation(GlyphPtr(), QString("+"))));
 
-	row->Add(variable, 10);
-	row->Add(operation, 10);
-	row->Add(space, 10);
-	row->Add(variable2, 10);
-	row->Add(operation2, 10);
-	row->Add(brackets, 10);
+	mainGlyph_->Add(variable, 10);
+	mainGlyph_->Add(operation, 10);
+	mainGlyph_->Add(space, 10);
+	mainGlyph_->Add(variable2, 10);
+	mainGlyph_->Add(operation2, 10);
+	mainGlyph_->Add(brackets, 10);
 
 	brackets->Add(variable3, 10);
 	brackets->Add(operation1, 10);
 	brackets->Add(variable4, 10);
 
-        row->Add(frac1, 15);
+		mainGlyph_->Add(frac1, 15);
 
         frac1->Add(variable5, (1 << 15));
         frac1->Add(variable6, 0);
@@ -92,7 +100,7 @@ void MainWindow::__try__()
 
         func1->Add(arg1, 15);
 
-	row->Draw(scene_);
+	mainGlyph_->Draw(scene_);
 
 	/**
 	 * IteratorBacklight TEST
