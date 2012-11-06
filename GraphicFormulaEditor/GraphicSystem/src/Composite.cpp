@@ -30,6 +30,8 @@ QRect Composite::Bound()
 			right = std::numeric_limits<int>::min(),
 			bottom = std::numeric_limits<int>::min();*/
 
+    using std::max;
+
     int width = 0, height = 0;
 
 	for(Content::const_iterator _it(contents_.begin()); _it != contents_.end(); ++_it)
@@ -49,7 +51,7 @@ QRect Composite::Bound()
 			bottom = _bound.bottom();*/
 
 		width += _bound.width();
-		height += _bound.height();
+                height = max(height, _bound.height());
 	}
 
 	return QRect(0, 0, width, height);

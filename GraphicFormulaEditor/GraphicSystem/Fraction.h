@@ -8,9 +8,13 @@ namespace Graphic
 class Fraction : public Composite
 {
 public:
-	Fraction(GlyphPtr parent = GlyphPtr());
+    Fraction(GlyphPtr parent = GlyphPtr(), QPoint position = QPoint());
+
 	//! Рисует глиф на сцене
 	virtual void Draw(QGraphicsScenePtr scene);
+
+        //! Возвращает максимальную прямоугольную область, занимаемую глифом
+        virtual QRect Bound();
 
 	/**
 	 * У каждого глифа есть позиция.
@@ -33,7 +37,10 @@ public:
 	 * Добавляет к глифу потомка.
 	 * Будет работать только для глифов, наследуемых от Composite.
 	 * Для простых глифов будет иметь пустую реализацию по умолчанию.
+         *
+         * @param position - 0..(2^15) - 1 - добавляем к знаменателю, От 2^15 - в числитель
 	 */
+
 	virtual void Add(GlyphPtr glyph, size_t position);
 
 	/**
@@ -51,6 +58,8 @@ public:
 
 private:
 	QPoint position_;
+	GlyphPtr numerator;
+	GlyphPtr denominator;
 };
 
 

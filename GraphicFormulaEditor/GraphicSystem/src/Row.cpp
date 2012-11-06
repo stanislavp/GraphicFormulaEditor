@@ -3,12 +3,6 @@
 namespace Graphic
 {
 
-Row::Row(GlyphPtr parent)
-	: Composite(parent), position_(QPoint())
-{
-
-}
-
 Row::Row(GlyphPtr parent, QPoint position)
 	: Composite(parent), position_(position)
 {
@@ -20,7 +14,9 @@ void Row::Add(GlyphPtr glyph, size_t position)
 	/**
 	 * Пока забъём на position, будем пихать в конец
 	 */
-
+#ifdef DEBUG
+    std::cout << "Row: " << position_.x() << " " << position_.y() << std::endl;
+#endif
 	if(contents_.empty())
 	{
 		//! TODO: указать родителя, как this
@@ -37,6 +33,9 @@ void Row::Add(GlyphPtr glyph, size_t position)
 
 void Row::SetPosition(const QPoint &point)
 {
+#ifdef DEBUG
+    std::cout << "Row position: " << position_.x() << " " << position_.y() << std::endl;
+#endif
 	position_.setX(point.x());
 	position_.setY(point.y());
 }

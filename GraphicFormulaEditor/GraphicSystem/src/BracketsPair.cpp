@@ -24,6 +24,8 @@ void BracketsPair::Draw(QGraphicsScenePtr scene)
 
 QRect BracketsPair::Bound()
 {
+    using std::max;
+
     QRect result = frontBracket_->Bound();
 
     int width = result.width();
@@ -31,12 +33,12 @@ QRect BracketsPair::Bound()
 
     result = backBracket_->Bound();
     width += result.width();
-    height += result.height();
+    height = max(height, result.height());
 
     if(row_) {
         result = row_->Bound();
         width += result.width();
-        height += result.height();
+        height = max(height, result.height());
     }
 
     return QRect(frontBracket_->GetPosition().x(), frontBracket_->GetPosition().y(), width, height);

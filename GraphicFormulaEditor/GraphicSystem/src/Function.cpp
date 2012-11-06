@@ -17,6 +17,8 @@ void Function::Draw(QGraphicsScenePtr scene)
 
 QRect Function::Bound()
 {
+    using std::max;
+
     QRect result = name_->Bound();
 
     int width = result.width();
@@ -25,7 +27,7 @@ QRect Function::Bound()
     result = brackets_->Bound();
 
     width += result.width();
-    height += result.height();
+    height = max(height, result.height());
 
     return QRect(name_->GetPosition().x(), name_->GetPosition().y(), width, height);
 }

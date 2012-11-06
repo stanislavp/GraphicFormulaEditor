@@ -8,9 +8,7 @@ namespace Graphic
 class Row : public Composite
 {
 public:
-
-	Row(GlyphPtr parent = GlyphPtr());
-	Row(GlyphPtr parent, QPoint position = QPoint());
+        Row(GlyphPtr parent = GlyphPtr(), QPoint position = QPoint());
 
 	//! Рисует глиф на сцене
 	//virtual void Draw(QGraphicsScenePtr scene);

@@ -7,6 +7,11 @@
 #include <QGraphicsScene>
 #include <QRect>
 
+//!> STL max()
+#include <algorithm>
+
+//#define DEBUG
+
 namespace Graphic
 {
 
