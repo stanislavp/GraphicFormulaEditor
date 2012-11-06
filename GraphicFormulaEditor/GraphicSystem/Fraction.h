@@ -2,8 +2,13 @@
 
 #include "Composite.h"
 
+//! Qt
+#include <QGraphicsLineItem>
+
 namespace Graphic
 {
+
+typedef boost::shared_ptr<QGraphicsLineItem> QGrapicsLineItemPtr;
 
 class Fraction : public Composite
 {
@@ -57,9 +62,13 @@ public:
 	virtual ~Fraction();
 
 private:
+
+	void UpdateLine();
+
 	QPoint position_;
 	GlyphPtr numerator;
 	GlyphPtr denominator;
+	QGrapicsLineItemPtr line_;
 };
 
 

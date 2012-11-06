@@ -11,9 +11,9 @@ namespace Graphic
 Fraction::Fraction(GlyphPtr parent, QPoint position)
     : Composite(parent), position_(position),
       numerator(GlyphPtr(new Row(GlyphPtr(this), position))),
-      denominator(GlyphPtr(new Row(GlyphPtr(this), position)))
+      denominator(GlyphPtr(new Row(GlyphPtr(this), position))),
+      line_(new QGraphicsLineItem())
 {
-
 }
 
 void Fraction::Add(GlyphPtr glyph, size_t position)
@@ -46,7 +46,8 @@ void Fraction::Add(GlyphPtr glyph, size_t position)
 void Fraction::Draw(QGraphicsScenePtr scene)
 {
     numerator->Draw(scene);
-    // Line
+    UpdateLine();
+    scene->addItem(line_.get());
     denominator->Draw(scene);
 }
 
@@ -75,6 +76,16 @@ QPoint Fraction::GetPosition()
 void Fraction::Remove(size_t position)
 {
 
+}
+
+void Fraction::UpdateLine()
+{
+    QRect _top = numerator->Bound();
+    QRect _bottom = denominator->Bound();
+
+    line_->setLine(position_.x(), position_.y() + std::max(_top.height(), _bottom.height()),
+                   position_.x() + std::max(_top.width(), _bottom.width()),
+                   position_.y() + std::max(_top.height(), _bottom.height()));
 }
 
 
