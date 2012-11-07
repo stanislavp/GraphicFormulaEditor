@@ -21,7 +21,14 @@ void MainWindow::FindGlyph(QPoint point)
 {
 	//! Find
 	std::cerr << "Confirm" << std::endl;
-	mainGlyph_->Intersects(point);
+	Graphic::GlyphPtr glyph = mainGlyph_->Intersects(point);
+
+	if(glyph)
+	{
+		Graphic::IteratorBacklightPtr ib(new Graphic::IteratorBacklight(glyph));
+		backlights_.push_back(ib);
+		ib->Draw(scene_);
+	}
 }
 
 void MainWindow::__try__()
@@ -106,11 +113,11 @@ void MainWindow::__try__()
 	 * IteratorBacklight TEST
 	 */
 
-	Graphic::IteratorBacklightPtr _ib(new IteratorBacklight(frac1));
-	backlights_.push_back(_ib);
-	_ib->SetGlyph(func1);
+	//Graphic::IteratorBacklightPtr _ib(new IteratorBacklight(frac1));
+	//backlights_.push_back(_ib);
+	//_ib->SetGlyph(func1);
 
-	_ib->Draw(scene_);
+	//_ib->Draw(scene_);
 
 	/**
 	*/

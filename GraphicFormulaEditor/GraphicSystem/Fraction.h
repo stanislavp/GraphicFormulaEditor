@@ -36,7 +36,7 @@ public:
 	//virtual QRect Bound();
 
 	//! Определяет пересечение точки с областью глифа
-	//virtual GlyphPtr Intersects(const QPoint &point);
+	virtual GlyphPtr Intersects(const QPoint &point);
 
 	/**
 	 * Добавляет к глифу потомка.

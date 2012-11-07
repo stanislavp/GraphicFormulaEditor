@@ -1,12 +1,18 @@
 #include "../Function.h"
 
+//!
+#include <stdexcept>
+
 namespace Graphic
 {
 
 Function::Function(const QString &name, GlyphPtr parent, QPoint position):
-    Composite(parent), name_(GlyphPtr(new Variable(GlyphPtr(), name, position))),
-    brackets_(GlyphPtr(new BracketsPair())), position_(position)
+	Composite(parent), position_(position)
 {
+	name_.reset(new Variable(GlyphPtr(), name, position));
+	brackets_.reset(new BracketsPair());
+
+	brackets_->SetPosition(position_ + QPoint(name_->Bound().width(), 0));
 }
 
 void Function::Draw(QGraphicsScenePtr scene)
@@ -18,6 +24,9 @@ void Function::Draw(QGraphicsScenePtr scene)
 QRect Function::Bound()
 {
     using std::max;
+
+	if(!name_)
+		throw std::runtime_error("Function::Bound(): null name_ ptr. ");
 
     QRect result = name_->Bound();
 
@@ -49,7 +58,18 @@ QPoint Function::GetPosition()
 
 GlyphPtr Function::Intersects(const QPoint &point)
 {
-
+	GlyphPtr glyph = brackets_->Intersects(point);
+	if(glyph)
+		return glyph;
+	else
+	{
+		glyph = name_->Intersects(point);
+		if(glyph)
+		{
+			return FunctionPtr(this);
+		}
+	}
+	return GlyphPtr();
 }
 
 void Function::Add(GlyphPtr glyph, size_t position)

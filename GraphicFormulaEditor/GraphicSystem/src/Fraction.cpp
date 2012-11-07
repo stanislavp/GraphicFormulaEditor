@@ -73,6 +73,21 @@ QPoint Fraction::GetPosition()
     return position_;
 }
 
+GlyphPtr Fraction::Intersects(const QPoint &point)
+{
+	GlyphPtr glyph = numerator->Intersects(point);
+
+	if(glyph)
+		return glyph;
+
+	glyph = denominator->Intersects(point);
+
+	if(glyph)
+		return glyph;
+
+	//! Проверять собственный bound
+}
+
 void Fraction::Remove(size_t position)
 {
 

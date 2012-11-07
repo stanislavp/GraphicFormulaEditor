@@ -8,6 +8,11 @@
 namespace Graphic
 {
 
+//! Forward declaration
+class BracketsPair;
+
+typedef boost::shared_ptr<BracketsPair> BracketsPairPtr;
+
 class BracketsPair : public Composite
 {
 public:

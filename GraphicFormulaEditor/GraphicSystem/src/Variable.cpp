@@ -40,6 +40,12 @@ QRect Variable::Bound()
 
 GlyphPtr Variable::Intersects(const QPoint &point)
 {
+	/**
+	 * Эталонный bound.
+	 * boundingRect возвращает bound без привязки\
+	 * к координатам, поэтому берём его, переводим координаты в свои\
+	 * и проверяем на вхождение точки.
+	 */
 	if(text_)
 	{
 		QRect _textBound = text_->boundingRect().toRect();
