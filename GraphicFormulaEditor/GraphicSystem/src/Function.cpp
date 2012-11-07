@@ -25,9 +25,6 @@ QRect Function::Bound()
 {
     using std::max;
 
-	if(!name_)
-		throw std::runtime_error("Function::Bound(): null name_ ptr. ");
-
     QRect result = name_->Bound();
 
     int width = result.width();

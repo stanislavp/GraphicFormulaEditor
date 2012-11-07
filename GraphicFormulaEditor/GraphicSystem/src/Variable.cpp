@@ -8,34 +8,27 @@ namespace Graphic
 
 Variable::Variable(GlyphPtr parent) : parent_(parent)
 {
-	text_.reset(new QGraphicsTextItem());
-	text_->setPlainText(QString("y"));
+	text_.setPlainText(QString("y"));
 }
 
 Variable::Variable(GlyphPtr parent, const QString &text, const QPoint &position)
 	: parent_(parent), position_(position)
 {
-	text_.reset(new QGraphicsTextItem());
-	text_->setPlainText(text);
+	text_.setPlainText(text);
 }
 
 void Variable::Draw(QGraphicsScenePtr scene)
 {
-	if(text_ && scene)
+	if(scene)
 	{
-	text_->setPos(position_);
-		scene->addItem(text_.get());
+	text_.setPos(position_);
+		scene->addItem(&text_);
 	}
 }
 
 QRect Variable::Bound()
 {
-	if(text_)
-	{
-		return text_->boundingRect().toRect();
-	}
-
-	throw std::logic_error("Variable::Bound: text item null pointer. ");
+	return text_.boundingRect().toRect();
 }
 
 GlyphPtr Variable::Intersects(const QPoint &point)
@@ -46,16 +39,15 @@ GlyphPtr Variable::Intersects(const QPoint &point)
 	 * к координатам, поэтому берём его, переводим координаты в свои\
 	 * и проверяем на вхождение точки.
 	 */
-	if(text_)
-	{
-		QRect _textBound = text_->boundingRect().toRect();
-		QRect tempBound(position_.x(),
-						position_.y(),
-						_textBound.width(),
-						_textBound.height());
-		if(tempBound.contains(point))
-			return Graphic::VariablePtr(this);
-	}
+
+	QRect _textBound = text_.boundingRect().toRect();
+	QRect tempBound(position_.x(),
+					position_.y(),
+					_textBound.width(),
+					_textBound.height());
+	if(tempBound.contains(point))
+		return Graphic::VariablePtr(this);
+
 	return GlyphPtr();
 }
 
@@ -66,8 +58,8 @@ GlyphPtr Variable::Parent() throw()
 
 void Variable::SetText(const QString &text)
 {
-	if(text_ && !text.isEmpty())
-		text_->setPlainText(text);
+	if(!text.isEmpty())
+		text_.setPlainText(text);
 }
 
 void Variable::SetPosition(const QPoint &point)
@@ -83,7 +75,6 @@ QPoint Variable::GetPosition()
 
 Variable::~Variable()
 {
-	text_.reset();
 }
 
 

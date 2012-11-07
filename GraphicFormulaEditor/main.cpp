@@ -8,6 +8,6 @@ int main(int argc, char *argv[])
 	w.show();
 
 	w.__try__();
-	
+	w.__try2__();
 	return a.exec();
 }

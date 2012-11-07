@@ -63,13 +63,14 @@ public:
 	~MainWindow();
 
 	void __try__();
+	void __try2__();
 
 public slots:
 	void FindGlyph(QPoint point);
 	
 private:
 	//! SHARED PTR ЖЕ :) Нужно хранить!
-	std::vector<Graphic::GlyphPtr> glyphs_;
+	boost::shared_ptr<std::vector<Graphic::GlyphPtr> > glyphs_;
 
 	//! Row
 	Graphic::GlyphPtr mainGlyph_;

@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->setupUi(this);
 	scene_.reset(new GraphicsScene());
 	mainGlyph_.reset(new Graphic::Row());
+	glyphs_.reset(new std::vector<Graphic::GlyphPtr>());
 
 	connect(scene_.get(), SIGNAL(clickOver(QPoint)), this, SLOT(FindGlyph(QPoint)));
 }
@@ -31,6 +32,12 @@ void MainWindow::FindGlyph(QPoint point)
 	}
 }
 
+void MainWindow::__try2__()
+{
+//	scene_->clear();
+//	mainGlyph_->Draw(scene_);
+}
+
 void MainWindow::__try__()
 {
 	using namespace Graphic;
@@ -38,51 +45,51 @@ void MainWindow::__try__()
 	mainGlyph_->SetPosition(QPoint(100, 100));
 
 	GlyphPtr variable(new Variable(GlyphPtr()));
-	glyphs_.push_back(variable);
+	glyphs_->push_back(variable);
 
 	GlyphPtr variable2(new Variable(GlyphPtr()));
-	glyphs_.push_back(variable2);
+	glyphs_->push_back(variable2);
 
 	GlyphPtr operation(new Operation(GlyphPtr(), QString("+")));
-	glyphs_.push_back(operation);
+	glyphs_->push_back(operation);
 
 	GlyphPtr space(new Space());
-	glyphs_.push_back(space);
+	glyphs_->push_back(space);
 
 	GlyphPtr brackets(new BracketsPair());
-	glyphs_.push_back(brackets);
+	glyphs_->push_back(brackets);
 
 	GlyphPtr variable3(new Variable());
-	glyphs_.push_back(variable3);
+	glyphs_->push_back(variable3);
 
 	GlyphPtr operation1(new Operation(GlyphPtr(), QString("+")));
-	glyphs_.push_back(operation1);
+	glyphs_->push_back(operation1);
 
 	GlyphPtr operation2(new Operation(GlyphPtr(), QString("*")));
-	glyphs_.push_back(operation2);
+	glyphs_->push_back(operation2);
 
 	GlyphPtr variable4(new Variable());
-	glyphs_.push_back(variable4);
+	glyphs_->push_back(variable4);
 
         // функция
 	GlyphPtr func1(new Function(QString("sin")));
-	glyphs_.push_back(func1);
+	glyphs_->push_back(func1);
 
         // аргумент функции func1
 	GlyphPtr arg1(new Variable(GlyphPtr(), QString("x")));
-	glyphs_.push_back(arg1);
+	glyphs_->push_back(arg1);
 
         // дробь
         GlyphPtr frac1(new Fraction());
-        glyphs_.push_back(frac1);
+		glyphs_->push_back(frac1);
 
         // числитель frac1
         GlyphPtr variable5(new Variable(GlyphPtr(), QString("z")));
-        glyphs_.push_back(variable5);
+		glyphs_->push_back(variable5);
 
         // знаменатель frac1
         GlyphPtr variable6(new Variable(GlyphPtr(), QString("t")));
-        glyphs_.push_back(variable6);
+		glyphs_->push_back(variable6);
 
         // операция в числителе frac1
         GlyphPtr operation3(GlyphPtr(new Operation(GlyphPtr(), QString("+"))));
