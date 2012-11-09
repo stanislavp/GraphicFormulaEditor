@@ -65,6 +65,7 @@ public:
 	 * Будет работать только для глифов, наследуемых от Composite.
 	 * Для простых глифов будет иметь пустую реализацию по умолчанию.
 	 */
+
 	virtual void Add(GlyphPtr glyph, size_t position);
 
 	/**

@@ -28,6 +28,7 @@ void Variable::Draw(QGraphicsScenePtr scene)
 
 QRect Variable::Bound()
 {
+    std::cout << " ";
 	return text_.boundingRect().toRect();
 }
 
@@ -45,8 +46,10 @@ GlyphPtr Variable::Intersects(const QPoint &point)
 					position_.y(),
 					_textBound.width(),
 					_textBound.height());
-	if(tempBound.contains(point))
-		return Graphic::VariablePtr(this);
+        if(tempBound.contains(point)) {
+            std::cerr << (size_t)(this) << std::endl;
+                return Graphic::VariablePtr(this);
+        }
 
 	return GlyphPtr();
 }

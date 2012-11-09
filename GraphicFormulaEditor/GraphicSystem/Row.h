@@ -52,6 +52,12 @@ public:
 protected:
 	QPoint position_;
 
+private:
+
+        /**
+         * Сдвигает элементы вправо, стоящие после изменившегося.
+         */
+        void updateHorizontal(int width, GlyphPtr obj);
 };
 
 }

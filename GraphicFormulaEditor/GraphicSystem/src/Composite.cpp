@@ -64,8 +64,10 @@ GlyphPtr Composite::Intersects(const QPoint &point)
 	for(Content::const_iterator _it(contents_.begin()); _it != contents_.end(); ++_it)
 	{
 		GlyphPtr _glyph = (*_it)->Intersects(point);
-		if(_glyph)
+                if(_glyph) {
+                    std::cerr << (size_t)(&*_glyph) << std::endl;
 			return _glyph;
+                }
 	}
 	return GlyphPtr();
 }

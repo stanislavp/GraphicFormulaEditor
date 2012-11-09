@@ -24,6 +24,7 @@ void MainWindow::FindGlyph(QPoint point)
 	std::cerr << "Confirm" << std::endl;
 	Graphic::GlyphPtr glyph = mainGlyph_->Intersects(point);
 
+        std::cerr << (size_t)(&*glyph) << std::endl;
 	if(glyph)
 	{
 		Graphic::IteratorBacklightPtr ib(new Graphic::IteratorBacklight(glyph));
@@ -81,20 +82,20 @@ void MainWindow::__try__()
 
         // дробь
         GlyphPtr frac1(new Fraction());
-		glyphs_->push_back(frac1);
+        glyphs_->push_back(frac1);
 
         // числитель frac1
         GlyphPtr variable5(new Variable(GlyphPtr(), QString("z")));
-		glyphs_->push_back(variable5);
+        glyphs_->push_back(variable5);
 
         // знаменатель frac1
         GlyphPtr variable6(new Variable(GlyphPtr(), QString("t")));
-		glyphs_->push_back(variable6);
+        glyphs_->push_back(variable6);
 
         // операция в числителе frac1
         GlyphPtr operation3(GlyphPtr(new Operation(GlyphPtr(), QString("+"))));
 
-	mainGlyph_->Add(variable, 10);
+        mainGlyph_->Add(variable, 10);
 	mainGlyph_->Add(operation, 10);
 	mainGlyph_->Add(space, 10);
 	mainGlyph_->Add(variable2, 10);
@@ -105,7 +106,7 @@ void MainWindow::__try__()
 	brackets->Add(operation1, 10);
 	brackets->Add(variable4, 10);
 
-		mainGlyph_->Add(frac1, 15);
+        mainGlyph_->Add(frac1, 15);
 
         frac1->Add(variable5, (1 << 15));
         frac1->Add(variable6, 0);

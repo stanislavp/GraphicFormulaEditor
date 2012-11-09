@@ -24,7 +24,12 @@ public:
 	virtual QRect Bound();
 
 	//! Определяет пересечение точки с областью глифа
-	virtual GlyphPtr Intersects(const QPoint &point);
+	virtual GlyphPtr Intersects(const QPoint &point);        
+
+        /**
+         * Сдвигает элементы вниз, после добавления(изменения высоты) одного из элементов.
+         */
+       // void updateVertical();
 
 	/**
 	 * Добавляет к глифу потомка.

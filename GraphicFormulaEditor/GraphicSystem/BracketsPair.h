@@ -16,8 +16,7 @@ typedef boost::shared_ptr<BracketsPair> BracketsPairPtr;
 class BracketsPair : public Composite
 {
 public:
-	BracketsPair(GlyphPtr parent = GlyphPtr());
-	BracketsPair(GlyphPtr parent, QPoint position = QPoint());
+        BracketsPair(GlyphPtr parent = GlyphPtr(), QPoint position = QPoint());
 
 	//! Рисует глиф на сцене
 	virtual void Draw(QGraphicsScenePtr scene);
@@ -59,7 +58,7 @@ public:
 private:
 	QPoint position_;
 	GlyphPtr row_;
-	GlyphPtr frontBracket_;
+        GlyphPtr frontBracket_;
 	GlyphPtr backBracket_;
 };
 

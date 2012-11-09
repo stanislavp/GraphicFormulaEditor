@@ -4,7 +4,7 @@ namespace Graphic
 {
 
 IteratorBacklight::IteratorBacklight(GlyphPtr glyph)
-    : glyph_(glyph), rectangle_(new QGraphicsRectItem)
+    : glyph_(glyph), rectangle_(new QGraphicsRectItem())
 {
 
 }
@@ -22,6 +22,8 @@ void IteratorBacklight::UpdateRectangle()
 {
     if(glyph_)
     {
+        std::cerr << (size_t)(&*glyph_) << std::endl;
+
         QRect _bound = glyph_->Bound();
         QPoint _position = glyph_->GetPosition();
 

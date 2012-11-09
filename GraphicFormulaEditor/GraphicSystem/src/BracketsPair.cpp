@@ -3,23 +3,14 @@
 namespace Graphic
 {
 
-    BracketsPair::BracketsPair(GlyphPtr parent):
-        Composite(parent), position_(QPoint()),
-        frontBracket_(new Variable(parent, "(", QPoint())),
-		backBracket_(new Variable(parent, ")", QPoint()))
-	{
-		row_.reset(new Row(GlyphPtr(this), position_ + QPoint(frontBracket_->Bound().width(), 0)));
-    }
+BracketsPair::BracketsPair(GlyphPtr parent, QPoint position):
+    Composite(parent), position_(position),
+    frontBracket_(new Variable(parent, "(", position)),
+    backBracket_(new Variable(parent, ")", position)) {
 
-    BracketsPair::BracketsPair(GlyphPtr parent, QPoint position):
-        Composite(parent), position_(position),
-        frontBracket_(new Variable(parent, "(", position)),
-		backBracket_(new Variable(parent, ")", position))
-	{
+        row_.reset(new Row(GlyphPtr(this), position_ + QPoint(frontBracket_->Bound().width(), 0)));
 
-		row_.reset(new Row(GlyphPtr(this), position_ + QPoint(frontBracket_->Bound().width(), 0)));
-
-    }
+}
 
 void BracketsPair::Draw(QGraphicsScenePtr scene)
 {
@@ -32,7 +23,7 @@ QRect BracketsPair::Bound()
 {
     using std::max;
 
-	QRect result = frontBracket_->Bound();
+    QRect result = frontBracket_->Bound();
 
     int width = result.width();
     int height = result.height();
@@ -52,14 +43,14 @@ QRect BracketsPair::Bound()
 
 GlyphPtr BracketsPair::Intersects(const QPoint &point)
 {
-	GlyphPtr glyph = frontBracket_->Intersects(point);
+        GlyphPtr glyph = frontBracket_->Intersects(point);
 
 	/**
 	 * Сначала проверим - не тыкнули ли мы в скобку.
 	 * В таком случае будем возвращать указатель на текущий глиф.
 	 */
 	if(glyph)
-		return BracketsPairPtr(this);
+            return BracketsPairPtr(this);
 
 	glyph = backBracket_->Intersects(point);
 
