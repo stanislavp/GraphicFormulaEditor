@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	glyphs_.reset(new std::vector<Graphic::GlyphPtr>());
 
 	connect(scene_.get(), SIGNAL(clickOver(QPoint)), this, SLOT(FindGlyph(QPoint)));
+	connect(ui->selectedList, SIGNAL(itemSelectionChanged()), this, SLOT(ChangeSelected()));
 }
 
 MainWindow::~MainWindow()
@@ -18,20 +19,31 @@ MainWindow::~MainWindow()
 	delete ui;
 }
 
+void MainWindow::ChangeSelected()
+{
+
+}
+
 void MainWindow::FindGlyph(QPoint point)
 {
 	Graphic::GlyphList list;
 
-	 if(mainGlyph_->Intersects(point, list))
-	 {
-		 for(Graphic::GlyphList::const_iterator _it(list.begin()); _it != list.end(); ++_it)
-		 {
-			 Graphic::IteratorBacklightPtr ib(new Graphic::IteratorBacklight((*_it)));
-			 backlights_.push_back(ib);
-			 ib->Draw(scene_.get());
-		 }
-	 }
-	 std::cerr << "Confirm(" << list.size() << ")" << std::endl;
+	if(mainGlyph_->Intersects(point, list))
+	{
+		selectedMap_.clear();
+		ui->selectedList->clear();
+
+		for(Graphic::GlyphList::const_iterator _it(list.begin()); _it != list.end(); ++_it)
+		{
+			QListWidgetItem *item = new QListWidgetItem(tr("Item"));
+			ui->selectedList->addItem(item);
+
+			selectedMap_[item] = *_it;
+		}
+	}
+	std::cerr << "Confirm(" << list.size() << ")" << std::endl;
+
+
 }
 
 void MainWindow::__try2__()

@@ -6,6 +6,8 @@
 //! QT
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
+#include <QListWidget>
+#include <QListWidgetItem>
 
 //! Boost
 #include <boost/shared_ptr.hpp>
@@ -23,6 +25,7 @@
 
 //! STL
 #include <vector>
+#include <map>
 
 //! TEMP
 #include <iostream>
@@ -67,6 +70,7 @@ public:
 
 public slots:
 	void FindGlyph(QPoint point);
+	void ChangeSelected();
 	
 private:
 	//! SHARED PTR ЖЕ :) Нужно хранить!
@@ -74,6 +78,9 @@ private:
 
 	//! Row
 	Graphic::GlyphPtr mainGlyph_;
+
+	//! Для выбранных глифоф
+	std::map<QListWidgetItem*, Graphic::GlyphPtr> selectedMap_;
 
 	//! Для теста.
 	std::vector<Graphic::IteratorBacklightPtr> backlights_;

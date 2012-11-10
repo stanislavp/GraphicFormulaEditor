@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'MainWindow.ui'
 **
-** Created: Sat Nov 10 11:26:39 2012
+** Created: Sat Nov 10 15:21:28 2012
 **      by: Qt User Interface Compiler version 4.8.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -16,6 +16,7 @@
 #include <QtGui/QButtonGroup>
 #include <QtGui/QGraphicsView>
 #include <QtGui/QHeaderView>
+#include <QtGui/QListWidget>
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenuBar>
 #include <QtGui/QStatusBar>
@@ -29,6 +30,7 @@ class Ui_MainWindow
 public:
     QWidget *centralWidget;
     QGraphicsView *FormulaView;
+    QListWidget *selectedList;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -42,7 +44,10 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         FormulaView = new QGraphicsView(centralWidget);
         FormulaView->setObjectName(QString::fromUtf8("FormulaView"));
-        FormulaView->setGeometry(QRect(10, 10, 911, 461));
+        FormulaView->setGeometry(QRect(10, 10, 911, 361));
+        selectedList = new QListWidget(centralWidget);
+        selectedList->setObjectName(QString::fromUtf8("selectedList"));
+        selectedList->setGeometry(QRect(10, 380, 256, 101));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));

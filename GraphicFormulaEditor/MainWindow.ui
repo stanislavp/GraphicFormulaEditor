@@ -20,7 +20,17 @@
       <x>10</x>
       <y>10</y>
       <width>911</width>
-      <height>461</height>
+      <height>361</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="selectedList">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>380</y>
+      <width>256</width>
+      <height>101</height>
      </rect>
     </property>
    </widget>
