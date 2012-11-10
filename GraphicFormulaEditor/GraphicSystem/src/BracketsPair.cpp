@@ -46,11 +46,11 @@ bool BracketsPair::Intersects(const QPoint &point, GlyphList &list)
 {
 	if(frontBracket_->Intersects(point, list))
 	{
-		list.push_back(this);
+		list.back() = this;
 		return true;
 	} else if(backBracket_->Intersects(point, list))
 	{
-		list.push_back(this);
+		list.back() = this;
 		return true;
 	} else if(row_->Intersects(point, list))
 	{
