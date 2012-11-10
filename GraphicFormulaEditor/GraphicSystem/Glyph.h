@@ -67,12 +67,16 @@ public:
 	//! Определяет пересечение точки с областью глифа
 	virtual bool Intersects(const QPoint &point, GlyphList &list) = 0;
 
+        /**
+         * Обновляет позиции элементов после изменения контейнера.
+         */
+        virtual void updatePositions(int height);
+
 	/**
 	 * Добавляет к глифу потомка.
 	 * Будет работать только для глифов, наследуемых от Composite.
 	 * Для простых глифов будет иметь пустую реализацию по умолчанию.
 	 */
-
 	virtual void Add(GlyphPtr glyph, size_t position);
 
 	/**

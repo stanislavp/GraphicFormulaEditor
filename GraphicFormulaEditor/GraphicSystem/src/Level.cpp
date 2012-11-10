@@ -46,7 +46,7 @@ QRect LeveledExpression::Bound()
 }
 
 bool LeveledExpression::Intersects(const QPoint &point, GlyphList &list)
-{
+{    
 	if(expression_)
 	{
 		if(expression_->Intersects(point, list))
@@ -72,12 +72,27 @@ bool LeveledExpression::Intersects(const QPoint &point, GlyphList &list)
 
 void LeveledExpression::SetPosition(const QPoint &point)
 {
-	position_.setX(point.x());
-	position_.setY(point.y());
+    QPoint aligned(point);
+    if(Parent()) {
+        int parentHeight = Parent()->Bound().height();
+        int selfHeight = Bound().height();
+        int diff = 0;
 
-	expression_->SetPosition(QPoint(position_.x(), position_.y() + level_->Bound().height()));
+        if(parentHeight > selfHeight)
+            diff = (parentHeight - selfHeight) / 4;
+        else
+            diff = selfHeight / 4;
+
+        aligned.setY(aligned.y() - diff);
+
+    }
+
+        position_.setX(aligned.x());
+        position_.setY(aligned.y());
+
+        expression_->SetPosition(QPoint(position_.x(), position_.y() + level_->Bound().height()));
 	QRect bound = expression_->Bound();
-	level_->SetPosition(QPoint(position_.x() + bound.width(), position_.y()));
+        level_->SetPosition(QPoint(position_.x() + bound.width(), position_.y()));
 
 }
 

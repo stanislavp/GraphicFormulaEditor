@@ -25,9 +25,13 @@ GlyphPtr Glyph::Parent() throw()
 }
 
 
+void Glyph::updatePositions(int height)
+{
+}
+
 Glyph::~Glyph()
 {
 
 }
 
-} // Graphic
+}

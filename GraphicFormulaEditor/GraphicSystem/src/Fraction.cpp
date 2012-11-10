@@ -57,10 +57,25 @@ QRect Fraction::Bound()
 
 void Fraction::SetPosition(const QPoint &point)
 {
-    numerator->SetPosition(QPoint(point.x(), point.y()));
-    denominator->SetPosition(QPoint(point.x(), point.y() + numerator->Bound().height()));
-    position_.setX(point.x());
-    position_.setY(point.y());
+    QPoint aligned(point);
+    if(Parent()) {
+        int parentHeight = Parent()->Bound().height();
+        int selfHeight = Bound().height();
+        int diff = 0;
+
+        if(parentHeight > selfHeight)
+            diff = (parentHeight - selfHeight) / 4;
+        else
+            diff = selfHeight / 4;
+
+        aligned.setY(aligned.y() - diff);
+
+    }
+
+    numerator->SetPosition(QPoint(aligned.x(), aligned.y()));
+    denominator->SetPosition(QPoint(aligned.x(), aligned.y() + numerator->Bound().height()));
+    position_.setX(aligned.x());
+    position_.setY(aligned.y());
 }
 
 QPoint Fraction::GetPosition()

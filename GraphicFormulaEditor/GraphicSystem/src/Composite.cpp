@@ -119,7 +119,7 @@ void Composite::Remove(size_t position)
 
 void Composite::updatePositions(int height)
 {
-    int heightDiff = getMaxHeihgt() - height;
+    int heightDiff = Bound().height() - height;
     for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it) {
         QPoint position;
 
@@ -134,16 +134,6 @@ void Composite::updatePositions(int height)
 
         (*it)->SetPosition(position);
     }
-}
-
-
-int Composite::getMaxHeihgt()
-{
-    int maxHeight = 0;
-    for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it) {
-        maxHeight = std::max(maxHeight, (*it)->Bound().height());
-    }
-    return maxHeight;
 }
 
 GlyphPtr Composite::Parent() throw()

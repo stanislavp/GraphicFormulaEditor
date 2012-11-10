@@ -19,8 +19,6 @@ void Row::Add(GlyphPtr glyph, size_t position)
     std::cout << "Row: " << position_.x() << " " << position_.y() << std::endl;
 #endif
 
-        int oldWidth = Bound().width();
-
         if(contents_.empty())
 	{
 		//! TODO: указать родителя, как this

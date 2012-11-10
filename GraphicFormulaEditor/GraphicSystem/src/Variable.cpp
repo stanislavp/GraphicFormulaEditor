@@ -28,7 +28,6 @@ void Variable::Draw(QGraphicsScenePtr scene)
 
 QRect Variable::Bound()
 {
-    std::cout << " ";
 	return text_.boundingRect().toRect();
 }
 

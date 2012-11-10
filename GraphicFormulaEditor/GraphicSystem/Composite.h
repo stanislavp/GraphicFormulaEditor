@@ -43,23 +43,18 @@ public:
 	 */
 	virtual void Remove(size_t position);
 
-	/**
-	 * Возвращает родителя глифа.
-	 * Пустой указатель, если родителя нет.
-	 */
-	virtual GlyphPtr Parent() throw();
-
-protected:
-
-        /**
-         * Возвращает максимальную высоту элементов контейнера.
-         */
-        int getMaxHeihgt();
-
         /**
          * Обновляет позиции элементов после изменения контейнера.
          */
-        void updatePositions(int height);
+        virtual void updatePositions(int height);
+
+	/**
+	 * Возвращает родителя глифа.
+	 * Пустой указатель, если родителя нет.
+         */
+	virtual GlyphPtr Parent() throw();
+
+protected:
 
 	/**
 	 * Компоновщик будет хранить свои потомки в списке.

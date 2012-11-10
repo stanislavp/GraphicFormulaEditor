@@ -82,16 +82,18 @@ void MainWindow::__try__()
 
 	mainGlyph_->SetPosition(QPoint(100, 100));
 
-	GlyphPtr leveled(new LeveledExpression());
+        GlyphPtr leveled(new LeveledExpression(mainGlyph_));
 	glyphs_->push_back(leveled);
 
 	GlyphPtr variable(new Variable(GlyphPtr(), QString("s")));
 	glyphs_->push_back(variable);
-	leveled->Add(variable, (1 << 15) + 1);
+        //leveled->Add(variable, (1 << 15) + 1);
+        adding(leveled, variable, (1 << 15) + 1);
 
 	GlyphPtr variable2(new Variable(GlyphPtr(), QString("m")));
 	glyphs_->push_back(variable2);
-	leveled->Add(variable2, 0);
+        //leveled->Add(variable2, 0);
+        adding(leveled, variable2, 0);
 
 	GlyphPtr space(new Space());
 	glyphs_->push_back(space);
@@ -120,7 +122,7 @@ void MainWindow::__try__()
 	glyphs_->push_back(arg1);
 
         // дробь
-        GlyphPtr frac1(new Fraction());
+        GlyphPtr frac1(new Fraction(mainGlyph_));
         glyphs_->push_back(frac1);
 
         // числитель frac1
@@ -134,25 +136,65 @@ void MainWindow::__try__()
         // операция в числителе frac1
         GlyphPtr operation3(GlyphPtr(new Operation(GlyphPtr(), QString("+"))));
 
-	mainGlyph_->Add(leveled, 10);
-	mainGlyph_->Add(space, 10);
-	mainGlyph_->Add(operation2, 10);
-	mainGlyph_->Add(brackets, 10);
+        //mainGlyph_->Add(leveled, 10);
+        //mainGlyph_->Add(space, 10);
+        //mainGlyph_->Add(operation2, 10);
+        //mainGlyph_->Add(brackets, 10);
 
-	brackets->Add(variable3, 10);
-	brackets->Add(operation1, 10);
-	brackets->Add(variable4, 10);
+        adding(mainGlyph_, leveled, 10);
+        adding(mainGlyph_, space, 10);
+        adding(mainGlyph_, operation2, 10);
+        adding(mainGlyph_, brackets, 10);
 
-        mainGlyph_->Add(frac1, 15);
+        //brackets->Add(variable3, 10);
+        //brackets->Add(operation1, 10);
+        //brackets->Add(variable4, 10);
 
-        frac1->Add(variable5, (1 << 15));
-        frac1->Add(variable6, 0);
-        frac1->Add(operation3, (1 << 15) + 1);
-        frac1->Add(func1, (1 << 15) + 2);
+        adding(brackets, variable3, 10);
+        adding(brackets, operation1, 10);
+        adding(brackets, variable4, 10);
 
-        func1->Add(arg1, 15);
+        //frac1->Add(variable5, (1 << 15));
+        //frac1->Add(variable6, 0);
+        //frac1->Add(operation3, (1 << 15) + 1);
+        //frac1->Add(func1, (1 << 15) + 2);
 
-		mainGlyph_->Draw(scene_.get());
+        adding(frac1, variable5, (1 << 15));
+        adding(frac1, variable6, 0);
+        adding(frac1, operation3, (1 << 15) + 1);
+        adding(frac1, func1, (1 << 15) + 2);
+
+        //func1->Add(arg1, 15);
+
+        adding(func1, arg1, 15);
+
+        GlyphPtr frac2(new Fraction());
+        glyphs_->push_back(frac2);
+
+        //frac2->Add(new Variable(frac2), 1 << 15);
+        //frac2->Add(new Variable(frac2), 0);
+
+        adding(frac2, new Variable(frac2), 0);
+
+        //frac1->Add(new Operation(frac1, QString("+")), 1);
+        //frac1->Add(frac2, 2);
+
+        adding(frac1, new Operation(frac1, QString("+")), 1);
+        adding(frac1, frac2, 2);
+
+        //mainGlyph_->Add(frac1, 15);
+        adding(mainGlyph_, frac1, 15);
+
+        adding(frac1, new Operation(frac1, QString("*")), (1 << 15) + 3);
+
+        GlyphPtr frac3(new Fraction(frac2));
+
+        adding(frac3, new Variable(frac2), 1 << 15);
+        adding(frac3, new Variable(frac2), 0);
+        adding(frac2, frac3, 1 << 15);
+
+
+        mainGlyph_->Draw(scene_.get());
 
 	/**
 	 * IteratorBacklight TEST
@@ -169,6 +211,15 @@ void MainWindow::__try__()
 
 	ui->FormulaView->setScene(scene_.get());
 
-//	FindGlyph(QPoint(185, 110));
+        //	FindGlyph(QPoint(185, 110));
 
+}
+
+void MainWindow::adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t position)
+{
+    int oldHeight = mainGlyph_->Bound().height();
+
+    where->Add(what, position);
+
+    mainGlyph_->updatePositions(oldHeight);
 }
