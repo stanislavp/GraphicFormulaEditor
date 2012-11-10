@@ -27,12 +27,12 @@ void Fraction::Add(GlyphPtr glyph, size_t position)
         numerator->Add(glyph, position - (1 << 15));
 
         QRect bound = numerator->Bound();
-        numerator->SetPosition(QPoint(position_.x(), position_.y() - bound.height()));
+        numerator->SetPosition(QPoint(position_.x(), position_.y()));
     } else {
         denominator->Add(glyph, position);
 
         QRect bound = denominator->Bound();
-        denominator->SetPosition(QPoint(position_.x(), position_.y() + line_->boundingRect().height()));
+        denominator->SetPosition(QPoint(position_.x(), position_.y() + line_->boundingRect().height() + numerator->Bound().height()));
     }
 
 #ifdef DEBUG
@@ -54,14 +54,14 @@ QRect Fraction::Bound()
 {
 	QRect top = numerator->Bound();
 	QRect bottom = denominator->Bound();
-	return QRect(0, 0, std::max(top.width(), bottom.width()), top.height() + bottom.height());
+        return QRect(0, 0, std::max(top.width(), bottom.width()), top.height() + bottom.height() + line_->boundingRect().height());
 }
 
 
 void Fraction::SetPosition(const QPoint &point)
 {
-    numerator->SetPosition(QPoint(point.x(), point.y() - numerator->Bound().height()));
-    denominator->SetPosition(QPoint(point.x(), point.y() + denominator->Bound().height()));
+    numerator->SetPosition(QPoint(point.x(), point.y()));
+    denominator->SetPosition(QPoint(point.x(), point.y() + numerator->Bound().height()));
     position_.setX(point.x());
     position_.setY(point.y());
 }
@@ -95,9 +95,9 @@ void Fraction::UpdateLine()
     QRect _top = numerator->Bound();
     QRect _bottom = denominator->Bound();
 
-    line_->setLine(position_.x(), position_.y()/* + std::max(_top.height(), _bottom.height())*/,
+    line_->setLine(position_.x(), position_.y() + _top.height(),
                    position_.x() + std::max(_top.width(), _bottom.width()),
-                   position_.y() /*+ std::max(_top.height(), _bottom.height())*/);
+                   position_.y() + _top.height());
 }
 
 
