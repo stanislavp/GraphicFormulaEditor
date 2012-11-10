@@ -82,14 +82,16 @@ void MainWindow::__try__()
 
 	mainGlyph_->SetPosition(QPoint(100, 100));
 
-	GlyphPtr variable(new Variable(GlyphPtr()));
+	GlyphPtr leveled(new LeveledExpression());
+	glyphs_->push_back(leveled);
+
+	GlyphPtr variable(new Variable(GlyphPtr(), QString("s")));
 	glyphs_->push_back(variable);
+	leveled->Add(variable, (1 << 15) + 1);
 
-	GlyphPtr variable2(new Variable(GlyphPtr()));
+	GlyphPtr variable2(new Variable(GlyphPtr(), QString("m")));
 	glyphs_->push_back(variable2);
-
-	GlyphPtr operation(new Operation(GlyphPtr(), QString("+")));
-	glyphs_->push_back(operation);
+	leveled->Add(variable2, 0);
 
 	GlyphPtr space(new Space());
 	glyphs_->push_back(space);
@@ -132,10 +134,8 @@ void MainWindow::__try__()
         // операция в числителе frac1
         GlyphPtr operation3(GlyphPtr(new Operation(GlyphPtr(), QString("+"))));
 
-        mainGlyph_->Add(variable, 10);
-	mainGlyph_->Add(operation, 10);
+	mainGlyph_->Add(leveled, 10);
 	mainGlyph_->Add(space, 10);
-	mainGlyph_->Add(variable2, 10);
 	mainGlyph_->Add(operation2, 10);
 	mainGlyph_->Add(brackets, 10);
 

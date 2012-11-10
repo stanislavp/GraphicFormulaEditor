@@ -9,7 +9,7 @@ namespace Graphic
 class LeveledExpression : public Composite
 {
 public:
-	LeveledExpression(GlyphPtr parent = GlyphPtr());
+	LeveledExpression(GlyphPtr parent = GlyphPtr(), QPoint position = QPoint());
 
 	//! Рисует глиф на сцене
 	virtual void Draw(QGraphicsScenePtr scene);
@@ -18,7 +18,7 @@ public:
 	virtual QRect Bound();
 
 	//! Определяет пересечение точки с областью глифа
-	virtual bool Intersects(const QPoint &point, GlyphList &list) = 0;
+	virtual bool Intersects(const QPoint &point, GlyphList &list);
 
 	/**
 	 * У каждого глифа есть позиция.
@@ -49,7 +49,9 @@ public:
 	 */
 	//virtual GlyphPtr Parent() throw();
 private:
-
+	GlyphPtr expression_;
+	GlyphPtr level_;
+	QPoint position_;
 };
 
 
