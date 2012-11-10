@@ -35,7 +35,6 @@ void Row::Add(GlyphPtr glyph, size_t position)
 	}
 
         int newWidth = Bound().width();
-      //  updateHorizontal(newWidth - oldWidth, GlyphPtr(this));
 }
 
 void Row::SetPosition(const QPoint &point)
@@ -58,23 +57,6 @@ void Row::SetPosition(const QPoint &point)
 QPoint Row::GetPosition()
 {
 	return position_;
-}
-
-
-void Row::updateHorizontal(int width, GlyphPtr obj)
-{
-    QPoint shift(width, 0);
-    while(obj) {
-        Content::iterator ptr = contents_.begin();
-        while(ptr != contents_.end() && obj != *ptr)  ++ptr;
-        ++ptr;
-
-        while(ptr != contents_.end() && (*ptr)->Parent() == obj->Parent()) {
-            (*ptr)->SetPosition((*ptr)->GetPosition() + shift);
-            ++ptr;
-        }
-        obj = obj->Parent();
-    }
 }
 
 Row::~Row()

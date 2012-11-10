@@ -25,14 +25,10 @@ void Fraction::Add(GlyphPtr glyph, size_t position)
 
     if(position >= (1 << 15)) {
         numerator->Add(glyph, position - (1 << 15));
-
-        QRect bound = numerator->Bound();
-        numerator->SetPosition(QPoint(position_.x(), position_.y()));
     } else {
         denominator->Add(glyph, position);
-
-        QRect bound = denominator->Bound();
-        denominator->SetPosition(QPoint(position_.x(), position_.y() + line_->boundingRect().height() + numerator->Bound().height()));
+        denominator->SetPosition(QPoint(position_.x(), position_.y() +
+                                        line_->boundingRect().height() + numerator->Bound().height()));
     }
 
 #ifdef DEBUG
@@ -45,7 +41,7 @@ void Fraction::Draw(QGraphicsScenePtr scene)
 {
     numerator->Draw(scene);
     UpdateLine();
-	scene->addItem(line_);
+    scene->addItem(line_);
     denominator->Draw(scene);
 }
 
@@ -54,7 +50,8 @@ QRect Fraction::Bound()
 {
 	QRect top = numerator->Bound();
 	QRect bottom = denominator->Bound();
-        return QRect(0, 0, std::max(top.width(), bottom.width()), top.height() + bottom.height() + line_->boundingRect().height());
+        return QRect(0, 0, std::max(top.width(), bottom.width()),
+                     top.height() + bottom.height() + line_->boundingRect().height());
 }
 
 
