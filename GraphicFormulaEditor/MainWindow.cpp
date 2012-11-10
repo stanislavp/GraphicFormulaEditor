@@ -63,10 +63,12 @@ void MainWindow::FindGlyph(QPoint point)
 
 			selectedMap_[item] = *_it;
 		}
+	} else
+	{
+		ui->selectedList->clear();
+		selectedMap_.clear();
+		backlights_.clear();
 	}
-	std::cerr << "Confirm(" << list.size() << ")" << std::endl;
-
-
 }
 
 void MainWindow::__try2__()
