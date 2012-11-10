@@ -39,4 +39,10 @@ void IteratorBacklight::SetGlyph(GlyphPtr glyph)
         glyph_ = glyph;
 }
 
+IteratorBacklight::~IteratorBacklight()
+{
+	delete rectangle_;
+}
+
+
 }

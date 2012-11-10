@@ -21,7 +21,30 @@ MainWindow::~MainWindow()
 
 void MainWindow::ChangeSelected()
 {
+	for(std::vector<Graphic::IteratorBacklightPtr>::const_iterator _it(backlights_.begin());
+		_it != backlights_.end(); ++_it)
+	{
+		delete *_it;
+	}
 
+	backlights_.clear();
+
+	QList<QListWidgetItem*> selected(ui->selectedList->selectedItems());
+
+	if(!selected.empty())
+	{
+		std::map<QListWidgetItem*, Graphic::GlyphPtr>::const_iterator _find = selectedMap_.find(selected.front());
+
+		if(_find != selectedMap_.end())
+		{
+			Graphic::GlyphPtr glyph = _find->second;
+
+			Graphic::IteratorBacklightPtr iterator = new Graphic::IteratorBacklight(glyph);
+			backlights_.push_back(iterator);
+
+			iterator->Draw(scene_.get());
+		}
+	}
 }
 
 void MainWindow::FindGlyph(QPoint point)
