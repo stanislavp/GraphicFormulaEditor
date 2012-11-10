@@ -48,7 +48,7 @@ GlyphPtr Variable::Intersects(const QPoint &point)
 					_textBound.height());
         if(tempBound.contains(point)) {
             std::cerr << (size_t)(this) << std::endl;
-                return Graphic::VariablePtr(this);
+				return this;
         }
 
 	return GlyphPtr();

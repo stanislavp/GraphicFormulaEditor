@@ -15,10 +15,14 @@
 namespace Graphic
 {
 
-typedef boost::shared_ptr<QGraphicsScene> QGraphicsScenePtr;
+//typedef boost::shared_ptr<QGraphicsScene> QGraphicsScenePtr;
+
+typedef QGraphicsScene* QGraphicsScenePtr;
 
 class Glyph;
-typedef boost::shared_ptr<Glyph> GlyphPtr;
+//typedef boost::shared_ptr<Glyph> GlyphPtr;
+
+typedef Glyph* GlyphPtr;
 
 /**
  * DESIGN PATTERN: COMPOSITE.

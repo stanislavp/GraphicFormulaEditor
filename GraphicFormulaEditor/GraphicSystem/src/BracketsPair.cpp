@@ -8,15 +8,16 @@ BracketsPair::BracketsPair(GlyphPtr parent, QPoint position):
     frontBracket_(new Variable(parent, "(", position)),
     backBracket_(new Variable(parent, ")", position)) {
 
-        row_.reset(new Row(GlyphPtr(this), position_ + QPoint(frontBracket_->Bound().width(), 0)));
+		row_ = (new Row(GlyphPtr(this), position_ + QPoint(frontBracket_->Bound().width(), 0)));
 
 }
 
 void BracketsPair::Draw(QGraphicsScenePtr scene)
 {
-    frontBracket_->Draw(scene);
-    if(row_)    row_->Draw(scene);
-    backBracket_->Draw(scene);
+	frontBracket_->Draw(scene);
+	if(row_)
+		row_->Draw(scene);
+	backBracket_->Draw(scene);
 }
 
 QRect BracketsPair::Bound()

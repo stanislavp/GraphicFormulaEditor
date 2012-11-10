@@ -9,8 +9,8 @@ namespace Graphic
 Function::Function(const QString &name, GlyphPtr parent, QPoint position):
 	Composite(parent), position_(position)
 {
-        name_.reset(new Variable(parent, name, position));
-        brackets_.reset(new BracketsPair(parent));
+		name_ = (new Variable(parent, name, position));
+		brackets_ = (new BracketsPair(parent));
 
 	brackets_->SetPosition(position_ + QPoint(name_->Bound().width(), 0));
 }

@@ -14,7 +14,7 @@ void IteratorBacklight::Draw(QGraphicsScenePtr scene)
     if(scene)
     {
         UpdateRectangle();
-        scene->addItem(rectangle_.get());
+		scene->addItem(rectangle_);
     }
 }
 

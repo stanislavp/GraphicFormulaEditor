@@ -9,11 +9,15 @@
 namespace Graphic
 {
 
-typedef boost::shared_ptr<QGraphicsTextItem> QGraphicsTextItemPtr;
+//typedef boost::shared_ptr<QGraphicsTextItem> QGraphicsTextItemPtr;
+
+typedef QGraphicsTextItem* QGraphicsTextItemPtr;
 
 //! Forward declaration
 class Operation;
-typedef boost::shared_ptr<Operation> OperationPtr;
+//typedef boost::shared_ptr<Operation> OperationPtr;
+
+typedef Operation* OperationPtr;
 
 class Operation : public Glyph
 {

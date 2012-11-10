@@ -12,9 +12,13 @@ namespace Graphic
 //! Forward declaration
 class IteratorBacklight;
 
-typedef boost::shared_ptr<IteratorBacklight> IteratorBacklightPtr;
+//typedef boost::shared_ptr<IteratorBacklight> IteratorBacklightPtr;
 
-typedef boost::shared_ptr<QGraphicsRectItem> QGraphicsRectItemPtr;
+typedef IteratorBacklight* IteratorBacklightPtr;
+
+//typedef boost::shared_ptr<QGraphicsRectItem> QGraphicsRectItemPtr;
+
+typedef QGraphicsRectItem* QGraphicsRectItemPtr;
 
 class IteratorBacklight
 {

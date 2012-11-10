@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 	ui->setupUi(this);
 	scene_.reset(new GraphicsScene());
-	mainGlyph_.reset(new Graphic::Row());
+	mainGlyph_ = (new Graphic::Row());
 	glyphs_.reset(new std::vector<Graphic::GlyphPtr>());
 
 	connect(scene_.get(), SIGNAL(clickOver(QPoint)), this, SLOT(FindGlyph(QPoint)));
@@ -27,16 +27,16 @@ void MainWindow::FindGlyph(QPoint point)
         std::cerr << (size_t)(&*glyph) << std::endl;
 	if(glyph)
 	{
+		QRect bound = glyph->Bound();
 		Graphic::IteratorBacklightPtr ib(new Graphic::IteratorBacklight(glyph));
 		backlights_.push_back(ib);
-		ib->Draw(scene_);
+		ib->Draw(scene_.get());
 	}
 }
 
 void MainWindow::__try2__()
 {
-//	scene_->clear();
-//	mainGlyph_->Draw(scene_);
+
 }
 
 void MainWindow::__try__()
@@ -115,7 +115,7 @@ void MainWindow::__try__()
 
         func1->Add(arg1, 15);
 
-	mainGlyph_->Draw(scene_);
+		mainGlyph_->Draw(scene_.get());
 
 	/**
 	 * IteratorBacklight TEST
@@ -131,5 +131,7 @@ void MainWindow::__try__()
 	*/
 
 	ui->FormulaView->setScene(scene_.get());
+
+//	FindGlyph(QPoint(185, 110));
 
 }

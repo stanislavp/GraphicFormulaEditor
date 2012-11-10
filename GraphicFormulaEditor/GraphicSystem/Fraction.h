@@ -8,7 +8,9 @@
 namespace Graphic
 {
 
-typedef boost::shared_ptr<QGraphicsLineItem> QGrapicsLineItemPtr;
+//typedef boost::shared_ptr<QGraphicsLineItem> QGrapicsLineItemPtr;
+
+typedef QGraphicsLineItem* QGrapicsLineItemPtr;
 
 class Fraction : public Composite
 {

@@ -9,13 +9,13 @@ namespace Graphic
 Operation::Operation(GlyphPtr parent)
 	: parent_(parent), position_(QPoint())
 {
-	text_.reset(new QGraphicsTextItem());
+	text_ = (new QGraphicsTextItem());
 }
 
 Operation::Operation(GlyphPtr parent, const QString &text, QPoint position)
 	: parent_(parent), position_(position)
 {
-	text_.reset(new QGraphicsTextItem());
+	text_ = (new QGraphicsTextItem());
 	text_->setPlainText(text);
 }
 
@@ -24,7 +24,7 @@ void Operation::Draw(QGraphicsScenePtr scene)
 	if(scene && text_)
 	{
 	text_->setPos(position_);
-		scene->addItem(text_.get());
+		scene->addItem(text_);
 	}
 }
 

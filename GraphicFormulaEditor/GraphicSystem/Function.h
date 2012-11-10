@@ -10,7 +10,9 @@ namespace Graphic
 //! Forward declaration
 class Function;
 
-typedef boost::shared_ptr<Function> FunctionPtr;
+//typedef boost::shared_ptr<Function> FunctionPtr;
+
+typedef Function* FunctionPtr;
 
 class Function : public Composite
 {

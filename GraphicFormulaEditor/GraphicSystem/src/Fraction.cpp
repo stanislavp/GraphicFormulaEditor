@@ -45,7 +45,7 @@ void Fraction::Draw(QGraphicsScenePtr scene)
 {
     numerator->Draw(scene);
     UpdateLine();
-    scene->addItem(line_.get());
+	scene->addItem(line_);
     denominator->Draw(scene);
 }
 

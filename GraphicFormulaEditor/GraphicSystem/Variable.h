@@ -10,10 +10,14 @@
 namespace Graphic
 {
 
-typedef boost::shared_ptr<QGraphicsTextItem> QGraphicsTextItemPtr;
+//typedef boost::shared_ptr<QGraphicsTextItem> QGraphicsTextItemPtr;
+
+typedef QGraphicsTextItem* QGraphicsTextItemPtr;
 
 class Variable;
-typedef boost::shared_ptr<Variable> VariablePtr;
+//typedef boost::shared_ptr<Variable> VariablePtr;
+
+typedef Variable* VariablePtr;
 
 /**
  * TODO.
