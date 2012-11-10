@@ -21,6 +21,7 @@
 #include "GraphicSystem/BracketsPair.h"
 #include "GraphicSystem/Function.h"
 #include "GraphicSystem/Fraction.h"
+#include "GraphicSystem/Level.h"
 #include "GraphicSystem/IteratorBacklight.h"
 
 //! STL

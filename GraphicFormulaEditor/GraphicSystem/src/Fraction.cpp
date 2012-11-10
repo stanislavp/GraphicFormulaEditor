@@ -23,17 +23,15 @@ void Fraction::Add(GlyphPtr glyph, size_t position)
     std::cout << "Fraction: " << position_.x() << " " << position_.y() << std::endl;
 #endif
 
-    if(position >= (1 << 15)) {
-        numerator->Add(glyph, position - (1 << 15));
+	if(position >= (1 << 15)) {
+		numerator->Add(glyph, position - (1 << 15));
 
-        QRect bound = numerator->Bound();
-        numerator->SetPosition(QPoint(position_.x(), position_.y()));
-    } else {
-        denominator->Add(glyph, position);
+		numerator->SetPosition(QPoint(position_.x(), position_.y()));
+	} else {
+		denominator->Add(glyph, position);
 
-        QRect bound = denominator->Bound();
-        denominator->SetPosition(QPoint(position_.x(), position_.y() + line_->boundingRect().height() + numerator->Bound().height()));
-    }
+		denominator->SetPosition(QPoint(position_.x(), position_.y() + line_->boundingRect().height() + numerator->Bound().height()));
+	}
 
 #ifdef DEBUG
     std::cout << "Fraction after adding: " << position_.x() << " " << position_.y() << std::endl;
