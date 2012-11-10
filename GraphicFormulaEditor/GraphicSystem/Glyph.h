@@ -6,8 +6,9 @@
 //! Qt
 #include <QGraphicsScene>
 #include <QRect>
+#include <QList>
 
-//!> STL max()
+//! STL
 #include <algorithm>
 
 //#define DEBUG
@@ -23,6 +24,8 @@ class Glyph;
 //typedef boost::shared_ptr<Glyph> GlyphPtr;
 
 typedef Glyph* GlyphPtr;
+
+typedef QList<GlyphPtr> GlyphList;
 
 /**
  * DESIGN PATTERN: COMPOSITE.
@@ -62,7 +65,7 @@ public:
 	virtual QPoint GetPosition() = 0;
 
 	//! Определяет пересечение точки с областью глифа
-	virtual GlyphPtr Intersects(const QPoint &point) = 0;
+	virtual bool Intersects(const QPoint &point, GlyphList &list) = 0;
 
 	/**
 	 * Добавляет к глифу потомка.

@@ -18,7 +18,7 @@ public:
 	virtual QRect Bound();
 
 	//! Определяет пересечение точки с областью глифа
-	virtual GlyphPtr Intersects(const QPoint &point);
+	virtual bool Intersects(const QPoint &point, GlyphList &list) = 0;
 
 	/**
 	 * У каждого глифа есть позиция.

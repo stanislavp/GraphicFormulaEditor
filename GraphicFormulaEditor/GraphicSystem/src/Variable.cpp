@@ -32,7 +32,7 @@ QRect Variable::Bound()
 	return text_.boundingRect().toRect();
 }
 
-GlyphPtr Variable::Intersects(const QPoint &point)
+bool Variable::Intersects(const QPoint &point, GlyphList &list)
 {
 	/**
 	 * Эталонный bound.
@@ -42,16 +42,15 @@ GlyphPtr Variable::Intersects(const QPoint &point)
 	 */
 
 	QRect _textBound = text_.boundingRect().toRect();
-	QRect tempBound(position_.x(),
-					position_.y(),
-					_textBound.width(),
-					_textBound.height());
-        if(tempBound.contains(point)) {
-            std::cerr << (size_t)(this) << std::endl;
-				return this;
-        }
 
-	return GlyphPtr();
+	QRect tempBound(position_.x(), position_.y(),
+					_textBound.width(),_textBound.height());
+	if(tempBound.contains(point))
+	{
+		list.push_back(this);
+		return true;
+	}
+	return false;
 }
 
 GlyphPtr Variable::Parent() throw()

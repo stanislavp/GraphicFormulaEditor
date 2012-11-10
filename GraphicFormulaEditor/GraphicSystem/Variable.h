@@ -35,7 +35,7 @@ public:
 
 	virtual QRect Bound();
 
-	virtual GlyphPtr Intersects(const QPoint &point);
+	virtual bool Intersects(const QPoint &point, GlyphList &list);
 
 	virtual GlyphPtr Parent() throw();
 

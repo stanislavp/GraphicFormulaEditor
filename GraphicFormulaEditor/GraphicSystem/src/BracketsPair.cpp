@@ -42,29 +42,22 @@ QRect BracketsPair::Bound()
     return QRect(0, 0, width, height);
 }
 
-GlyphPtr BracketsPair::Intersects(const QPoint &point)
+bool BracketsPair::Intersects(const QPoint &point, GlyphList &list)
 {
-        GlyphPtr glyph = frontBracket_->Intersects(point);
-
-	/**
-	 * Сначала проверим - не тыкнули ли мы в скобку.
-	 * В таком случае будем возвращать указатель на текущий глиф.
-	 */
-	if(glyph)
-            return BracketsPairPtr(this);
-
-	glyph = backBracket_->Intersects(point);
-
-	if(glyph)
-		return BracketsPairPtr(this);
-
-	glyph = row_->Intersects(point);
-
-	if(glyph)
-		return glyph;
-	else
-		return GlyphPtr();
-
+	if(frontBracket_->Intersects(point, list))
+	{
+		list.push_back(this);
+		return true;
+	} else if(backBracket_->Intersects(point, list))
+	{
+		list.push_back(this);
+		return true;
+	} else if(row_->Intersects(point, list))
+	{
+		list.push_back(this);
+		return true;
+	}
+	return false;
 }
 
 void BracketsPair::Add(GlyphPtr glyph, size_t position)

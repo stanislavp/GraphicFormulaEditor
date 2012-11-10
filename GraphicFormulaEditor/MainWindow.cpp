@@ -20,18 +20,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::FindGlyph(QPoint point)
 {
-	//! Find
-	std::cerr << "Confirm" << std::endl;
-	Graphic::GlyphPtr glyph = mainGlyph_->Intersects(point);
+	Graphic::GlyphList list;
 
-        std::cerr << (size_t)(&*glyph) << std::endl;
-	if(glyph)
-	{
-		QRect bound = glyph->Bound();
-		Graphic::IteratorBacklightPtr ib(new Graphic::IteratorBacklight(glyph));
-		backlights_.push_back(ib);
-		ib->Draw(scene_.get());
-	}
+	 if(mainGlyph_->Intersects(point, list))
+	 {
+		 for(Graphic::GlyphList::const_iterator _it(list.begin()); _it != list.end(); ++_it)
+		 {
+			 Graphic::IteratorBacklightPtr ib(new Graphic::IteratorBacklight((*_it)));
+			 backlights_.push_back(ib);
+			 ib->Draw(scene_.get());
+		 }
+	 }
+	 std::cerr << "Confirm(" << list.size() << ")" << std::endl;
 }
 
 void MainWindow::__try2__()

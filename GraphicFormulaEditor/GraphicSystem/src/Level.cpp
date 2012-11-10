@@ -23,7 +23,7 @@ QRect LeveledExpression::Bound()
 }
 
 //! Определяет пересечение точки с областью глифа
-GlyphPtr LeveledExpression::Intersects(const QPoint &point)
+bool LeveledExpression::Intersects(const QPoint &point, GlyphList &list)
 {
 
 }

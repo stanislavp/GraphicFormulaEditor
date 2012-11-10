@@ -52,9 +52,9 @@ void Fraction::Draw(QGraphicsScenePtr scene)
 
 QRect Fraction::Bound()
 {
-    QRect top = numerator->Bound();
-    QRect bottom = denominator->Bound();
-    return QRect(top.x(), top.y(), top.width() + bottom.width(), top.height() + bottom.height());
+	QRect top = numerator->Bound();
+	QRect bottom = denominator->Bound();
+	return QRect(0, 0, std::max(top.width(), bottom.width()), top.height() + bottom.height());
 }
 
 
@@ -71,19 +71,18 @@ QPoint Fraction::GetPosition()
     return position_;
 }
 
-GlyphPtr Fraction::Intersects(const QPoint &point)
+bool Fraction::Intersects(const QPoint &point, GlyphList &list)
 {
-	GlyphPtr glyph = numerator->Intersects(point);
-
-	if(glyph)
-		return glyph;
-
-	glyph = denominator->Intersects(point);
-
-	if(glyph)
-		return glyph;
-
-	//! Проверять собственный bound
+	if(numerator->Intersects(point, list))
+	{
+		list.push_back(this);
+		return true;
+	} else if(denominator->Intersects(point, list))
+	{
+		list.push_back(this);
+		return true;
+	}
+	return false;
 }
 
 void Fraction::Remove(size_t position)

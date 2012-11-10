@@ -44,7 +44,7 @@ public:
 	virtual QPoint GetPosition();
 
 	//! Определяет пересечение точки с областью глифа
-	virtual GlyphPtr Intersects(const QPoint &point);
+	virtual bool Intersects(const QPoint &point, GlyphList &list);
 
 	/**
 	 * Добавляет к глифу потомка.

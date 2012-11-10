@@ -59,17 +59,17 @@ QRect Composite::Bound()
 	//return QRect(left, top, std::abs(right - left), std::abs(top - bottom));
 }
 
-GlyphPtr Composite::Intersects(const QPoint &point)
+bool Composite::Intersects(const QPoint &point, GlyphList &list)
 {
 	for(Content::const_iterator _it(contents_.begin()); _it != contents_.end(); ++_it)
 	{
-		GlyphPtr _glyph = (*_it)->Intersects(point);
-                if(_glyph) {
-                    std::cerr << (size_t)(&*_glyph) << std::endl;
-			return _glyph;
-                }
+		if((*_it)->Intersects(point, list))
+		{
+			list.push_back(this);
+			return true;
+		}
 	}
-	return GlyphPtr();
+	return false;
 }
 
 void Composite::Add(GlyphPtr glyph, size_t position)

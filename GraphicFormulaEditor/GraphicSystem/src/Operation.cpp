@@ -47,19 +47,21 @@ QPoint Operation::GetPosition()
 	return position_;
 }
 
-GlyphPtr Operation::Intersects(const QPoint &point)
+bool Operation::Intersects(const QPoint &point, GlyphList &list)
 {
 	if(text_)
 	{
 		QRect _textBound = text_->boundingRect().toRect();
-		QRect tempBound(position_.x(),
-						position_.y(),
-						_textBound.width(),
-						_textBound.height());
+		QRect tempBound(position_.x(), position_.y(),
+						_textBound.width(), _textBound.height());
+
 		if(tempBound.contains(point))
-			return OperationPtr(this);
+		{
+			list.push_back(this);
+			return true;
+		}
 	}
-	return GlyphPtr();
+	return false;
 }
 
 GlyphPtr Operation::Parent() throw()

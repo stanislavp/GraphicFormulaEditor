@@ -53,20 +53,18 @@ QPoint Function::GetPosition()
     return position_;
 }
 
-GlyphPtr Function::Intersects(const QPoint &point)
+bool Function::Intersects(const QPoint &point, GlyphList &list)
 {
-	GlyphPtr glyph = brackets_->Intersects(point);
-	if(glyph)
-		return glyph;
-	else
+	if(brackets_->Intersects(point, list))
 	{
-		glyph = name_->Intersects(point);
-		if(glyph)
-		{
-			return FunctionPtr(this);
-		}
+		list.push_back(this);
+		return true;
+	} else if(name_->Intersects(point, list))
+	{
+		list.push_back(this);
+		return true;
 	}
-	return GlyphPtr();
+	return false;
 }
 
 void Function::Add(GlyphPtr glyph, size_t position)
