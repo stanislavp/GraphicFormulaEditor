@@ -14,7 +14,7 @@ void IteratorBacklight::Draw(QGraphicsScenePtr scene)
     if(scene)
     {
         UpdateRectangle();
-		scene->addItem(rectangle_);
+        scene->addItem(rectangle_);
     }
 }
 
@@ -22,8 +22,6 @@ void IteratorBacklight::UpdateRectangle()
 {
     if(glyph_)
     {
-        std::cerr << (size_t)(&*glyph_) << std::endl;
-
         QRect _bound = glyph_->Bound();
         QPoint _position = glyph_->GetPosition();
 
