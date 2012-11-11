@@ -82,6 +82,8 @@ private:
 
         void adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t position);
 
+	void removing(Graphic::GlyphPtr where, size_t position);
+
 	//! SHARED PTR ЖЕ :) Нужно хранить!
 	boost::shared_ptr<std::vector<Graphic::GlyphPtr> > glyphs_;
 

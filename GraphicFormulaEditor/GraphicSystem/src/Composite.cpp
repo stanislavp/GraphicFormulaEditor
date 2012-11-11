@@ -91,6 +91,7 @@ void Composite::Remove(size_t position)
 		if(_count == position)
 		{
 			contents_.erase(_it);
+			break;
 		}
 	}
 }

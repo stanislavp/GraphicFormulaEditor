@@ -193,6 +193,13 @@ void MainWindow::__try__()
         adding(frac3, new Variable(frac2), 0);
         adding(frac2, frac3, 1 << 15);
 
+	removing(mainGlyph_, 1);
+
+	removing(mainGlyph_, 0);
+
+	adding(mainGlyph_, leveled, 0);
+
+	removing(brackets, 2);
 
         mainGlyph_->Draw(scene_.get());
 
@@ -223,4 +230,13 @@ void MainWindow::adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t 
 
 
     mainGlyph_->updatePositions(oldHeight);
+}
+
+void MainWindow::removing(Graphic::GlyphPtr where, size_t position)
+{
+    int height = mainGlyph_->Bound().height();
+
+    where->Remove(position);
+
+    mainGlyph_->updatePositions(height);
 }
