@@ -1,9 +1,8 @@
 #include "../Fraction.h"
 #include "../Row.h"
 
-#ifdef DEBUG
-#include <iostream>
-#endif
+// STL
+#include <stdexcept>
 
 namespace Graphic
 {
@@ -18,11 +17,6 @@ Fraction::Fraction(GlyphPtr parent, QPoint position)
 
 void Fraction::Add(GlyphPtr glyph, size_t position)
 {
-
-#ifdef DEBUG
-    std::cout << "Fraction: " << position_.x() << " " << position_.y() << std::endl;
-#endif
-
     if(position >= (1 << 15)) {
         numerator->Add(glyph, position - (1 << 15));
     } else {
@@ -30,11 +24,6 @@ void Fraction::Add(GlyphPtr glyph, size_t position)
         denominator->SetPosition(QPoint(position_.x(), position_.y() +
                                         line_->boundingRect().height() + numerator->Bound().height()));
     }
-
-#ifdef DEBUG
-    std::cout << "Fraction after adding: " << position_.x() << " " << position_.y() << std::endl;
-#endif
-
 }
 
 void Fraction::Draw(QGraphicsScenePtr scene)
@@ -99,7 +88,17 @@ bool Fraction::Intersects(const QPoint &point, GlyphList &list)
 
 void Fraction::Remove(size_t position)
 {
-
+    if(position >= (1 << 15)) {
+	if(numerator)
+	    numerator->Remove(position - (1 << 15));
+	else
+	    throw std::runtime_error("Fraction::Remove: numerator has null pointer");
+    } else {
+	if(denominator)
+	    denominator->Remove(position);
+	else
+	    throw std::runtime_error("Fraction::Remove: denominator has null pointer");
+    }
 }
 
 void Fraction::UpdateLine()

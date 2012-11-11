@@ -1,5 +1,8 @@
 #include "../BracketsPair.h"
 
+// STL
+#include <stdexcept>
+
 namespace Graphic
 {
 
@@ -68,7 +71,10 @@ void BracketsPair::Add(GlyphPtr glyph, size_t position)
 
 void BracketsPair::Remove(size_t position)
 {
-
+    if(row_)
+	row_->Remove(position);
+    else
+	throw std::runtime_error("BracketsPair::Remove: row_ has null pointer");
 }
 
 void BracketsPair::SetPosition(const QPoint &point)

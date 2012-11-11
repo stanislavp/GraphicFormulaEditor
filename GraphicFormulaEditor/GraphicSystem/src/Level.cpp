@@ -117,7 +117,17 @@ void LeveledExpression::Add(GlyphPtr glyph, size_t position)
 
 void LeveledExpression::Remove(size_t position)
 {
-
+    if(position >= (1 << 15)) {
+	if(expression_)
+	    expression_->Remove(position - (1 << 15));
+	else
+	    throw std::runtime_error("LeveledExpression::Remove: expression_ has null pointer");
+    } else {
+	if(level_)
+	    level_->Remove(position);
+	else
+	    throw std::runtime_error("LeveledExpression::Remove: level_ has null pointer");
+    }
 }
 
 }

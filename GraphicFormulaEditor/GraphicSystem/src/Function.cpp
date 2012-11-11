@@ -72,7 +72,7 @@ void Function::Add(GlyphPtr glyph, size_t position)
 
 void Function::Remove(size_t position)
 {
-
+    brackets_->Remove(position);
 }
 
 
