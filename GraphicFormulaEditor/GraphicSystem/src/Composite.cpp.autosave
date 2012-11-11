@@ -32,7 +32,7 @@ QRect Composite::Bound()
 	QRect _bound = (*_it)->Bound();
 
 	width += _bound.width();
-	height = max(height, _bound.height());
+	height = std::max(height, _bound.height());
     }
 
     return QRect(0, 0, width, height);

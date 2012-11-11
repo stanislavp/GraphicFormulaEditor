@@ -93,7 +93,6 @@ void LeveledExpression::SetPosition(const QPoint &point)
         expression_->SetPosition(QPoint(position_.x(), position_.y() + level_->Bound().height()));
 	QRect bound = expression_->Bound();
         level_->SetPosition(QPoint(position_.x() + bound.width(), position_.y()));
-
 }
 
 QPoint LeveledExpression::GetPosition()

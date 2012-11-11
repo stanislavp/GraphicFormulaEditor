@@ -221,5 +221,6 @@ void MainWindow::adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t 
 
     where->Add(what, position);
 
+
     mainGlyph_->updatePositions(oldHeight);
 }

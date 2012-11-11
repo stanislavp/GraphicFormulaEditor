@@ -9,10 +9,10 @@ namespace Graphic
 Function::Function(const QString &name, GlyphPtr parent, QPoint position):
 	Composite(parent), position_(position)
 {
-		name_ = (new Variable(parent, name, position));
-		brackets_ = (new BracketsPair(parent));
+    name_ = (new Variable(parent, name, position));
+    brackets_ = (new BracketsPair(parent));
 
-	brackets_->SetPosition(position_ + QPoint(name_->Bound().width(), 0));
+    brackets_->SetPosition(position_ + QPoint(name_->Bound().width(), 0));
 }
 
 void Function::Draw(QGraphicsScenePtr scene)
@@ -23,8 +23,6 @@ void Function::Draw(QGraphicsScenePtr scene)
 
 QRect Function::Bound()
 {
-    using std::max;
-
     QRect result = name_->Bound();
 
     int width = result.width();
@@ -33,7 +31,7 @@ QRect Function::Bound()
     result = brackets_->Bound();
 
     width += result.width();
-    height = max(height, result.height());
+    height = std::max(height, result.height());
 
     return QRect(0, 0, width, height);
 }

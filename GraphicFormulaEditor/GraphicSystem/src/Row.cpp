@@ -15,10 +15,6 @@ void Row::Add(GlyphPtr glyph, size_t position)
 	 * Пока забъём на position, будем пихать в конец
 	 */
 
-#ifdef DEBUG
-    std::cout << "Row: " << position_.x() << " " << position_.y() << std::endl;
-#endif
-
         if(contents_.empty())
 	{
 		//! TODO: указать родителя, как this
@@ -31,17 +27,10 @@ void Row::Add(GlyphPtr glyph, size_t position)
 		glyph->SetPosition(QPoint(lastPosition.x() + contents_.back()->Bound().width(), lastPosition.y()));
 		contents_.push_back(glyph);
 	}
-
-        int newWidth = Bound().width();
 }
 
 void Row::SetPosition(const QPoint &point)
 {
-
-#ifdef DEBUG
-    std::cout << "Row position: " << position_.x() << " " << position_.y() << std::endl;
-#endif
-
     QPoint shift(0, 0);
     for(Content::iterator i = contents_.begin(); i != contents_.end(); ++i) {
         (*i)->SetPosition(point + shift);

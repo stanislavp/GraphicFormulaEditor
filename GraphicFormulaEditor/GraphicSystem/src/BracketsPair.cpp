@@ -8,7 +8,7 @@ BracketsPair::BracketsPair(GlyphPtr parent, QPoint position):
     frontBracket_(new Variable(parent, "(", position)),
     backBracket_(new Variable(parent, ")", position)) {
 
-		row_ = (new Row(GlyphPtr(this), position_ + QPoint(frontBracket_->Bound().width(), 0)));
+    row_ = (new Row(GlyphPtr(this), position_ + QPoint(frontBracket_->Bound().width(), 0)));
 
 }
 
@@ -34,9 +34,9 @@ QRect BracketsPair::Bound()
     height = max(height, result.height());
 
     if(row_) {
-        result = row_->Bound();
-        width += result.width();
-        height = max(height, result.height());
+	result = row_->Bound();
+	width += result.width();
+	height = max(height, result.height());
     }
 
     return QRect(0, 0, width, height);
@@ -80,8 +80,8 @@ void BracketsPair::SetPosition(const QPoint &point)
     position.setX(position.x() + bounds.width());
 
     if(row_) {
-        row_->SetPosition(position);
-        position.setX(position.x() + row_->Bound().width());
+	row_->SetPosition(position);
+	position.setX(position.x() + row_->Bound().width());
     }
 
     backBracket_->SetPosition(position);
