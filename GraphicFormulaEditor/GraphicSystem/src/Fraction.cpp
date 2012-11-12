@@ -114,7 +114,8 @@ void Fraction::UpdateLine()
 
 Fraction::~Fraction()
 {
-
+    delete numerator;
+    delete denominator;
 }
 
 }

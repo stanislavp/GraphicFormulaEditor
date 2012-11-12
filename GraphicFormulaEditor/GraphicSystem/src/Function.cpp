@@ -75,5 +75,10 @@ void Function::Remove(size_t position)
     brackets_->Remove(position);
 }
 
+Function::~Function()
+{
+    delete brackets_;
+    delete name_;
+}
 
 }

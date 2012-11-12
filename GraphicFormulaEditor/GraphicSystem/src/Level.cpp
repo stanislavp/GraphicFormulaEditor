@@ -130,4 +130,10 @@ void LeveledExpression::Remove(size_t position)
     }
 }
 
+LeveledExpression::~LeveledExpression()
+{
+    delete expression_;
+    delete level_;
+}
+
 }

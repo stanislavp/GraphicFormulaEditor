@@ -48,6 +48,8 @@ public:
 	 * Пустой указатель, если родителя нет.
 	 */
 	//virtual GlyphPtr Parent() throw();
+
+	virtual ~LeveledExpression();
 private:
 	GlyphPtr expression_;
 	GlyphPtr level_;

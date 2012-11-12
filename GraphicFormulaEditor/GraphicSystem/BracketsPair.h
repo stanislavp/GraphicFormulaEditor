@@ -56,6 +56,8 @@ public:
 	 * Пустой указатель, если родителя нет.
 	 */
 	//virtual GlyphPtr Parent() throw();
+
+	virtual ~BracketsPair();
 private:
 	QPoint position_;
 	GlyphPtr row_;

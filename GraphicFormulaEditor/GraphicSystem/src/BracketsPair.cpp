@@ -100,4 +100,11 @@ QPoint BracketsPair::GetPosition()
     return position_;
 }
 
+BracketsPair::~BracketsPair()
+{
+    delete frontBracket_;
+    delete row_;
+    delete backBracket_;
+}
+
 }

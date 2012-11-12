@@ -28,7 +28,7 @@ public:
     void Draw(QGraphicsScenePtr scene);
     void SetGlyph(GlyphPtr glyph);
 
-	~IteratorBacklight();
+    ~IteratorBacklight();
 
 private:
     void UpdateRectangle();
