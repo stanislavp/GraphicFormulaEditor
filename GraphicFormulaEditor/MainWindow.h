@@ -11,8 +11,10 @@
 #include <QListWidgetItem>
 
 #include <QHBoxLayout>
+#include <QVBoxLayout>
 
 #include <QGraphicsView>
+#include <QPushButton>
 
 //! Boost
 #include <boost/shared_ptr.hpp>
@@ -75,6 +77,9 @@ public:
 public slots:
 	void FindGlyph(QPoint point);
 	void ChangeSelected();
+
+	void AddGlyph();
+	void DeleteGlyph();
 	
 private:
 
@@ -105,7 +110,17 @@ private:
 	boost::shared_ptr<GraphicsScene> scene_;
 	boost::shared_ptr<QListWidget> selectedList_;
 
+	boost::shared_ptr<QPushButton> delete_;
+	boost::shared_ptr<QPushButton> add_;
+	boost::shared_ptr<QPushButton> variable_;
+	boost::shared_ptr<QPushButton> function_;
+	boost::shared_ptr<QPushButton> fraction_;
+	boost::shared_ptr<QPushButton> leveled_;
+	boost::shared_ptr<QPushButton> radix_;
+
 	boost::shared_ptr<QHBoxLayout> hlayout_;
+	boost::shared_ptr<QHBoxLayout> buttonsLayout_;
+	boost::shared_ptr<QVBoxLayout> vlayout_;
 };
 
 #endif // MAINWINDOW_H

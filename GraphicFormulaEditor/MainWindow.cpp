@@ -5,14 +5,53 @@ MainWindow::MainWindow(QWidget *parent) : QObject(parent)
 	//! GUI Initialization
 	window_.reset(new QWidget);
 	view_.reset(new QGraphicsView);
+
 	scene_.reset(new GraphicsScene);
 	selectedList_.reset(new QListWidget);
+
+	delete_.reset(new QPushButton("Delete"));
+	delete_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+
+	add_.reset(new QPushButton("Add"));
+	add_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+
+	variable_.reset(new QPushButton("x"));
+	variable_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+
+	function_.reset(new QPushButton("f(x)"));
+	function_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+
+	fraction_.reset(new QPushButton("x / y"));
+	fraction_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+
+	leveled_.reset(new QPushButton("x^y"));
+	leveled_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+
+	radix_.reset(new QPushButton("sqrt(x)"));
+	radix_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+
 	hlayout_.reset(new QHBoxLayout);
+
+	vlayout_.reset(new QVBoxLayout);
+	buttonsLayout_.reset(new QHBoxLayout);
 
 	hlayout_->addWidget(view_.get());
 	hlayout_->addWidget(selectedList_.get());
+	hlayout_->setStretch(0, 4);
+	hlayout_->setStretch(1, 1);
 
-	window_->setLayout(hlayout_.get());
+	buttonsLayout_->addWidget(delete_.get());
+	buttonsLayout_->addWidget(add_.get());
+	buttonsLayout_->addWidget(variable_.get());
+	buttonsLayout_->addWidget(function_.get());
+	buttonsLayout_->addWidget(fraction_.get());
+	buttonsLayout_->addWidget(leveled_.get());
+	buttonsLayout_->addWidget(radix_.get());
+
+	vlayout_->addLayout(buttonsLayout_.get());
+	vlayout_->addLayout(hlayout_.get());
+
+	window_->setLayout(vlayout_.get());
 
 	mainGlyph_ = (new Graphic::Row());
 	glyphs_.reset(new std::vector<Graphic::GlyphPtr>());
@@ -20,6 +59,9 @@ MainWindow::MainWindow(QWidget *parent) : QObject(parent)
 	//! Binding
 	connect(scene_.get(), SIGNAL(clickOver(QPoint)), this, SLOT(FindGlyph(QPoint)));
 	connect(selectedList_.get(), SIGNAL(itemSelectionChanged()), this, SLOT(ChangeSelected()));
+
+	connect(delete_.get(), SIGNAL(clicked()), this, SLOT(AddGlyph()));
+	connect(add_.get(), SIGNAL(clicked()), this, SLOT(DeleteGlyph()));
 
 }
 
@@ -32,6 +74,17 @@ void MainWindow::Show()
 {
 	window_->show();
 }
+
+void MainWindow::AddGlyph()
+{
+	std::cerr << "Confirm. " << std::endl;
+}
+
+void MainWindow::DeleteGlyph()
+{
+	std::cerr << "Confirm. " << std::endl;
+}
+
 
 void MainWindow::ChangeSelected()
 {
@@ -217,22 +270,7 @@ void MainWindow::__try__()
 
         mainGlyph_->Draw(scene_.get());
 
-	/**
-	 * IteratorBacklight TEST
-	 */
-
-	//Graphic::IteratorBacklightPtr _ib(new IteratorBacklight(frac1));
-	//backlights_.push_back(_ib);
-	//_ib->SetGlyph(func1);
-
-	//_ib->Draw(scene_);
-
-	/**
-	*/
-
 	view_->setScene(scene_.get());
-
-        //	FindGlyph(QPoint(185, 110));
 
 }
 
