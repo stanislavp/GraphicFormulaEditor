@@ -62,6 +62,11 @@ MainWindow::MainWindow(QWidget *parent) : QObject(parent)
 
 	connect(delete_.get(), SIGNAL(clicked()), this, SLOT(AddGlyph()));
 	connect(add_.get(), SIGNAL(clicked()), this, SLOT(DeleteGlyph()));
+	connect(variable_.get(), SIGNAL(clicked()), this, SLOT(ClickVariable()));
+	connect(function_.get(), SIGNAL(clicked()), this, SLOT(ClickFunction()));
+	connect(fraction_.get(), SIGNAL(clicked()), this, SLOT(ClickFraction()));
+	connect(leveled_.get(), SIGNAL(clicked()), this, SLOT(ClickLeveled()));
+	connect(radix_.get(), SIGNAL(clicked()), this, SLOT(ClickRadix()));
 
 }
 
@@ -83,6 +88,31 @@ void MainWindow::AddGlyph()
 void MainWindow::DeleteGlyph()
 {
 	std::cerr << "Confirm. " << std::endl;
+}
+
+void MainWindow::ClickVariable()
+{
+
+}
+
+void MainWindow::ClickFunction()
+{
+
+}
+
+void MainWindow::ClickFraction()
+{
+
+}
+
+void MainWindow::ClickLeveled()
+{
+
+}
+
+void MainWindow::ClickRadix()
+{
+
 }
 
 

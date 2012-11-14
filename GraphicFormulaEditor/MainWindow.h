@@ -80,6 +80,11 @@ public slots:
 
 	void AddGlyph();
 	void DeleteGlyph();
+	void ClickVariable();
+	void ClickFunction();
+	void ClickFraction();
+	void ClickLeveled();
+	void ClickRadix();
 	
 private:
 
