@@ -294,7 +294,7 @@ void MainWindow::__try__()
 
 	removing(mainGlyph_, 0);
 
-	adding(mainGlyph_, leveled, 0);
+	adding(mainGlyph_, leveled, 3);
 
 	removing(brackets, 2);
 
