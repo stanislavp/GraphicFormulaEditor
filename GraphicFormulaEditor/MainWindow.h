@@ -6,8 +6,13 @@
 //! QT
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
+
 #include <QListWidget>
 #include <QListWidgetItem>
+
+#include <QHBoxLayout>
+
+#include <QGraphicsView>
 
 //! Boost
 #include <boost/shared_ptr.hpp>
@@ -54,17 +59,15 @@ signals:
 	void clickOver(QPoint point);
 };
 
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QMainWindow
+class MainWindow : public QObject // : public QMainWindow
 {
 	Q_OBJECT
 	
 public:
 	explicit MainWindow(QWidget *parent = 0);
 	~MainWindow();
+
+	void Show();
 
 	void __try__();
 	void __try2__();
@@ -96,8 +99,13 @@ private:
 	//! Для теста.
 	std::vector<Graphic::IteratorBacklightPtr> backlights_;
 
+	//! GUI
+	boost::shared_ptr<QWidget> window_;
+	boost::shared_ptr<QGraphicsView> view_;
 	boost::shared_ptr<GraphicsScene> scene_;
-	Ui::MainWindow *ui;
+	boost::shared_ptr<QListWidget> selectedList_;
+
+	boost::shared_ptr<QHBoxLayout> hlayout_;
 };
 
 #endif // MAINWINDOW_H

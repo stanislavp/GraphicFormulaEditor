@@ -1,22 +1,36 @@
 #include "MainWindow.h"
-#include "ui_MainWindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-	QMainWindow(parent),
-	ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent) : QObject(parent)
 {
-	ui->setupUi(this);
-	scene_.reset(new GraphicsScene());
+	//! GUI Initialization
+	window_.reset(new QWidget);
+	view_.reset(new QGraphicsView);
+	scene_.reset(new GraphicsScene);
+	selectedList_.reset(new QListWidget);
+	hlayout_.reset(new QHBoxLayout);
+
+	hlayout_->addWidget(view_.get());
+	hlayout_->addWidget(selectedList_.get());
+
+	window_->setLayout(hlayout_.get());
+
 	mainGlyph_ = (new Graphic::Row());
 	glyphs_.reset(new std::vector<Graphic::GlyphPtr>());
 
+	//! Binding
 	connect(scene_.get(), SIGNAL(clickOver(QPoint)), this, SLOT(FindGlyph(QPoint)));
-	connect(ui->selectedList, SIGNAL(itemSelectionChanged()), this, SLOT(ChangeSelected()));
+	connect(selectedList_.get(), SIGNAL(itemSelectionChanged()), this, SLOT(ChangeSelected()));
+
 }
 
 MainWindow::~MainWindow()
 {
-	delete ui;
+
+}
+
+void MainWindow::Show()
+{
+	window_->show();
 }
 
 void MainWindow::ChangeSelected()
@@ -29,7 +43,7 @@ void MainWindow::ChangeSelected()
 
 	backlights_.clear();
 
-	QList<QListWidgetItem*> selected(ui->selectedList->selectedItems());
+	QList<QListWidgetItem*> selected(selectedList_->selectedItems());
 
 	if(!selected.empty())
 	{
@@ -54,18 +68,18 @@ void MainWindow::FindGlyph(QPoint point)
 	if(mainGlyph_->Intersects(point, list))
 	{
 		selectedMap_.clear();
-		ui->selectedList->clear();
+		selectedList_->clear();
 
 		for(Graphic::GlyphList::const_iterator _it(list.begin()); _it != list.end(); ++_it)
 		{
 			QListWidgetItem *item = new QListWidgetItem(tr("Item"));
-			ui->selectedList->addItem(item);
+			selectedList_->addItem(item);
 
 			selectedMap_[item] = *_it;
 		}
 	} else
 	{
-		ui->selectedList->clear();
+		selectedList_->clear();
 		selectedMap_.clear();
 		backlights_.clear();
 	}
@@ -216,7 +230,7 @@ void MainWindow::__try__()
 	/**
 	*/
 
-	ui->FormulaView->setScene(scene_.get());
+	view_->setScene(scene_.get());
 
         //	FindGlyph(QPoint(185, 110));
 

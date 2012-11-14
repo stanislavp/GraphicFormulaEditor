@@ -11,6 +11,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = GraphicFormulaEditor
 TEMPLATE = app
 
-FORMS    += MainWindow.ui
+FORMS    +=
 
 include (Config/files.pri)
