@@ -24,11 +24,6 @@ GlyphPtr Glyph::Parent() throw()
 	return GlyphPtr();
 }
 
-
-void Glyph::updatePositions(int height)
-{
-}
-
 Glyph::~Glyph()
 {
 

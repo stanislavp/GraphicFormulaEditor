@@ -224,19 +224,12 @@ void MainWindow::__try__()
 
 void MainWindow::adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t position)
 {
-    int oldHeight = mainGlyph_->Bound().height();
-
     where->Add(what, position);
-
-
-    mainGlyph_->updatePositions(oldHeight);
+    mainGlyph_->SetPosition(mainGlyph_->GetPosition());
 }
 
 void MainWindow::removing(Graphic::GlyphPtr where, size_t position)
 {
-    int height = mainGlyph_->Bound().height();
-
     where->Remove(position);
-
-    mainGlyph_->updatePositions(height);
+    mainGlyph_->SetPosition(mainGlyph_->GetPosition());
 }

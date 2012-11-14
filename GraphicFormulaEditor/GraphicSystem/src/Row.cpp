@@ -31,14 +31,19 @@ void Row::Add(GlyphPtr glyph, size_t position)
 
 void Row::SetPosition(const QPoint &point)
 {
-    QPoint shift(0, 0);
-    for(Content::iterator i = contents_.begin(); i != contents_.end(); ++i) {
-        (*i)->SetPosition(point + shift);
-        shift.setX(shift.x() + (*i)->Bound().width());
-    }
+    position_.setX(point.x());
+    position_.setY(point.y());
 
-	position_.setX(point.x());
-	position_.setY(point.y());
+    int cumlWidth = 0;
+    int rowHeight = Bound().height();
+
+    for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it) {
+	int localHeight = (*it)->Bound().height();
+	int topIndent = (rowHeight - localHeight) / 2;
+
+	(*it)->SetPosition(QPoint(point.x() + cumlWidth, point.y() + topIndent));
+	cumlWidth += (*it)->Bound().width();
+    }
 }
 
 QPoint Row::GetPosition()

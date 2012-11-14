@@ -96,26 +96,6 @@ void Composite::Remove(size_t position)
 	}
 }
 
-
-void Composite::updatePositions(int height)
-{
-    int heightDiff = Bound().height() - height;
-    for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it) {
-	QPoint position;
-
-	if(it != contents_.begin()) {
-	    Content::const_iterator _it = it;
-
-	    --_it;
-	    position = (*_it)->GetPosition() + QPoint((*_it)->Bound().width(), 0);
-	} else {
-	    position = QPoint((*it)->GetPosition().x(), (*it)->GetPosition().y() + heightDiff);
-	}
-
-	(*it)->SetPosition(position);
-    }
-}
-
 GlyphPtr Composite::Parent() throw()
 {
 	return parent_;

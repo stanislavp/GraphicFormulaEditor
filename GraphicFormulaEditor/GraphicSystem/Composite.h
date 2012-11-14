@@ -43,11 +43,6 @@ public:
 	 */
 	virtual void Remove(size_t position);
 
-        /**
-         * Обновляет позиции элементов после изменения контейнера.
-         */
-        virtual void updatePositions(int height);
-
 	/**
 	 * Возвращает родителя глифа.
 	 * Пустой указатель, если родителя нет.
