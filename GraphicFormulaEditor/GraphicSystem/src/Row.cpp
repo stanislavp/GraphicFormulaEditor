@@ -11,10 +11,6 @@ Row::Row(GlyphPtr parent, QPoint position)
 
 void Row::Add(GlyphPtr glyph, size_t position)
 {
-	/**
-	 * Пока забъём на position, будем пихать в конец
-	 */
-
         if(contents_.empty())
 	{
 		//! TODO: указать родителя, как this
@@ -22,10 +18,30 @@ void Row::Add(GlyphPtr glyph, size_t position)
 		contents_.push_back(glyph);
 	} else
 	{
-		QPoint lastPosition = contents_.back()->GetPosition();
+	    int count = 0;
+	    bool inserted = false;
+	    for(Content::iterator it = contents_.begin(); it != contents_.end(); ++it, ++count) {
+		if(count == position) {
+		    Content::iterator _it = it;
+		    --_it;
+		    if(_it != contents_.begin() && it != contents_.begin()) {
+			--_it;
+			QPoint lastPosition = (*_it)->GetPosition();
+			glyph->SetPosition(QPoint(lastPosition.x() + (*_it)->Bound().width(), lastPosition.y()));
+		    }
 
+		    contents_.insert(it, glyph);
+		    inserted = true;
+		    break;
+		}
+	    }
+
+	    if(!inserted) {
+		QPoint lastPosition = contents_.back()->GetPosition();
 		glyph->SetPosition(QPoint(lastPosition.x() + contents_.back()->Bound().width(), lastPosition.y()));
+
 		contents_.push_back(glyph);
+	    }
 	}
 }
 
