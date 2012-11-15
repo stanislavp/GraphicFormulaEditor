@@ -28,6 +28,8 @@ public:
     void Draw(QGraphicsScenePtr scene);
     void SetGlyph(GlyphPtr glyph);
 
+    GlyphPtr GetGlyph();
+
     ~IteratorBacklight();
 
 private:

@@ -83,12 +83,28 @@ void MainWindow::Show()
 void MainWindow::AddGlyph()
 {
 	std::cerr << "Confirm. " << std::endl;
+
+
 }
 
 void MainWindow::DeleteGlyph()
 {
-	if(selected_)
-		std::cerr << "Confirm. " << std::endl;
+	if(selected_) {
+	    std::cerr << "Confirm." << std::endl;
+
+	    Graphic::GlyphPtr glyph = selected_->GetGlyph();
+
+	    if(glyph->Parent()) {		
+		Graphic::GlyphPtr parent = glyph->Parent();
+		try {
+		    size_t position = parent->GetPositionByPtr(glyph);
+		    removing(parent, position);
+		} catch(std::logic_error& e) {
+		    std::cerr << e.what() << std::endl;
+		}
+	    }
+	}
+
 }
 
 void MainWindow::ClickVariable()

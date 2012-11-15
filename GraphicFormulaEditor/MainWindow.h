@@ -37,6 +37,7 @@
 //! STL
 #include <vector>
 #include <map>
+#include <stdexcept>
 
 //! TEMP
 #include <iostream>
@@ -91,12 +92,11 @@ public slots:
 	
 private:
 
-        // Куда запилить не знал, пихнул сюда для проверки как обновляются позиции.
-        // Примерно так и должно быть. Как правильно указывать глифу родителя можно подумать.
-        // Хз как ты там ищешь, может оттуда сможешь.
-        // Можно прямо из функици добавления указывать как вариант.
+	// Добавление к глифу потомка
 
         void adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t position);
+
+	// Удаление по позиции
 
 	void removing(Graphic::GlyphPtr where, size_t position);
 

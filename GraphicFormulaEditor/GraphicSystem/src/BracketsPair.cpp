@@ -100,6 +100,11 @@ QPoint BracketsPair::GetPosition()
     return position_;
 }
 
+size_t BracketsPair::GetPositionByPtr(GlyphPtr ptr)
+{
+    return row_->GetPositionByPtr(ptr);
+}
+
 BracketsPair::~BracketsPair()
 {
     delete frontBracket_;

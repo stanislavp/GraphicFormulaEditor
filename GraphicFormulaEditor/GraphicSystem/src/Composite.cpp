@@ -107,6 +107,17 @@ GlyphPtr Composite::Get(size_t position) {
 	}
 }
 
+size_t Composite::GetPositionByPtr(GlyphPtr ptr)
+{
+    size_t result = 0;
+    for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it, ++result) {
+	if(*it == ptr)
+	    return result;
+    }
+
+    throw std::logic_error("This glyph is not here.");
+}
+
 GlyphPtr Composite::Parent() throw()
 {
 	return parent_;

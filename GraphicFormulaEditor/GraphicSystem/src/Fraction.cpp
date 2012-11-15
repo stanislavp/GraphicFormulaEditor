@@ -105,6 +105,18 @@ GlyphPtr Fraction::Get(size_t position)
 	return (position == 0 ? numerator : denominator);
 }
 
+size_t Fraction::GetPositionByPtr(GlyphPtr ptr)
+{
+    size_t position = 0;
+    try {
+	position = numerator->GetPositionByPtr(ptr);
+	return position + (1 << 15);
+    } catch(std::logic_error& e) {
+	position = denominator->GetPositionByPtr(ptr);
+    }
+    return position;
+}
+
 Fraction::~Fraction()
 {
     delete numerator;

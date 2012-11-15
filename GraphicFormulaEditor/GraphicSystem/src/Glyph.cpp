@@ -24,6 +24,12 @@ GlyphPtr Glyph::Parent() throw()
 	return GlyphPtr();
 }
 
+size_t Glyph::GetPositionByPtr(GlyphPtr ptr)
+{
+    // Default implementation
+    return 0;
+}
+
 Glyph::~Glyph()
 {
 

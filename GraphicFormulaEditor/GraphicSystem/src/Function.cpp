@@ -83,6 +83,11 @@ GlyphPtr Function::Get(size_t position)
 	return brackets_;
 }
 
+size_t Function::GetPositionByPtr(GlyphPtr ptr)
+{
+    return brackets_->GetPositionByPtr(ptr);
+}
+
 Function::~Function()
 {
     delete brackets_;

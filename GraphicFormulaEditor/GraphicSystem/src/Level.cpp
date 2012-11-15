@@ -122,6 +122,18 @@ GlyphPtr LeveledExpression::Get(size_t position)
 	return (position == 0 ? expression_ : level_);
 }
 
+size_t LeveledExpression::GetPositionByPtr(GlyphPtr ptr)
+{
+    size_t position = 0;
+    try {
+	position = level_->GetPositionByPtr(ptr);
+	return position + (1 << 15);
+    } catch(std::logic_error& e) {
+	position = expression_->GetPositionByPtr(ptr);
+    }
+    return position;
+}
+
 LeveledExpression::~LeveledExpression()
 {
     delete expression_;
