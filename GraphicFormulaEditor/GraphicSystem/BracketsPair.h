@@ -52,6 +52,11 @@ public:
 	virtual QPoint GetPosition();
 
 	/**
+	 * Возвращает потомка глифа по позиции.
+	 */
+	virtual GlyphPtr get(size_t position);
+
+	/**
 	 * Возвращает родителя глифа.
 	 * Пустой указатель, если родителя нет.
 	 */

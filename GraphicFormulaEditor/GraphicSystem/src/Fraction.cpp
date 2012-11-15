@@ -97,6 +97,11 @@ void Fraction::UpdateLine()
                    position_.y() + _top.height());
 }
 
+GlyphPtr Fraction::get(size_t position) {
+    if(position > 1)
+	throw std::out_of_range("Index out of range");
+    return (position == 0 ? numerator : denominator);
+}
 
 Fraction::~Fraction()
 {

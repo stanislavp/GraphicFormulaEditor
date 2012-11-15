@@ -114,6 +114,12 @@ void LeveledExpression::Remove(size_t position)
     }
 }
 
+GlyphPtr LeveledExpression::get(size_t position) {
+    if(position > 1)
+	throw std::out_of_range("Index out of range");
+    return (position == 0 ? expression_ : level_);
+}
+
 LeveledExpression::~LeveledExpression()
 {
     delete expression_;

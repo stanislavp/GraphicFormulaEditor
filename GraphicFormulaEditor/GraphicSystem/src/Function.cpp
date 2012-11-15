@@ -75,6 +75,12 @@ void Function::Remove(size_t position)
     brackets_->Remove(position);
 }
 
+GlyphPtr Function::get(size_t position) {
+    if(position > 0)
+	throw std::out_of_range("Index out of range");
+    return brackets_;
+}
+
 Function::~Function()
 {
     delete brackets_;

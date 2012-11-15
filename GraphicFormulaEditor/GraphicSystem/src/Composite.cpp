@@ -96,6 +96,17 @@ void Composite::Remove(size_t position)
 	}
 }
 
+GlyphPtr Composite::get(size_t position) {
+    if(position >= contents_.size())
+	throw std::out_of_range("Index out of range");
+
+    int count = 0;
+    for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it, ++count) {
+	if(count == position)
+	    return *it;
+    }
+}
+
 GlyphPtr Composite::Parent() throw()
 {
 	return parent_;
