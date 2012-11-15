@@ -1,6 +1,6 @@
 #include "MainWindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QObject(parent)
+MainWindow::MainWindow(QWidget *parent) : QObject(parent), selected_(0)
 {
 	//! GUI Initialization
 	window_.reset(new QWidget);
@@ -87,7 +87,8 @@ void MainWindow::AddGlyph()
 
 void MainWindow::DeleteGlyph()
 {
-	std::cerr << "Confirm. " << std::endl;
+	if(selected_)
+		std::cerr << "Confirm. " << std::endl;
 }
 
 void MainWindow::ClickVariable()
@@ -137,6 +138,7 @@ void MainWindow::ChangeSelected()
 			Graphic::GlyphPtr glyph = _find->second;
 
 			Graphic::IteratorBacklightPtr iterator = new Graphic::IteratorBacklight(glyph);
+			selected_ = iterator;
 			backlights_.push_back(iterator);
 
 			iterator->Draw(scene_.get());

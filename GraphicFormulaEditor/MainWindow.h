@@ -106,6 +106,9 @@ private:
 	//! Row
 	Graphic::GlyphPtr mainGlyph_;
 
+	//! Текущий выделенный
+	Graphic::IteratorBacklightPtr selected_;
+
 	//! Для выбранных глифоф
 	std::map<QListWidgetItem*, Graphic::GlyphPtr> selectedMap_;
 
