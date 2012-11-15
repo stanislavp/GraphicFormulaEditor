@@ -107,11 +107,12 @@ BracketsPair::~BracketsPair()
     delete backBracket_;
 }
 
-GlyphPtr BracketsPair::get(size_t position)
+GlyphPtr BracketsPair::Get(size_t position)
 {
-    if(position	> 0)
-	throw std::out_of_range("Index out of range");
-    return row_;
+	if(position	> 0)
+		throw std::out_of_range("Index out of range");
+
+	return row_;
 }
 
 }

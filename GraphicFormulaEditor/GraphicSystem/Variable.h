@@ -43,6 +43,8 @@ public:
 
 	virtual void SetPosition(const QPoint &point);
 
+	virtual GlyphPtr Get(size_t position);
+
 	/**
 	 * Возвращает позицию глифа.
 	 */

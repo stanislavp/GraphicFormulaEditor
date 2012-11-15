@@ -49,7 +49,7 @@ public:
 	/**
 	 * Возвращает потомка глифа по позиции.
 	 */
-	virtual GlyphPtr get(size_t position);
+	virtual GlyphPtr Get(size_t position);
 
 	/**
 	 * Возвращает родителя глифа.

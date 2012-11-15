@@ -170,7 +170,7 @@ void MainWindow::FindGlyph(QPoint point)
 
 void MainWindow::__try2__()
 {
-
+	Iterator::GlyphIterator _it(mainGlyph_);
 }
 
 void MainWindow::__try__()

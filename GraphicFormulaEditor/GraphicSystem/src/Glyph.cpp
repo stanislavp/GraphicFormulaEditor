@@ -24,11 +24,6 @@ GlyphPtr Glyph::Parent() throw()
 	return GlyphPtr();
 }
 
-GlyphPtr Glyph::get(size_t position) {
-    // Говорит, что такого нету.
-    //throw std::underflow_error("Glyph has no childs");
-}
-
 Glyph::~Glyph()
 {
 

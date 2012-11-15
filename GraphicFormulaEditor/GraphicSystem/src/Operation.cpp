@@ -2,6 +2,7 @@
 
 //! STL
 #include <stdexcept>
+#include "../../Exceptions/IsPlainGlyph.h"
 
 namespace Graphic
 {
@@ -62,6 +63,11 @@ bool Operation::Intersects(const QPoint &point, GlyphList &list)
 		}
 	}
 	return false;
+}
+
+GlyphPtr Operation::Get(size_t position)
+{
+	throw Exception::IsPlainGlyph("Operation::Get(): is plain. ");
 }
 
 GlyphPtr Operation::Parent() throw()

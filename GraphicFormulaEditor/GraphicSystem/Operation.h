@@ -58,6 +58,8 @@ public:
 	 */
 	//virtual void Remove(size_t position);
 
+	virtual GlyphPtr Get(size_t position);
+
 	/**
 	 * Возвращает родителя глифа.
 	 * Пустой указатель, если родителя нет.

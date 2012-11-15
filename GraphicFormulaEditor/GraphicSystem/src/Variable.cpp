@@ -2,6 +2,7 @@
 
 //! STL
 #include <stdexcept>
+#include "../../Exceptions/IsPlainGlyph.h"
 
 namespace Graphic
 {
@@ -72,6 +73,11 @@ void Variable::SetPosition(const QPoint &point)
 QPoint Variable::GetPosition()
 {
 	return position_;
+}
+
+GlyphPtr Variable::Get(size_t position)
+{
+	throw Exception::IsPlainGlyph("Operation::Get(): is plain. ");
 }
 
 Variable::~Variable()

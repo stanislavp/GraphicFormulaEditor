@@ -31,6 +31,9 @@
 #include "GraphicSystem/Level.h"
 #include "GraphicSystem/IteratorBacklight.h"
 
+//! Iterator
+#include "Iterators/GlyphIterator.h"
+
 //! STL
 #include <vector>
 #include <map>

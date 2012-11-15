@@ -10,6 +10,8 @@ SOURCES += main.cpp\
     GraphicSystem/src/Fraction.cpp \
     GraphicSystem/src/Composite.cpp \
     GraphicSystem/src/IteratorBacklight.cpp \
+    Exceptions/src/IsPlainGlyph.cpp \
+    Iterators/src/GlyphIterator.cpp \
     GraphicSystem/src/BracketsPair.cpp
 
 HEADERS  += MainWindow.h \
@@ -23,6 +25,9 @@ HEADERS  += MainWindow.h \
     GraphicSystem/Fraction.h \
     GraphicSystem/Composite.h \
     GraphicSystem/IteratorBacklight.h \
+    Exceptions/IsPlainGlyph.h \
+    Iterators/Iterator.h \
+    Iterators/GlyphIterator.h \
     GraphicSystem/BracketsPair.h
 
 OTHER_FILES += \
