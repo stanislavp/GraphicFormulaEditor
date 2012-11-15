@@ -84,7 +84,31 @@ void MainWindow::AddGlyph()
 {
 	std::cerr << "Confirm. " << std::endl;
 
+	/*
+	    Здесь как-то надо слепить это дело с теми кнопками.
+	    Запилить одну переменную смежную, в которую будем
+	    создавать добавляемый глиф? И тут проверять было
+	    ли все правильно выделено?
+	*/
 
+	if(selected_) {
+	    // пихаем после выделенного глифа
+	    Graphic::GlyphPtr glyph = selected_->GetGlyph();
+
+	    if(glyph->Parent()) {
+		Graphic::GlyphPtr parent = glyph->Parent();
+
+		try {
+		    size_t position = parent->GetPositionByPtr(glyph);
+		    adding(parent, /* что-то */, position + 1);
+		} catch(std::logic_exception& e) {
+		    std::cerr << e.what() << std::endl;
+		}
+	    }
+	} else {
+	    // пихаем в конец
+	    adding(mainGlyph_, /* что-то */, 0);
+	}
 }
 
 void MainWindow::DeleteGlyph()
