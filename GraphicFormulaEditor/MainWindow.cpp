@@ -125,6 +125,7 @@ void MainWindow::DeleteGlyph()
 			try {
 				size_t position = parent->GetPositionByPtr(glyph);
 				removing(parent, position);
+				delete glyph;
 				std::cerr << "Deleted." << std::endl;
 			} catch(std::logic_error& e) {
 				std::cerr << e.what() << std::endl;

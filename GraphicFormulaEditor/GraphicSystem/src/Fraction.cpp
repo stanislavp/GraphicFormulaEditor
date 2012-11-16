@@ -120,6 +120,7 @@ size_t Fraction::GetPositionByPtr(GlyphPtr ptr)
 Fraction::~Fraction()
 {
     delete numerator;
+	delete line_;
     delete denominator;
 }
 

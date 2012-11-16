@@ -53,7 +53,7 @@ public:
 	virtual ~Variable();
 protected:
 	GlyphPtr parent_;
-	QGraphicsTextItem text_;
+	QGraphicsTextItem *text_;
 	QPoint position_;
 };
 

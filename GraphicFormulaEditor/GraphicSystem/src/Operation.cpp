@@ -77,7 +77,7 @@ GlyphPtr Operation::Parent() throw()
 
 Operation::~Operation()
 {
-
+	delete text_;
 }
 
 }

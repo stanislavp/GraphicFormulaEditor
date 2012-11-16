@@ -123,5 +123,13 @@ GlyphPtr Composite::Parent() throw()
 	return parent_;
 }
 
+Composite::~Composite()
+{
+	for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it)
+	{
+		delete *it;
+	}
+}
+
 
 }

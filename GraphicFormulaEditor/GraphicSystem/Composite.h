@@ -60,6 +60,8 @@ public:
          */
 	virtual GlyphPtr Parent() throw();
 
+	virtual ~Composite();
+
 protected:
 
 	/**
