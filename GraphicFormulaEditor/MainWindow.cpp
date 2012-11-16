@@ -125,6 +125,7 @@ void MainWindow::DeleteGlyph()
 			try {
 				size_t position = parent->GetPositionByPtr(glyph);
 				removing(parent, position);
+				std::cerr << "Deleted." << std::endl;
 			} catch(std::logic_error& e) {
 				std::cerr << e.what() << std::endl;
 			}
@@ -223,124 +224,27 @@ void MainWindow::__try__()
 
 	mainGlyph_->SetPosition(QPoint(100, 100));
 
-        GlyphPtr leveled(new LeveledExpression(mainGlyph_));
-	glyphs_->push_back(leveled);
+	GlyphPtr function(new Function(QString("sin"), mainGlyph_));
 
-	GlyphPtr variable(new Variable(GlyphPtr(), QString("s")));
-	glyphs_->push_back(variable);
-        //leveled->Add(variable, (1 << 15) + 1);
-        adding(leveled, variable, (1 << 15) + 1);
+	GlyphPtr var(new Variable(function));
 
-	GlyphPtr variable2(new Variable(GlyphPtr(), QString("m")));
-	glyphs_->push_back(variable2);
-        //leveled->Add(variable2, 0);
-        adding(leveled, variable2, 0);
+	GlyphPtr oper(new Operation(function, QString("+")));
 
-	GlyphPtr space(new Space());
-	glyphs_->push_back(space);
+	GlyphPtr func2(new Function(QString("cos"), function));
 
-	GlyphPtr brackets(new BracketsPair());
-	glyphs_->push_back(brackets);
+	GlyphPtr var2(new Variable(func2, QString("x")));
 
-	GlyphPtr variable3(new Variable());
-	glyphs_->push_back(variable3);
+	glyphs_->push_back(function);
+	glyphs_->push_back(var);
+	glyphs_->push_back(oper);
+	glyphs_->push_back(func2);
+	glyphs_->push_back(var2);
 
-	GlyphPtr operation1(new Operation(GlyphPtr(), QString("+")));
-	glyphs_->push_back(operation1);
-
-	GlyphPtr operation2(new Operation(GlyphPtr(), QString("*")));
-	glyphs_->push_back(operation2);
-
-	GlyphPtr variable4(new Variable());
-	glyphs_->push_back(variable4);
-
-        // функция
-	GlyphPtr func1(new Function(QString("sin")));
-	glyphs_->push_back(func1);
-
-        // аргумент функции func1
-	GlyphPtr arg1(new Variable(GlyphPtr(), QString("x")));
-	glyphs_->push_back(arg1);
-
-        // дробь
-        GlyphPtr frac1(new Fraction(mainGlyph_));
-        glyphs_->push_back(frac1);
-
-        // числитель frac1
-        GlyphPtr variable5(new Variable(GlyphPtr(), QString("z")));
-        glyphs_->push_back(variable5);
-
-        // знаменатель frac1
-        GlyphPtr variable6(new Variable(GlyphPtr(), QString("t")));
-        glyphs_->push_back(variable6);
-
-        // операция в числителе frac1
-        GlyphPtr operation3(GlyphPtr(new Operation(GlyphPtr(), QString("+"))));
-
-        //mainGlyph_->Add(leveled, 10);
-        //mainGlyph_->Add(space, 10);
-        //mainGlyph_->Add(operation2, 10);
-        //mainGlyph_->Add(brackets, 10);
-
-        adding(mainGlyph_, leveled, 10);
-        adding(mainGlyph_, space, 10);
-        adding(mainGlyph_, operation2, 10);
-        adding(mainGlyph_, brackets, 10);
-
-        //brackets->Add(variable3, 10);
-        //brackets->Add(operation1, 10);
-        //brackets->Add(variable4, 10);
-
-        adding(brackets, variable3, 10);
-        adding(brackets, operation1, 10);
-        adding(brackets, variable4, 10);
-
-        //frac1->Add(variable5, (1 << 15));
-        //frac1->Add(variable6, 0);
-        //frac1->Add(operation3, (1 << 15) + 1);
-        //frac1->Add(func1, (1 << 15) + 2);
-
-        adding(frac1, variable5, (1 << 15));
-        adding(frac1, variable6, 0);
-        adding(frac1, operation3, (1 << 15) + 1);
-        adding(frac1, func1, (1 << 15) + 2);
-
-        //func1->Add(arg1, 15);
-
-        adding(func1, arg1, 15);
-
-        GlyphPtr frac2(new Fraction());
-        glyphs_->push_back(frac2);
-
-        //frac2->Add(new Variable(frac2), 1 << 15);
-        //frac2->Add(new Variable(frac2), 0);
-
-        adding(frac2, new Variable(frac2), 0);
-
-        //frac1->Add(new Operation(frac1, QString("+")), 1);
-        //frac1->Add(frac2, 2);
-
-        adding(frac1, new Operation(frac1, QString("+")), 1);
-        adding(frac1, frac2, 2);
-
-        //mainGlyph_->Add(frac1, 15);
-        adding(mainGlyph_, frac1, 15);
-
-        adding(frac1, new Operation(frac1, QString("*")), (1 << 15) + 3);
-
-        GlyphPtr frac3(new Fraction(frac2));
-
-        adding(frac3, new Variable(frac2), 1 << 15);
-        adding(frac3, new Variable(frac2), 0);
-        adding(frac2, frac3, 1 << 15);
-
-	removing(mainGlyph_, 1);
-
-	removing(mainGlyph_, 0);
-
-	adding(mainGlyph_, leveled, 3);
-
-	removing(brackets, 2);
+	adding(mainGlyph_, function, 0);
+	adding(function, var, 0);
+	adding(function, oper, 1);
+	adding(function, func2, 2);
+	adding(func2, var2, 0);
 
         mainGlyph_->Draw(scene_.get());
 
