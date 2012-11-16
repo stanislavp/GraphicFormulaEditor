@@ -60,8 +60,8 @@ MainWindow::MainWindow(QWidget *parent) : QObject(parent), selected_(0)
 	connect(scene_.get(), SIGNAL(clickOver(QPoint)), this, SLOT(FindGlyph(QPoint)));
 	connect(selectedList_.get(), SIGNAL(itemSelectionChanged()), this, SLOT(ChangeSelected()));
 
-	connect(delete_.get(), SIGNAL(clicked()), this, SLOT(AddGlyph()));
-	connect(add_.get(), SIGNAL(clicked()), this, SLOT(DeleteGlyph()));
+	connect(add_.get(), SIGNAL(clicked()), this, SLOT(AddGlyph()));
+	connect(delete_.get(), SIGNAL(clicked()), this, SLOT(DeleteGlyph()));
 	connect(variable_.get(), SIGNAL(clicked()), this, SLOT(ClickVariable()));
 	connect(function_.get(), SIGNAL(clicked()), this, SLOT(ClickFunction()));
 	connect(fraction_.get(), SIGNAL(clicked()), this, SLOT(ClickFraction()));
@@ -90,7 +90,7 @@ void MainWindow::AddGlyph()
 	    создавать добавляемый глиф? И тут проверять было
 	    ли все правильно выделено?
 	*/
-
+	/*
 	if(selected_) {
 	    // пихаем после выделенного глифа
 	    Graphic::GlyphPtr glyph = selected_->GetGlyph();
@@ -100,33 +100,35 @@ void MainWindow::AddGlyph()
 
 		try {
 		    size_t position = parent->GetPositionByPtr(glyph);
-		    adding(parent, /* что-то */, position + 1);
+			adding(parent, , position + 1);
 		} catch(std::logic_exception& e) {
 		    std::cerr << e.what() << std::endl;
 		}
 	    }
 	} else {
 	    // пихаем в конец
-	    adding(mainGlyph_, /* что-то */, 0);
+		adding(mainGlyph_, , 0);
 	}
+	*/
 }
 
 void MainWindow::DeleteGlyph()
 {
-	if(selected_) {
-	    std::cerr << "Confirm." << std::endl;
+	if(selected_)
+	{
+		std::cerr << "Confirm." << std::endl;
 
-	    Graphic::GlyphPtr glyph = selected_->GetGlyph();
+		Graphic::GlyphPtr glyph = selected_->GetGlyph();
 
-	    if(glyph->Parent()) {		
-		Graphic::GlyphPtr parent = glyph->Parent();
-		try {
-		    size_t position = parent->GetPositionByPtr(glyph);
-		    removing(parent, position);
-		} catch(std::logic_error& e) {
-		    std::cerr << e.what() << std::endl;
+		if(glyph->Parent()) {
+			Graphic::GlyphPtr parent = glyph->Parent();
+			try {
+				size_t position = parent->GetPositionByPtr(glyph);
+				removing(parent, position);
+			} catch(std::logic_error& e) {
+				std::cerr << e.what() << std::endl;
+			}
 		}
-	    }
 	}
 
 }
