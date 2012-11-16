@@ -41,6 +41,7 @@ void Operation::SetPosition(const QPoint &point)
 {
 	position_.setX(point.x());
 	position_.setY(point.y());
+	text_->setPos(position_);
 }
 
 QPoint Operation::GetPosition()
