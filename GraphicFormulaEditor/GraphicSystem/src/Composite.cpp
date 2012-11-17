@@ -25,17 +25,17 @@ void Composite::Draw(QGraphicsScenePtr scene)
 
 QRect Composite::Bound()
 {
-    int width = 0, height = 0;
+	 int width = 0, height = 0;
 
-    for(Content::const_iterator _it(contents_.begin()); _it != contents_.end(); ++_it)
-    {
-	QRect _bound = (*_it)->Bound();
+	 for(Content::const_iterator _it(contents_.begin()); _it != contents_.end(); ++_it)
+	 {
+		  QRect _bound = (*_it)->Bound();
 
-	width += _bound.width();
-	height = std::max(height, _bound.height());
-    }
+		  width += _bound.width();
+		  height = std::max(height, _bound.height());
+	 }
 
-    return QRect(0, 0, width, height);
+	 return QRect(0, 0, width, height);
 }
 
 bool Composite::Intersects(const QPoint &point, GlyphList &list)
@@ -109,13 +109,13 @@ GlyphPtr Composite::Get(size_t position) {
 
 size_t Composite::GetPositionByPtr(GlyphPtr ptr)
 {
-    size_t result = 0;
-    for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it, ++result) {
-	if(*it == ptr)
-	    return result;
-    }
+	 size_t result = 0;
+	 for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it, ++result) {
+		  if(*it == ptr)
+		  return result;
+	 }
 
-    throw std::logic_error("This glyph is not here.");
+	 throw std::logic_error("This glyph is not here.");
 }
 
 GlyphPtr Composite::Parent() throw()

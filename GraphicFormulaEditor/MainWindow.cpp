@@ -85,28 +85,28 @@ void MainWindow::AddGlyph()
 	std::cerr << "Confirm. " << std::endl;
 
 	/*
-	    Здесь как-то надо слепить это дело с теми кнопками.
-	    Запилить одну переменную смежную, в которую будем
-	    создавать добавляемый глиф? И тут проверять было
-	    ли все правильно выделено?
+		 Здесь как-то надо слепить это дело с теми кнопками.
+		 Запилить одну переменную смежную, в которую будем
+		 создавать добавляемый глиф? И тут проверять было
+		 ли все правильно выделено?
 	*/
 	/*
 	if(selected_) {
-	    // пихаем после выделенного глифа
-	    Graphic::GlyphPtr glyph = selected_->GetGlyph();
+		 // пихаем после выделенного глифа
+		 Graphic::GlyphPtr glyph = selected_->GetGlyph();
 
-	    if(glyph->Parent()) {
+		 if(glyph->Parent()) {
 		Graphic::GlyphPtr parent = glyph->Parent();
 
 		try {
-		    size_t position = parent->GetPositionByPtr(glyph);
-			adding(parent, , position + 1);
+			 size_t position = parent->GetPositionByPtr(glyph);
+			 adding(parent, , position + 1);
 		} catch(std::logic_exception& e) {
-		    std::cerr << e.what() << std::endl;
+			 std::cerr << e.what() << std::endl;
 		}
-	    }
+		 }
 	} else {
-	    // пихаем в конец
+		 // пихаем в конец
 		adding(mainGlyph_, , 0);
 	}
 	*/
@@ -247,7 +247,7 @@ void MainWindow::__try__()
 	adding(function, func2, 2);
 	adding(func2, var2, 0);
 
-        mainGlyph_->Draw(scene_.get());
+	mainGlyph_->Draw(scene_.get());
 
 	view_->setScene(scene_.get());
 
@@ -255,12 +255,12 @@ void MainWindow::__try__()
 
 void MainWindow::adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t position)
 {
-    where->Add(what, position);
-    mainGlyph_->SetPosition(mainGlyph_->GetPosition());
+	 where->Add(what, position);
+	 mainGlyph_->SetPosition(mainGlyph_->GetPosition());
 }
 
 void MainWindow::removing(Graphic::GlyphPtr where, size_t position)
 {
-    where->Remove(position);
-    mainGlyph_->SetPosition(mainGlyph_->GetPosition());
+	 where->Remove(position);
+	 mainGlyph_->SetPosition(mainGlyph_->GetPosition());
 }

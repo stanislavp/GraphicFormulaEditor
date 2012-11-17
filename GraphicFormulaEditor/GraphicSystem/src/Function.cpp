@@ -9,46 +9,46 @@ namespace Graphic
 Function::Function(const QString &name, GlyphPtr parent, QPoint position):
 	Composite(parent), position_(position)
 {
-    name_ = (new Variable(parent, name, position));
-    brackets_ = (new BracketsPair(parent));
+	 name_ = (new Variable(parent, name, position));
+	 brackets_ = (new BracketsPair(parent));
 
-    brackets_->SetPosition(position_ + QPoint(name_->Bound().width(), 0));
+	 brackets_->SetPosition(position_ + QPoint(name_->Bound().width(), 0));
 }
 
 void Function::Draw(QGraphicsScenePtr scene)
 {
-    name_->Draw(scene);
-    brackets_->Draw(scene);
+	 name_->Draw(scene);
+	 brackets_->Draw(scene);
 }
 
 QRect Function::Bound()
 {
-    QRect result = name_->Bound();
+	 QRect result = name_->Bound();
 
-    int width = result.width();
-    int height = result.height();
+	 int width = result.width();
+	 int height = result.height();
 
-    result = brackets_->Bound();
+	 result = brackets_->Bound();
 
-    width += result.width();
-    height = std::max(height, result.height());
+	 width += result.width();
+	 height = std::max(height, result.height());
 
-    return QRect(0, 0, width, height);
+	 return QRect(0, 0, width, height);
 }
 
 void Function::SetPosition(const QPoint &point)
 {
-    name_->SetPosition(point);
+	 name_->SetPosition(point);
 
-    brackets_->SetPosition(point + QPoint(name_->Bound().width(), 0));
+	 brackets_->SetPosition(point + QPoint(name_->Bound().width(), 0));
 
-    position_.setX(point.x());
-    position_.setY(point.y());
+	 position_.setX(point.x());
+	 position_.setY(point.y());
 }
 
 QPoint Function::GetPosition()
 {
-    return position_;
+	 return position_;
 }
 
 bool Function::Intersects(const QPoint &point, GlyphList &list)
@@ -67,12 +67,12 @@ bool Function::Intersects(const QPoint &point, GlyphList &list)
 
 void Function::Add(GlyphPtr glyph, size_t position)
 {
-    brackets_->Add(glyph, position);
+	 brackets_->Add(glyph, position);
 }
 
 void Function::Remove(size_t position)
 {
-    brackets_->Remove(position);
+	 brackets_->Remove(position);
 }
 
 GlyphPtr Function::Get(size_t position)
@@ -85,13 +85,13 @@ GlyphPtr Function::Get(size_t position)
 
 size_t Function::GetPositionByPtr(GlyphPtr ptr)
 {
-    return brackets_->GetPositionByPtr(ptr);
+	 return brackets_->GetPositionByPtr(ptr);
 }
 
 Function::~Function()
 {
-    delete brackets_;
-    delete name_;
+	 delete brackets_;
+	 delete name_;
 }
 
 }

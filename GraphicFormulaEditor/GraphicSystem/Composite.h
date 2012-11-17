@@ -57,7 +57,7 @@ public:
 	/**
 	 * Возвращает родителя глифа.
 	 * Пустой указатель, если родителя нет.
-         */
+	*/
 	virtual GlyphPtr Parent() throw();
 
 	virtual ~Composite();

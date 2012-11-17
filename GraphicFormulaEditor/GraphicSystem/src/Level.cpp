@@ -72,11 +72,11 @@ bool LeveledExpression::Intersects(const QPoint &point, GlyphList &list)
 
 void LeveledExpression::SetPosition(const QPoint &point)
 {
-    position_.setX(point.x());
-    position_.setY(point.y());
+	 position_.setX(point.x());
+	 position_.setY(point.y());
 
-    level_->SetPosition(QPoint(position_.x() + expression_->Bound().width(), position_.y()));
-    expression_->SetPosition(QPoint(position_.x(), position_.y() + level_->Bound().height()));
+	 level_->SetPosition(QPoint(position_.x() + expression_->Bound().width(), position_.y()));
+	 expression_->SetPosition(QPoint(position_.x(), position_.y() + level_->Bound().height()));
 }
 
 QPoint LeveledExpression::GetPosition()
@@ -101,17 +101,17 @@ void LeveledExpression::Add(GlyphPtr glyph, size_t position)
 
 void LeveledExpression::Remove(size_t position)
 {
-    if(position >= (1 << 15)) {
-	if(expression_)
-	    expression_->Remove(position - (1 << 15));
-	else
-	    throw std::runtime_error("LeveledExpression::Remove: expression_ has null pointer");
-    } else {
-	if(level_)
-	    level_->Remove(position);
-	else
-	    throw std::runtime_error("LeveledExpression::Remove: level_ has null pointer");
-    }
+	 if(position >= (1 << 15)) {
+		  if(expression_)
+			   expression_->Remove(position - (1 << 15));
+		  else
+			   throw std::runtime_error("LeveledExpression::Remove: expression_ has null pointer");
+	 } else {
+		  if(level_)
+			   level_->Remove(position);
+		  else
+			   throw std::runtime_error("LeveledExpression::Remove: level_ has null pointer");
+	 }
 }
 
 GlyphPtr LeveledExpression::Get(size_t position)
@@ -124,20 +124,22 @@ GlyphPtr LeveledExpression::Get(size_t position)
 
 size_t LeveledExpression::GetPositionByPtr(GlyphPtr ptr)
 {
-    size_t position = 0;
-    try {
-	position = level_->GetPositionByPtr(ptr);
-	return position + (1 << 15);
-    } catch(std::logic_error& e) {
-	position = expression_->GetPositionByPtr(ptr);
-    }
-    return position;
+	 size_t position = 0;
+
+	 try {
+		  position = level_->GetPositionByPtr(ptr);
+		  return position + (1 << 15);
+	 } catch(std::logic_error& e) {
+		  position = expression_->GetPositionByPtr(ptr);
+	 }
+
+	 return position;
 }
 
 LeveledExpression::~LeveledExpression()
 {
-    delete expression_;
-    delete level_;
+	 delete expression_;
+	 delete level_;
 }
 
 }
