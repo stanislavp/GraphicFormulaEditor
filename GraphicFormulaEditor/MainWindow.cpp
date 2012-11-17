@@ -1,6 +1,9 @@
 #include "MainWindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QObject(parent), selected_(0)
+//! Dialogs
+#include "Dialogs/CreateVariable.h"
+
+MainWindow::MainWindow(QWidget *parent) : QWidget(parent), selected_(0)
 {
 	//! GUI Initialization
 	window_.reset(new QWidget);
@@ -90,26 +93,32 @@ void MainWindow::AddGlyph()
 		 создавать добавляемый глиф? И тут проверять было
 		 ли все правильно выделено?
 	*/
-	/*
-	if(selected_) {
-		 // пихаем после выделенного глифа
-		 Graphic::GlyphPtr glyph = selected_->GetGlyph();
 
-		 if(glyph->Parent()) {
-		Graphic::GlyphPtr parent = glyph->Parent();
+	if(selected_)
+	{
+		// пихаем после выделенного глифа
+		Graphic::GlyphPtr glyph = selected_->GetGlyph();
 
-		try {
-			 size_t position = parent->GetPositionByPtr(glyph);
-			 adding(parent, , position + 1);
-		} catch(std::logic_exception& e) {
-			 std::cerr << e.what() << std::endl;
+		if(glyph->Parent())
+		{
+			Graphic::GlyphPtr parent = glyph->Parent();
+
+			try
+			{
+				 size_t position = parent->GetPositionByPtr(glyph);
+				 adding(parent, new Graphic::Variable(parent, "pi"), position + 1);
+				 mainGlyph_->Draw(scene_.get());
+			} catch(const std::logic_error &e) {
+				 std::cerr << e.what() << std::endl;
+			}
 		}
-		 }
-	} else {
+	} else
+	{
 		 // пихаем в конец
-		adding(mainGlyph_, , 0);
+		adding(mainGlyph_, new Graphic::Variable(mainGlyph_, "pi") , 0);
+		mainGlyph_->Draw(scene_.get());
 	}
-	*/
+
 }
 
 void MainWindow::DeleteGlyph()
@@ -137,7 +146,29 @@ void MainWindow::DeleteGlyph()
 
 void MainWindow::ClickVariable()
 {
+	Graphic::GlyphPtr newGlyph;
 
+	Dialog::CreateVariable *create = new Dialog::CreateVariable(newGlyph, selected_->GetGlyph()->Parent(), this);
+	create->setModal(true);
+
+	create->show();
+
+	if(newGlyph)
+	{
+		if(newGlyph->Parent())
+		{
+			Graphic::GlyphPtr parent = newGlyph->Parent();
+			try
+			{
+				 size_t position = parent->GetPositionByPtr(newGlyph);
+				 adding(parent, newGlyph, position + 1);
+				 mainGlyph_->Draw(scene_.get());
+
+			} catch(const std::logic_error &e) {
+				 std::cerr << e.what() << std::endl;
+			}
+		}
+	}
 }
 
 void MainWindow::ClickFunction()

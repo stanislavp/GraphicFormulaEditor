@@ -65,7 +65,7 @@ signals:
 	void clickOver(QPoint point);
 };
 
-class MainWindow : public QObject // : public QMainWindow
+class MainWindow : public QWidget // : public QMainWindow
 {
 	Q_OBJECT
 	

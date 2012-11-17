@@ -1,5 +1,5 @@
 SOURCES += main.cpp\
-        MainWindow.cpp \
+    MainWindow.cpp \
     GraphicSystem/src/Variable.cpp \
     GraphicSystem/src/Space.cpp \
     GraphicSystem/src/Row.cpp \
@@ -12,6 +12,12 @@ SOURCES += main.cpp\
     GraphicSystem/src/IteratorBacklight.cpp \
     Exceptions/src/IsPlainGlyph.cpp \
     Iterators/src/GlyphIterator.cpp \
+    Dialogs/src/CreateFraction.cpp \
+    Dialogs/src/CreateFunction.cpp \
+    Dialogs/src/CreateLeveled.cpp \
+    Dialogs/src/CreateOperation.cpp \
+    Dialogs/src/CreateVariable.cpp \
+    Dialogs/src/CreateBrackets.cpp \
     GraphicSystem/src/BracketsPair.cpp
 
 HEADERS  += MainWindow.h \
@@ -28,6 +34,12 @@ HEADERS  += MainWindow.h \
     Exceptions/IsPlainGlyph.h \
     Iterators/Iterator.h \
     Iterators/GlyphIterator.h \
+    Dialogs/CreateFraction.h \
+    Dialogs/CreateFunction.h \
+    Dialogs/CreateLeveled.h \
+    Dialogs/CreateOperation.h \
+    Dialogs/CreateVariable.h \
+    Dialogs/CreateBrackets.h \
     GraphicSystem/BracketsPair.h
 
 OTHER_FILES += \
