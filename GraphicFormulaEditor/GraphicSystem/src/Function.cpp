@@ -41,7 +41,12 @@ QRect Function::Bound()
 
 void Function::SetPosition(const QPoint &point)
 {
-	 name_->SetPosition(point);
+	 QRect bracketsBound = brackets_->Bound();
+	 QRect nameBound = name_->Bound();
+
+	 int topIndent = (bracketsBound.height() - nameBound.height()) / 2;
+
+	 name_->SetPosition(QPoint(point.x(), point.y() + topIndent));
 
 	 brackets_->SetPosition(point + QPoint(name_->Bound().width(), 0));
 

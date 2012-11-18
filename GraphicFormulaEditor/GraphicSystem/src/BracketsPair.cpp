@@ -82,7 +82,12 @@ bool BracketsPair::Remove(size_t position)
 
 void BracketsPair::SetPosition(const QPoint &point)
 {
-	 frontBracket_->SetPosition(point);
+	 QRect rowBound = row_->Bound();
+	 QRect bracketBound = frontBracket_->Bound();
+
+	 int topIndent = (rowBound.height() - bracketBound.height()) / 2;
+
+	 frontBracket_->SetPosition(QPoint(point.x(), point.y() + topIndent));
 
 	 QPoint position = point;
 	 QRect bounds = frontBracket_->Bound();
@@ -93,7 +98,7 @@ void BracketsPair::SetPosition(const QPoint &point)
 		  position.setX(position.x() + row_->Bound().width());
 	 }
 
-	 backBracket_->SetPosition(position);
+	 backBracket_->SetPosition(QPoint(position.x(), position.y() + topIndent));
 	 position_.setX(point.x());
 	 position_.setY(point.y());
 }
