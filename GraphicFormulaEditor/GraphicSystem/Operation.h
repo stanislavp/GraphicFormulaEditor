@@ -69,6 +69,9 @@ public:
 	~Operation();
 
 protected:
+	static QString __Type();
+
+protected:
 	GlyphPtr parent_;
 	QPoint position_;
 	QGraphicsTextItemPtr text_;

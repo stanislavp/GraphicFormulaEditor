@@ -124,6 +124,11 @@ size_t Fraction::GetPositionByPtr(GlyphPtr ptr)
 	 return position;
 }
 
+QString Fraction::__Type()
+{
+	return QString("fraction");
+}
+
 Fraction::~Fraction()
 {
 	 delete numerator;

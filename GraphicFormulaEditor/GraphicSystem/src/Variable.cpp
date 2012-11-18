@@ -81,6 +81,12 @@ GlyphPtr Variable::Get(size_t position)
 	throw Exception::IsPlainGlyph("Operation::Get(): is plain. ");
 }
 
+QString Variable::__Type()
+{
+	return QString("variable");
+}
+
+
 Variable::~Variable()
 {
 	delete text_;

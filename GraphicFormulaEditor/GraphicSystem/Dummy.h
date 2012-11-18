@@ -13,6 +13,9 @@ class Dummy : public Variable
 {
 public:
 	 Dummy(GlyphPtr parent = GlyphPtr());
+
+protected:
+	static QString __Type();
 };
 
 }

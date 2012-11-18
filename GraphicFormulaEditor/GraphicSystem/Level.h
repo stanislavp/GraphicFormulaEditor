@@ -61,6 +61,10 @@ public:
 	//virtual GlyphPtr Parent() throw();
 
 	virtual ~LeveledExpression();
+
+protected:
+	static QString __Type();
+
 private:
 	GlyphPtr expression_;
 	GlyphPtr level_;

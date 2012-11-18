@@ -139,6 +139,11 @@ GlyphPtr Composite::Parent() throw()
 	return parent_;
 }
 
+QString Composite::__Type()
+{
+	return QString("composite");
+}
+
 Composite::~Composite()
 {
 	for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it)

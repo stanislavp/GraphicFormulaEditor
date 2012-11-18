@@ -76,6 +76,11 @@ GlyphPtr Operation::Parent() throw()
 	return parent_;
 }
 
+QString Operation::__Type()
+{
+	return QString("operation");
+}
+
 Operation::~Operation()
 {
 	delete text_;

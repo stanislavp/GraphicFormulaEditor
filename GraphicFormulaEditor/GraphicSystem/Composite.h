@@ -63,6 +63,9 @@ public:
 	virtual ~Composite();
 
 protected:
+	static QString __Type();
+
+protected:
 
 	/**
 	 * Компоновщик будет хранить свои потомки в списке.

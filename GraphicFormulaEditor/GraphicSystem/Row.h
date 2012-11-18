@@ -49,6 +49,10 @@ public:
 	//virtual GlyphPtr Parent() throw();
 
 	virtual ~Row();
+
+protected:
+	static QString __Type();
+
 protected:
 	QPoint position_;
 };

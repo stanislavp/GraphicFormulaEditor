@@ -64,6 +64,10 @@ public:
 	//virtual GlyphPtr Parent() throw();
 
 	virtual ~Function();
+
+protected:
+	static QString __Type();
+
 private:
 	QPoint position_;
 	GlyphPtr brackets_;

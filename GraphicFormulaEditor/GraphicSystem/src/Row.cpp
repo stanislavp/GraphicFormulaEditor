@@ -80,6 +80,11 @@ QPoint Row::GetPosition()
 	return position_;
 }
 
+QString Row::__Type()
+{
+	return QString("row");
+}
+
 Row::~Row()
 {
 

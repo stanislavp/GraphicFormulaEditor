@@ -123,4 +123,9 @@ GlyphPtr BracketsPair::Get(size_t position)
 	return row_;
 }
 
+QString BracketsPair::__Type()
+{
+	return QString("bracketspair");
+}
+
 }

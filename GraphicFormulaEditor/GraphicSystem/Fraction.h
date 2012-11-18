@@ -74,6 +74,9 @@ public:
 
 	virtual ~Fraction();
 
+protected:
+	static QString __Type();
+
 private:
 
 	void UpdateLine();

@@ -10,6 +10,10 @@ class Space : public Variable
 {
 public:
 	Space(GlyphPtr parent = GlyphPtr());
+
+protected:
+	static QString __Type();
+
 };
 
 }

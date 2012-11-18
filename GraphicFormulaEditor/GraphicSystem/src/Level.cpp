@@ -140,6 +140,11 @@ size_t LeveledExpression::GetPositionByPtr(GlyphPtr ptr)
 	 return position;
 }
 
+QString LeveledExpression::__Type()
+{
+	return QString("leveledexpression");
+}
+
 LeveledExpression::~LeveledExpression()
 {
 	 delete expression_;

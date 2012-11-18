@@ -62,7 +62,7 @@ bool Function::Intersects(const QPoint &point, GlyphList &list)
 		return true;
 	} else if(name_->Intersects(point, list))
 	{
-		list.push_back(this);
+		list.back() = this;
 		return true;
 	}
 	return false;
@@ -90,6 +90,12 @@ size_t Function::GetPositionByPtr(GlyphPtr ptr)
 {
 	 return brackets_->GetPositionByPtr(ptr);
 }
+
+QString Function::__Type()
+{
+	return QString("function");
+}
+
 
 Function::~Function()
 {

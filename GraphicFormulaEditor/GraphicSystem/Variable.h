@@ -51,6 +51,10 @@ public:
 	virtual QPoint GetPosition();
 
 	virtual ~Variable();
+
+protected:
+	static QString __Type();
+
 protected:
 	GlyphPtr parent_;
 	QGraphicsTextItemPtr text_;
