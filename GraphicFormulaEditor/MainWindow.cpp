@@ -360,6 +360,38 @@ void MainWindow::CreateActions()
 	export_->setShortcuts(QKeySequence::SaveAs);
 	export_->setStatusTip(tr("Save formula as image file"));
 	connect(export_.get(), SIGNAL(triggered()), this, SLOT(ExportAsImage()));
+
+	//! Adding glyphs
+	actionVariable_.reset(new QAction(tr("&Add variable"), this));
+	actionVariable_->setShortcut(Qt::CTRL + Qt::Key_V);
+	actionVariable_->setStatusTip(tr("Add variable after selected glyph"));
+	connect(actionVariable_.get(), SIGNAL(triggered()), this, SLOT(ClickVariable()));
+
+	actionFunction_.reset(new QAction(tr("&Add function"), this));
+	actionFunction_->setShortcut(Qt::CTRL + Qt::Key_F);
+	actionFunction_->setStatusTip(tr("Add function after selected glyph"));
+	connect(actionFunction_.get(), SIGNAL(triggered()), this, SLOT(ClickFunction()));
+
+	actionFraction_.reset(new QAction(tr("&Add fraction"), this));
+	actionFraction_->setShortcut(Qt::CTRL + Qt::SHIFT + Qt::Key_F);
+	actionFraction_->setStatusTip(tr("Add fraction after selected glyph"));
+	connect(actionFraction_.get(), SIGNAL(triggered()), this, SLOT(ClickFraction()));
+
+	actionLeveled_.reset(new QAction(tr("&Add leveled"), this));
+	actionLeveled_->setShortcut(Qt::CTRL + Qt::Key_L);
+	actionLeveled_->setStatusTip(tr("Add leveled after selected glyph"));
+	connect(actionLeveled_.get(), SIGNAL(triggered()), this, SLOT(ClickLeveled()));
+
+	actionRadix_.reset(new QAction(tr("&Add radix"), this));
+	actionRadix_->setShortcut(Qt::CTRL + Qt::Key_R);
+	actionRadix_->setStatusTip(tr("Add radix after selected glyph"));
+	connect(actionRadix_.get(), SIGNAL(triggered()), this, SLOT(ClickRadix()));
+
+	actionOperation_.reset(new QAction(tr("&Add operation"), this));
+	actionOperation_->setShortcut(Qt::CTRL + Qt::Key_O);
+	actionOperation_->setStatusTip(tr("Add operation after selected glyph"));
+	connect(actionOperation_.get(), SIGNAL(triggered()), this, SLOT(ClickOperation()));
+
 }
 
 void MainWindow::CreateMenus()
@@ -371,6 +403,15 @@ void MainWindow::CreateMenus()
 	//! File
 	fileMenu_.reset(menuBar_->addMenu(tr("&File")));
 	fileMenu_->addAction(export_.get());
+
+	//! Add
+	addMenu_.reset(menuBar_->addMenu(tr("&Add")));
+	addMenu_->addAction(actionVariable_.get());
+	addMenu_->addAction(actionFunction_.get());
+	addMenu_->addAction(actionFraction_.get());
+	addMenu_->addAction(actionLeveled_.get());
+	addMenu_->addAction(actionRadix_.get());
+	addMenu_->addAction(actionOperation_.get());
 }
 
 //! Export
@@ -386,5 +427,6 @@ void MainWindow::ExportAsImage()
 	{
 		QPixmap pixMap = QPixmap::grabWidget(view_.get());
 		pixMap.save(fileName);
-	}
+	} else
+		std::cerr << "MainWindow::ExportAsImage(): bad file name. " << std::endl;
 }

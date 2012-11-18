@@ -162,8 +162,17 @@ private:
 	//! Menus
 	boost::shared_ptr<QMenu> fileMenu_;
 
+	boost::shared_ptr<QMenu> addMenu_;
+
 	//! Actions
 	boost::shared_ptr<QAction> export_;
+
+	boost::shared_ptr<QAction> actionVariable_;
+	boost::shared_ptr<QAction> actionFunction_;
+	boost::shared_ptr<QAction> actionFraction_;
+	boost::shared_ptr<QAction> actionLeveled_;
+	boost::shared_ptr<QAction> actionRadix_;
+	boost::shared_ptr<QAction> actionOperation_;
 };
 
 #endif // MAINWINDOW_H
