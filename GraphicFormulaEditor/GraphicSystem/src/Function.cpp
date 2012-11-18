@@ -1,4 +1,5 @@
 #include "../Function.h"
+#include "../Dummy.h"
 
 //!
 #include <stdexcept>
@@ -13,6 +14,8 @@ Function::Function(const QString &name, GlyphPtr parent, QPoint position):
 	 brackets_ = (new BracketsPair(parent));
 
 	 brackets_->SetPosition(position_ + QPoint(name_->Bound().width(), 0));
+
+	 brackets_->Add(new Dummy(brackets_), 0);
 }
 
 void Function::Draw(QGraphicsScenePtr scene)

@@ -1,5 +1,6 @@
 #include "../Fraction.h"
 #include "../Row.h"
+#include "../Dummy.h"
 
 // STL
 #include <stdexcept>
@@ -13,6 +14,8 @@ Fraction::Fraction(GlyphPtr parent, QPoint position):
 	 denominator(GlyphPtr(new Row(GlyphPtr(this), position))),
 	 line_(new QGraphicsLineItem())
 {
+	 numerator->Add(new Dummy(numerator), 0);
+	 denominator->Add(new Dummy(denominator), 0);
 }
 
 void Fraction::Add(GlyphPtr glyph, size_t position)
