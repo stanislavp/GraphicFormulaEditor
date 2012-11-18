@@ -2,6 +2,7 @@
 //! Own
 #include "../Level.h"
 #include "../Row.h"
+#include "../Dummy.h"
 
 //! STL
 #include <stdexcept>
@@ -13,7 +14,8 @@ LeveledExpression::LeveledExpression(GlyphPtr parent, QPoint position)
 	: Composite(parent), expression_(new Row(GlyphPtr(), position)),
 	  level_(new Row(GlyphPtr(), position)), position_(position)
 {
-
+	 level_->Add(new Dummy(level_), 0);
+	 expression_->Add(new Dummy(expression_), 0);
 }
 
 void LeveledExpression::Draw(QGraphicsScenePtr scene)
