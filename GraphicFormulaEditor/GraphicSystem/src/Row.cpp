@@ -82,6 +82,15 @@ QPoint Row::GetPosition()
 	return position_;
 }
 
+QPoint Row::GetMinPosition() {
+	 int y = position_.y();
+	 for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it) {
+		  y = std::min(y, (*it)->GetMinPosition().y());
+	 }
+
+	 return QPoint(position_.x(), y);
+}
+
 QString Row::__Type()
 {
 	return QString("Row");

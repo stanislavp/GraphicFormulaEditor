@@ -60,6 +60,8 @@ public:
 
 	virtual GlyphPtr Get(size_t position);
 
+	virtual QPoint GetMinPosition();
+
 	/**
 	 * Возвращает родителя глифа.
 	 * Пустой указатель, если родителя нет.

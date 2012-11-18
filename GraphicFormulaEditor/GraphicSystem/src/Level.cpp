@@ -140,6 +140,10 @@ GlyphPtr LeveledExpression::Get(size_t position)
 	return (position == 0 ? expression_ : level_);
 }
 
+QPoint LeveledExpression::GetMinPosition() {
+	 return level_->GetMinPosition();
+}
+
 size_t LeveledExpression::GetPositionByPtr(GlyphPtr ptr)
 {
 	 size_t position = 0;

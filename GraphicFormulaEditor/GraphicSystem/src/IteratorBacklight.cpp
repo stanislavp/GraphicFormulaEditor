@@ -25,10 +25,14 @@ void IteratorBacklight::UpdateRectangle()
 		 QRect _bound = glyph_->Bound();
 		 QPoint _position = glyph_->GetPosition();
 
+		 QPoint minPosition = glyph_->GetMinPosition();
+
+		 int diff = _position.y() - minPosition.y();
+
 		 rectangle_->setRect(_bound.x() + _position.x(),
-				     _bound.y() + _position.y(),
+				     _bound.y() + minPosition.y(),
 				     _bound.width(),
-				     _bound.height());
+				     _bound.height() + diff);
 		 rectangle_->setBrush(*brush_);
 	 }
 }
