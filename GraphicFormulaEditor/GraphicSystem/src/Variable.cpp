@@ -83,7 +83,7 @@ GlyphPtr Variable::Get(size_t position)
 
 QString Variable::__Type()
 {
-	return QString("variable");
+	return QString("Variable");
 }
 
 QString Variable::Type() const

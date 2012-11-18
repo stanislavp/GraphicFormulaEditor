@@ -33,7 +33,7 @@ size_t Glyph::GetPositionByPtr(GlyphPtr ptr)
 
 QString Glyph::__Type()
 {
-	return QString("glyph");
+	return QString("Glyph");
 }
 
 

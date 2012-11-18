@@ -98,7 +98,7 @@ size_t Function::GetPositionByPtr(GlyphPtr ptr)
 
 QString Function::__Type()
 {
-	return QString("function");
+	return QString("Function");
 }
 
 QString Function::Type() const

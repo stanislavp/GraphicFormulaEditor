@@ -10,7 +10,7 @@ Space::Space(GlyphPtr parent) : Variable(parent)
 
 QString Space::__Type()
 {
-	return QString("space");
+	return QString("Space");
 }
 
 QString Space::Type() const

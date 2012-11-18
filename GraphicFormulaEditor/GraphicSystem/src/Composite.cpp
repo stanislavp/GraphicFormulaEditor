@@ -141,7 +141,7 @@ GlyphPtr Composite::Parent() throw()
 
 QString Composite::__Type()
 {
-	return QString("composite");
+	return QString("Composite");
 }
 
 QString Composite::Type() const

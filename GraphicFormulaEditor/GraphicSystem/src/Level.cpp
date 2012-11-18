@@ -156,7 +156,7 @@ size_t LeveledExpression::GetPositionByPtr(GlyphPtr ptr)
 
 QString LeveledExpression::__Type()
 {
-	return QString("leveledexpression");
+	return QString("LeveledExpression");
 }
 
 QString LeveledExpression::Type() const

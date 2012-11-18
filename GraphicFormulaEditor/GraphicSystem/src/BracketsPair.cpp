@@ -130,7 +130,7 @@ GlyphPtr BracketsPair::Get(size_t position)
 
 QString BracketsPair::__Type()
 {
-	return QString("bracketspair");
+	return QString("Bracketspair");
 }
 
 QString BracketsPair::Type() const

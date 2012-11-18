@@ -127,7 +127,7 @@ size_t Fraction::GetPositionByPtr(GlyphPtr ptr)
 
 QString Fraction::__Type()
 {
-	return QString("fraction");
+	return QString("Fraction");
 }
 
 QString Fraction::Type() const

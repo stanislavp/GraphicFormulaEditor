@@ -13,7 +13,7 @@ Dummy::Dummy(GlyphPtr parent)
 
 QString Dummy::__Type()
 {
-	return QString("dummy");
+	return QString("Dummy");
 }
 
 QString Dummy::Type() const

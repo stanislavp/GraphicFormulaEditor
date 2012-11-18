@@ -78,7 +78,7 @@ GlyphPtr Operation::Parent() throw()
 
 QString Operation::__Type()
 {
-	return QString("operation");
+	return QString("Operation");
 }
 
 QString Operation::Type() const

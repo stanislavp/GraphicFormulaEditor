@@ -84,7 +84,7 @@ QPoint Row::GetPosition()
 
 QString Row::__Type()
 {
-	return QString("row");
+	return QString("Row");
 }
 
 QString Row::Type() const
