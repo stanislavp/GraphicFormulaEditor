@@ -1,4 +1,5 @@
 #include "../Composite.h"
+#include "../Dummy.h"
 
 //! STL
 #include <stdexcept>
@@ -94,6 +95,9 @@ void Composite::Remove(size_t position)
 			break;
 		}
 	}
+
+	if(contents_.empty())
+		 Add(new Dummy(Parent()), 0);
 }
 
 GlyphPtr Composite::Get(size_t position) {
