@@ -5,6 +5,7 @@
 
 //! Qt
 #include <QGraphicsRectItem>
+#include <QBrush>
 
 namespace Graphic
 {
@@ -23,21 +24,23 @@ typedef QGraphicsRectItem* QGraphicsRectItemPtr;
 class IteratorBacklight
 {
 public:
-    IteratorBacklight(GlyphPtr glyph = GlyphPtr());
+	IteratorBacklight(GlyphPtr glyph = GlyphPtr());
 
-    void Draw(QGraphicsScenePtr scene);
-    void SetGlyph(GlyphPtr glyph);
+	void Draw(QGraphicsScenePtr scene);
+	void SetGlyph(GlyphPtr glyph);
 
-    GlyphPtr GetGlyph();
+	GlyphPtr GetGlyph();
+	void SetBrush(QBrush brush);
 
-    ~IteratorBacklight();
-
-private:
-    void UpdateRectangle();
+	~IteratorBacklight();
 
 private:
-    GlyphPtr glyph_;
-    QGraphicsRectItemPtr rectangle_;
+	void UpdateRectangle();
+
+private:
+	QBrush *brush_;
+	GlyphPtr glyph_;
+	QGraphicsRectItemPtr rectangle_;
 };
 
 
