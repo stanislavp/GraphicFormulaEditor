@@ -97,7 +97,12 @@ public:
 	 */
 	virtual GlyphPtr Parent() throw();
 
+	virtual QString Type() const { }
+
 	virtual ~Glyph();
+
+protected:
+	static QString __Type();
 };
 
 

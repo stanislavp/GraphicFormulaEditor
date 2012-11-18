@@ -152,7 +152,6 @@ void MainWindow::DeleteGlyph()
 
 void MainWindow::Create(Graphic::GlyphPtr newGlyph)
 {
-	std::cerr << "Config, is create slot" << std::endl;
 	if(selected_->GetGlyph() && newGlyph)
 	{
 		if(newGlyph->Parent())
