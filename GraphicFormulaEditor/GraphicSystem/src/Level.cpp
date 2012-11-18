@@ -145,6 +145,11 @@ QString LeveledExpression::__Type()
 	return QString("leveledexpression");
 }
 
+QString LeveledExpression::Type() const
+{
+	return __Type();
+}
+
 LeveledExpression::~LeveledExpression()
 {
 	 delete expression_;

@@ -50,6 +50,8 @@ public:
 	 */
 	virtual QPoint GetPosition();
 
+	virtual QString Type() const;
+
 	virtual ~Variable();
 
 protected:

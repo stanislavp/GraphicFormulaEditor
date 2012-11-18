@@ -85,6 +85,11 @@ QString Row::__Type()
 	return QString("row");
 }
 
+QString Row::Type() const
+{
+	return __Type();
+}
+
 Row::~Row()
 {
 

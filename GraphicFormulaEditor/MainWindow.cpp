@@ -248,7 +248,7 @@ void MainWindow::FindGlyph(QPoint point)
 
 		for(Graphic::GlyphList::const_iterator _it(list.begin()); _it != list.end(); ++_it)
 		{
-			QListWidgetItem *item = new QListWidgetItem(tr("Item"));
+			QListWidgetItem *item = new QListWidgetItem((*_it)->Type());
 			selectedList_->addItem(item);
 
 			selectedMap_[item] = *_it;

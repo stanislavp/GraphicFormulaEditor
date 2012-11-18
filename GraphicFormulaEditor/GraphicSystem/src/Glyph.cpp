@@ -36,6 +36,7 @@ QString Glyph::__Type()
 	return QString("glyph");
 }
 
+
 Glyph::~Glyph()
 {
 

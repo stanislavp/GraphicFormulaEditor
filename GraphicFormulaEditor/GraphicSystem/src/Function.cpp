@@ -96,6 +96,11 @@ QString Function::__Type()
 	return QString("function");
 }
 
+QString Function::Type() const
+{
+	return __Type();
+}
+
 
 Function::~Function()
 {

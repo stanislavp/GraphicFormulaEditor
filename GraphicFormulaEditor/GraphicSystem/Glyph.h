@@ -97,7 +97,11 @@ public:
 	 */
 	virtual GlyphPtr Parent() throw();
 
-	virtual QString Type() const { }
+	/**
+	 * Динамически возвращает информацию о типе.
+	 * Такой свой RTTI :D
+	 */
+	virtual QString Type() const = 0;
 
 	virtual ~Glyph();
 

@@ -128,4 +128,9 @@ QString BracketsPair::__Type()
 	return QString("bracketspair");
 }
 
+QString BracketsPair::Type() const
+{
+	return __Type();
+}
+
 }

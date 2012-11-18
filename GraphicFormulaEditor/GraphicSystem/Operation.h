@@ -66,6 +66,8 @@ public:
 	 */
 	virtual GlyphPtr Parent() throw();
 
+	virtual QString Type() const;
+
 	~Operation();
 
 protected:

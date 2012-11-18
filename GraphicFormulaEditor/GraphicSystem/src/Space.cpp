@@ -13,4 +13,9 @@ QString Space::__Type()
 	return QString("space");
 }
 
+QString Space::Type() const
+{
+	return __Type();
+}
+
 }

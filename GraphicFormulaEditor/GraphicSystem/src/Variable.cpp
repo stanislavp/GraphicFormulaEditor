@@ -86,6 +86,11 @@ QString Variable::__Type()
 	return QString("variable");
 }
 
+QString Variable::Type() const
+{
+	return __Type();
+}
+
 
 Variable::~Variable()
 {

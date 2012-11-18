@@ -48,6 +48,8 @@ public:
 	 */
 	//virtual GlyphPtr Parent() throw();
 
+	virtual QString Type() const;
+
 	virtual ~Row();
 
 protected:

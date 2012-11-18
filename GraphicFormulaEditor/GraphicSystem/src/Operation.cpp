@@ -81,6 +81,11 @@ QString Operation::__Type()
 	return QString("operation");
 }
 
+QString Operation::Type() const
+{
+	return __Type();
+}
+
 Operation::~Operation()
 {
 	delete text_;

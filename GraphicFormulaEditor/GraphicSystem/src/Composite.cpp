@@ -144,6 +144,11 @@ QString Composite::__Type()
 	return QString("composite");
 }
 
+QString Composite::Type() const
+{
+	return __Type();
+}
+
 Composite::~Composite()
 {
 	for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it)

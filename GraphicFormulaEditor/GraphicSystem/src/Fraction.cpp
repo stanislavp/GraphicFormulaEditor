@@ -129,6 +129,11 @@ QString Fraction::__Type()
 	return QString("fraction");
 }
 
+QString Fraction::Type() const
+{
+	return __Type();
+}
+
 Fraction::~Fraction()
 {
 	 delete numerator;
