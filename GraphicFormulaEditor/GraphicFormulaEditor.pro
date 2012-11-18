@@ -14,3 +14,8 @@ TEMPLATE = app
 OBJECTS_DIR = "Obj"
 
 include (Config/files.pri)
+
+HEADERS +=
+
+SOURCES +=
+

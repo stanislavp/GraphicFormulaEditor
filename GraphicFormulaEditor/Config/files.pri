@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     Dialogs/src/CreateOperation.cpp \
     Dialogs/src/CreateVariable.cpp \
     Dialogs/src/CreateBrackets.cpp \
-    GraphicSystem/src/BracketsPair.cpp
+    GraphicSystem/src/BracketsPair.cpp \
+    GraphicSystem/src/Dummy.cpp
 
 HEADERS  += MainWindow.h \
     GraphicSystem/Variable.h \
@@ -40,7 +41,8 @@ HEADERS  += MainWindow.h \
     Dialogs/CreateOperation.h \
     Dialogs/CreateVariable.h \
     Dialogs/CreateBrackets.h \
-    GraphicSystem/BracketsPair.h
+    GraphicSystem/BracketsPair.h \
+    GraphicSystem/Dummy.h
 
 OTHER_FILES += \
     Config/files.pri

@@ -1,4 +1,5 @@
 #include "../Row.h"
+#include "../Dummy.h"
 
 namespace Graphic
 {
@@ -11,6 +12,16 @@ Row::Row(GlyphPtr parent, QPoint position)
 
 void Row::Add(GlyphPtr glyph, size_t position)
 {
+	 if(contents_.size() == 1) {
+		  try {
+			   DummyPtr ptr = dynamic_cast<DummyPtr>(contents_.back());
+			   if(ptr != 0) {
+				    Remove(0);
+			   }
+		  } catch(const std::exception& e) {
+		  }
+	 }
+
 	 if(contents_.empty())
 	{
 		//! TODO: указать родителя, как this
