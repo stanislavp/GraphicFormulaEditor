@@ -101,7 +101,7 @@ private:
 
 	// Удаление по позиции
 
-	void removing(Graphic::GlyphPtr where, size_t position);
+	bool removing(Graphic::GlyphPtr where, size_t position);
 
 	//! SHARED PTR ЖЕ :) Нужно хранить!
 	boost::shared_ptr<std::vector<Graphic::GlyphPtr> > glyphs_;

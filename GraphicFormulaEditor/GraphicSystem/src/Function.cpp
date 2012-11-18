@@ -70,9 +70,9 @@ void Function::Add(GlyphPtr glyph, size_t position)
 	 brackets_->Add(glyph, position);
 }
 
-void Function::Remove(size_t position)
+bool Function::Remove(size_t position)
 {
-	 brackets_->Remove(position);
+	return brackets_->Remove(position);
 }
 
 GlyphPtr Function::Get(size_t position)

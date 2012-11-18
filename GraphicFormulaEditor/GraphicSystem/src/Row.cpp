@@ -15,8 +15,11 @@ void Row::Add(GlyphPtr glyph, size_t position)
 	 if(contents_.size() == 1) {
 		  try {
 			   DummyPtr ptr = dynamic_cast<DummyPtr>(contents_.back());
+			   std::cerr << (size_t)ptr << std::endl;
+
 			   if(ptr != 0) {
-				    Remove(0);
+				    contents_.erase(contents_.begin());
+				    delete ptr;
 			   }
 		  } catch(const std::exception& e) {
 		  }

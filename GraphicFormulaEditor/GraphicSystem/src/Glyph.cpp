@@ -13,9 +13,10 @@ void Glyph::Add(GlyphPtr glyph, size_t position)
 	//! Default implementation
 }
 
-void Glyph::Remove(size_t position)
+bool Glyph::Remove(size_t position)
 {
 	//! Default implementation
+	 return false;
 }
 
 GlyphPtr Glyph::Parent() throw()

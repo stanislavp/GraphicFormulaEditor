@@ -79,7 +79,7 @@ void Composite::Add(GlyphPtr glyph, size_t position)
 	}
 }
 
-void Composite::Remove(size_t position)
+bool Composite::Remove(size_t position)
 {
 
 	if(position >= contents_.size())
@@ -87,17 +87,29 @@ void Composite::Remove(size_t position)
 
 	size_t _count = 0;
 
+	if(contents_.size() == 1) {
+		 try {
+			  DummyPtr ptr = dynamic_cast<DummyPtr>(contents_.back());
+			  if(ptr == 0) {
+				   contents_.erase(contents_.begin());
+				   Add(new Dummy(Parent()), 0);
+				   return true;
+			  } else
+				   return false;
+		 } catch(const std::exception& e) {
+		 }
+	}
+
 	for(Content::iterator _it(contents_.begin()); _it != contents_.end(); ++_it, ++_count)
 	{
 		if(_count == position)
 		{
 			contents_.erase(_it);
-			break;
+			return true;
 		}
 	}
 
-	if(contents_.empty())
-		 Add(new Dummy(Parent()), 0);
+	return false;
 }
 
 GlyphPtr Composite::Get(size_t position) {

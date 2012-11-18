@@ -70,12 +70,14 @@ void BracketsPair::Add(GlyphPtr glyph, size_t position)
 	 backBracket_->SetPosition(row_->GetPosition() + QPoint(row_->Bound().width(), 0));
 }
 
-void BracketsPair::Remove(size_t position)
+bool BracketsPair::Remove(size_t position)
 {
 	 if(row_)
-		  row_->Remove(position);
+		  return row_->Remove(position);
 	 else
 		  throw std::runtime_error("BracketsPair::Remove: row_ has null pointer");
+
+	 return false;
 }
 
 void BracketsPair::SetPosition(const QPoint &point)

@@ -72,19 +72,21 @@ bool Fraction::Intersects(const QPoint &point, GlyphList &list)
 	return false;
 }
 
-void Fraction::Remove(size_t position)
+bool Fraction::Remove(size_t position)
 {
 	if(position >= (1 << 15)) {
 		 if(numerator)
-			  numerator->Remove(position - (1 << 15));
+			  return numerator->Remove(position - (1 << 15));
 		 else
 			  throw std::runtime_error("Fraction::Remove: numerator has null pointer");
 	} else {
 		 if(denominator)
-			  denominator->Remove(position);
+			  return denominator->Remove(position);
 		 else
 			  throw std::runtime_error("Fraction::Remove: denominator has null pointer");
 	}
+
+	return false;
 }
 
 void Fraction::UpdateLine()

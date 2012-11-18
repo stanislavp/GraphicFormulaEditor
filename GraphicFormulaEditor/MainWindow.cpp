@@ -138,8 +138,9 @@ void MainWindow::DeleteGlyph()
 			Graphic::GlyphPtr parent = glyph->Parent();
 			try {
 				size_t position = parent->GetPositionByPtr(glyph);
-				removing(parent, position);
-				delete glyph;
+				if(removing(parent, position))
+				    delete glyph;
+
 				std::cerr << "Deleted." << std::endl;
 			} catch(std::logic_error& e) {
 				std::cerr << e.what() << std::endl;
@@ -306,8 +307,9 @@ void MainWindow::adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t 
 	 mainGlyph_->SetPosition(mainGlyph_->GetPosition());
 }
 
-void MainWindow::removing(Graphic::GlyphPtr where, size_t position)
+bool MainWindow::removing(Graphic::GlyphPtr where, size_t position)
 {
-	 where->Remove(position);
+	 bool deleted = where->Remove(position);
 	 mainGlyph_->SetPosition(mainGlyph_->GetPosition());
+	 return deleted;
 }

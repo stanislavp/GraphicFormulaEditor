@@ -40,7 +40,7 @@ public:
 	/**
 	 * Пробует удалять потомок глифа по позици.
 	 */
-	//virtual void Remove(size_t position);
+	//virtual bool Remove(size_t position);
 
 	/**
 	 * Возвращает родителя глифа.
