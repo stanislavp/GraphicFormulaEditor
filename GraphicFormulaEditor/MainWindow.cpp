@@ -253,6 +253,12 @@ void MainWindow::FindGlyph(QPoint point)
 
 			selectedMap_[item] = *_it;
 		}
+
+		//! Автовыделим первый глиф
+		if(selectedList_->count())
+		{
+			selectedList_->item(0)->setSelected(true);
+		}
 	} else
 	{
 		selectedList_->clear();
