@@ -90,8 +90,8 @@ void LeveledExpression::SetPosition(const QPoint &point)
 	 level_->SetPosition(QPoint(point.x() + expression_->Bound().width(),
 				    expression_->GetPosition().y() - level_->Bound().height()));
 
-	 position_.setX(level_->GetPosition().x());
-	 position_.setY(point.x());
+	 position_.setY(level_->GetPosition().y());
+	 position_.setX(point.x());
 
 }
 
