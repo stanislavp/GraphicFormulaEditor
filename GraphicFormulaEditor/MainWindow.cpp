@@ -211,8 +211,7 @@ void MainWindow::ChangeSelected()
 		delete *_it;
 	}
 
-	delete selected_;
-	selected_ = 0;
+	ClearSelected();
 
 	QList<QListWidgetItem*> selected(selectedList_->selectedItems());
 
@@ -306,8 +305,7 @@ void MainWindow::adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t 
 	 where->Add(what, position);
 	 mainGlyph_->SetPosition(mainGlyph_->GetPosition());
 
-	 delete selected_;
-	 selected_ = 0;
+	 ClearSelected();
 }
 
 bool MainWindow::removing(Graphic::GlyphPtr where, size_t position)
@@ -315,4 +313,10 @@ bool MainWindow::removing(Graphic::GlyphPtr where, size_t position)
 	 bool deleted = where->Remove(position);
 	 mainGlyph_->SetPosition(mainGlyph_->GetPosition());
 	 return deleted;
+}
+
+void MainWindow::ClearSelected()
+{
+	delete selected_;
+	selected_ = 0;
 }
