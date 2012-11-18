@@ -89,6 +89,7 @@ public slots:
 	void ClickFraction();
 	void ClickLeveled();
 	void ClickRadix();
+	void ClickOperation();
 
 	//! Create
 	void Create(Graphic::GlyphPtr newGlyph);
@@ -102,6 +103,7 @@ private:
 	bool removing(Graphic::GlyphPtr where, size_t position);
 
 	void ClearSelected();
+	void ClearSelectedBackLight();
 
 private:
 
@@ -130,6 +132,7 @@ private:
 	boost::shared_ptr<QPushButton> fraction_;
 	boost::shared_ptr<QPushButton> leveled_;
 	boost::shared_ptr<QPushButton> radix_;
+	boost::shared_ptr<QPushButton> operation_;
 
 	boost::shared_ptr<QHBoxLayout> hlayout_;
 	boost::shared_ptr<QHBoxLayout> buttonsLayout_;

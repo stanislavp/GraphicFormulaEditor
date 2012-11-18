@@ -38,6 +38,9 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), selected_(0)
 	radix_.reset(new QPushButton("sqrt(x)"));
 	radix_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
 
+	operation_.reset(new QPushButton("*/-+"));
+	operation_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+
 	hlayout_.reset(new QHBoxLayout);
 
 	vlayout_.reset(new QVBoxLayout);
@@ -55,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), selected_(0)
 	buttonsLayout_->addWidget(fraction_.get());
 	buttonsLayout_->addWidget(leveled_.get());
 	buttonsLayout_->addWidget(radix_.get());
+	buttonsLayout_->addWidget(operation_.get());
 
 	vlayout_->addLayout(buttonsLayout_.get());
 	vlayout_->addLayout(hlayout_.get());
@@ -75,6 +79,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), selected_(0)
 	connect(fraction_.get(), SIGNAL(clicked()), this, SLOT(ClickFraction()));
 	connect(leveled_.get(), SIGNAL(clicked()), this, SLOT(ClickLeveled()));
 	connect(radix_.get(), SIGNAL(clicked()), this, SLOT(ClickRadix()));
+	connect(operation_.get(), SIGNAL(clicked()), this, SLOT(ClickOperation()));
 
 }
 
@@ -157,6 +162,8 @@ void MainWindow::Create(Graphic::GlyphPtr newGlyph)
 				 adding(parent, newGlyph, position + 1);
 				 mainGlyph_->Draw(scene_.get());
 
+				 FindGlyph(newGlyph->GetPosition());
+
 			} catch(const std::logic_error &e)
 			{
 				 std::cerr << e.what() << std::endl;
@@ -202,10 +209,17 @@ void MainWindow::ClickRadix()
 	}
 }
 
+void MainWindow::ClickOperation()
+{
+	QDialog *create = new Dialog::CreateOperation(selected_->GetGlyph()->Parent(), this);
+	create->setModal(true);
+	create->show();
+}
+
 
 void MainWindow::ChangeSelected()
 {
-	ClearSelected();
+	ClearSelectedBackLight();
 
 	QList<QListWidgetItem*> selected(selectedList_->selectedItems());
 
@@ -299,6 +313,7 @@ void MainWindow::adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t 
 	 mainGlyph_->SetPosition(mainGlyph_->GetPosition());
 
 	 ClearSelected();
+	 ClearSelectedBackLight();
 }
 
 bool MainWindow::removing(Graphic::GlyphPtr where, size_t position)
@@ -307,12 +322,17 @@ bool MainWindow::removing(Graphic::GlyphPtr where, size_t position)
 	mainGlyph_->SetPosition(mainGlyph_->GetPosition());
 
 	ClearSelected();
-	ChangeSelected();
 
 	return deleted;
 }
 
 void MainWindow::ClearSelected()
+{
+	if(selectedList_)
+		selectedList_->clear();
+}
+
+void MainWindow::ClearSelectedBackLight()
 {
 	delete selected_;
 	selected_ = 0;
