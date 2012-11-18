@@ -57,6 +57,10 @@ void Fraction::SetPosition(const QPoint &point)
 	 UpdateLine();
 }
 
+QPoint Fraction::GetMinPosition() {
+	 return numerator->GetMinPosition();
+}
+
 QPoint Fraction::GetPosition()
 {
 	 return position_;

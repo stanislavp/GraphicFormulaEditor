@@ -64,6 +64,8 @@ public:
 	 */
 	virtual QPoint GetPosition() = 0;
 
+	virtual QPoint GetMinPosition() = 0;
+
 	//! Определяет пересечение точки с областью глифа
 	virtual bool Intersects(const QPoint &point, GlyphList &list) = 0;
 

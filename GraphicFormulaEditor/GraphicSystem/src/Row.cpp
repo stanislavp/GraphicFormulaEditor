@@ -7,7 +7,6 @@ namespace Graphic
 Row::Row(GlyphPtr parent, QPoint position)
 	: Composite(parent), position_(position)
 {
-
 }
 
 void Row::Add(GlyphPtr glyph, size_t position)
@@ -80,6 +79,15 @@ void Row::SetPosition(const QPoint &point)
 QPoint Row::GetPosition()
 {
 	return position_;
+}
+
+QPoint Row::GetMinPosition() {
+	 int y = position_.y();
+	 for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it) {
+		  y = std::min(y, (*it)->GetMinPosition().y());
+	 }
+
+	 return QPoint(position_.x(), y);
 }
 
 QString Row::__Type()

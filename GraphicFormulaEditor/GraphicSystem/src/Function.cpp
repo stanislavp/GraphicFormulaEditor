@@ -59,6 +59,10 @@ QPoint Function::GetPosition()
 	 return position_;
 }
 
+QPoint Function::GetMinPosition() {
+	 return brackets_->GetMinPosition();
+}
+
 bool Function::Intersects(const QPoint &point, GlyphList &list)
 {
 	if(brackets_->Intersects(point, list))

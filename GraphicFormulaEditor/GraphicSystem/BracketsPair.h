@@ -51,6 +51,8 @@ public:
 	 */
 	virtual QPoint GetPosition();
 
+	virtual QPoint GetMinPosition();
+
 	/**
 	 * Возвращает потомка глифа по позиции.
 	 */
