@@ -275,8 +275,6 @@ void MainWindow::__try__()
 
 	GlyphPtr function(new Function(QString("sin"), mainGlyph_));
 
-	GlyphPtr function1(new Function(QString("sin"), mainGlyph_));
-
 	GlyphPtr var(new Variable(function));
 
 	GlyphPtr oper(new Operation(function, QString("+")));
@@ -286,7 +284,6 @@ void MainWindow::__try__()
 	GlyphPtr var2(new Variable(func2, QString("x")));
 
 	glyphs_->push_back(function);
-	glyphs_->push_back(function1);
 	glyphs_->push_back(var);
 	glyphs_->push_back(oper);
 	glyphs_->push_back(func2);
@@ -297,7 +294,6 @@ void MainWindow::__try__()
 	adding(function, oper, 1);
 	adding(function, func2, 2);
 	adding(func2, var2, 0);
-	adding(function, function1, 0);
 
 	mainGlyph_->Draw(scene_.get());
 
