@@ -7,7 +7,7 @@ namespace Graphic
 Row::Row(GlyphPtr parent, QPoint position)
 	: Composite(parent), position_(position)
 {
-
+	Add(new Dummy(this), 0);
 }
 
 void Row::Add(GlyphPtr glyph, size_t position)

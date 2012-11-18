@@ -86,7 +86,7 @@ public slots:
 	void FindGlyph(QPoint point);
 	void ChangeSelected();
 
-	void AddGlyph();
+	void CreateNewFormula();
 	void DeleteGlyph();
 	void ClickVariable();
 	void ClickFunction();
@@ -118,6 +118,9 @@ private slots:
 	//! Export
 	void ExportAsImage();
 
+	//! Engine
+	void CreateMainGlyph();
+
 private:
 
 	//! SHARED PTR ЖЕ :) Нужно хранить!
@@ -142,7 +145,7 @@ private:
 
 	//! Buttons
 	boost::shared_ptr<QPushButton> delete_;
-	boost::shared_ptr<QPushButton> add_;
+	boost::shared_ptr<QPushButton> create_;
 	boost::shared_ptr<QPushButton> variable_;
 	boost::shared_ptr<QPushButton> function_;
 	boost::shared_ptr<QPushButton> fraction_;

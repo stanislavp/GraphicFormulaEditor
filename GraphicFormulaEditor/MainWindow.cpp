@@ -24,8 +24,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), selected_(0)
 	delete_.reset(new QPushButton("Delete"));
 	delete_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
 
-	add_.reset(new QPushButton("Add"));
-	add_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+	create_.reset(new QPushButton("New"));
+	create_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
 
 	variable_.reset(new QPushButton("x"));
 	variable_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
@@ -65,7 +65,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), selected_(0)
 	hlayout_->setStretch(1, 1);
 
 	buttonsLayout_->addWidget(delete_.get());
-	buttonsLayout_->addWidget(add_.get());
+	buttonsLayout_->addWidget(create_.get());
 	buttonsLayout_->addWidget(variable_.get());
 	buttonsLayout_->addWidget(function_.get());
 	buttonsLayout_->addWidget(fraction_.get());
@@ -86,7 +86,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), selected_(0)
 	connect(scene_.get(), SIGNAL(clickOver(QPoint)), this, SLOT(FindGlyph(QPoint)));
 	connect(selectedList_.get(), SIGNAL(itemSelectionChanged()), this, SLOT(ChangeSelected()));
 
-	connect(add_.get(), SIGNAL(clicked()), this, SLOT(AddGlyph()));
+	connect(create_.get(), SIGNAL(clicked()), this, SLOT(CreateNewFormula()));
 	connect(delete_.get(), SIGNAL(clicked()), this, SLOT(DeleteGlyph()));
 	connect(variable_.get(), SIGNAL(clicked()), this, SLOT(ClickVariable()));
 	connect(function_.get(), SIGNAL(clicked()), this, SLOT(ClickFunction()));
@@ -94,6 +94,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), selected_(0)
 	connect(leveled_.get(), SIGNAL(clicked()), this, SLOT(ClickLeveled()));
 	connect(radix_.get(), SIGNAL(clicked()), this, SLOT(ClickRadix()));
 	connect(operation_.get(), SIGNAL(clicked()), this, SLOT(ClickOperation()));
+
+	view_->setScene(scene_.get());
 }
 
 MainWindow::~MainWindow()
@@ -106,36 +108,21 @@ void MainWindow::Show()
 	window_->show();
 }
 
-void MainWindow::AddGlyph()
+void MainWindow::CreateNewFormula()
 {
-	std::cerr << "Confirm. " << std::endl;
+	ClearSelected();
+	ClearSelectedBackLight();
+	CreateMainGlyph();
+}
 
-	if(selected_)
-	{
-		// пихаем после выделенного глифа
-		Graphic::GlyphPtr glyph = selected_->GetGlyph();
+void MainWindow::CreateMainGlyph()
+{
+	delete mainGlyph_;
 
-		if(glyph->Parent())
-		{
-			Graphic::GlyphPtr parent = glyph->Parent();
+	mainGlyph_ = (new Graphic::Row());
+	glyphs_.reset(new std::vector<Graphic::GlyphPtr>());
 
-			try
-			{
-				 size_t position = parent->GetPositionByPtr(glyph);
-				 adding(parent, new Graphic::Variable(parent, "pi"), position + 1);
-				 mainGlyph_->Draw(scene_.get());
-			} catch(const std::logic_error &e) {
-				 std::cerr << e.what() << std::endl;
-			}
-		}
-		delete selected_;
-	} else
-	{
-		 // пихаем в конец
-		adding(mainGlyph_, new Graphic::Variable(mainGlyph_, "pi") , 0);
-		mainGlyph_->Draw(scene_.get());
-	}
-
+	mainGlyph_->Draw(scene_.get());
 }
 
 void MainWindow::DeleteGlyph()
@@ -182,7 +169,8 @@ void MainWindow::Create(Graphic::GlyphPtr newGlyph)
 				 std::cerr << e.what() << std::endl;
 			}
 		}
-	}
+	} else
+		std::cerr << "MainWindow::Create(): !GetGlyph && newGlyph" << std::endl;
 }
 
 void MainWindow::ClickVariable()
@@ -316,8 +304,6 @@ void MainWindow::__try__()
 
 	mainGlyph_->Draw(scene_.get());
 
-	view_->setScene(scene_.get());
-
 }
 
 void MainWindow::adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t position)
@@ -343,6 +329,8 @@ void MainWindow::ClearSelected()
 {
 	if(selectedList_)
 		selectedList_->clear();
+
+	selectedMap_.clear();
 }
 
 void MainWindow::ClearSelectedBackLight()
