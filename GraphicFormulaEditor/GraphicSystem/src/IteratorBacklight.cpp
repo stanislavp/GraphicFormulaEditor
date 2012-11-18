@@ -4,9 +4,9 @@ namespace Graphic
 {
 
 IteratorBacklight::IteratorBacklight(GlyphPtr glyph):
-	 glyph_(glyph), rectangle_(new QGraphicsRectItem())
+	glyph_(glyph), rectangle_(new QGraphicsRectItem()), brush_(0)
 {
-
+	brush_= new QBrush(QColor(0, 0, 255, 50));
 }
 
 void IteratorBacklight::Draw(QGraphicsScenePtr scene)
@@ -29,8 +29,13 @@ void IteratorBacklight::UpdateRectangle()
 				     _bound.y() + _position.y(),
 				     _bound.width(),
 				     _bound.height());
-		 rectangle_->setBrush(QBrush(QColor(0, 0, 255, 50)));
+		 rectangle_->setBrush(*brush_);
 	 }
+}
+
+void IteratorBacklight::SetBrush(QBrush brush)
+{
+	*brush_ = brush;
 }
 
 void IteratorBacklight::SetGlyph(GlyphPtr glyph)
@@ -46,6 +51,7 @@ GlyphPtr IteratorBacklight::GetGlyph() {
 IteratorBacklight::~IteratorBacklight()
 {
 	delete rectangle_;
+	delete brush_;
 }
 
 
