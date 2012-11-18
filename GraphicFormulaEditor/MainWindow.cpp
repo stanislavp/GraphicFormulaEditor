@@ -205,12 +205,6 @@ void MainWindow::ClickRadix()
 
 void MainWindow::ChangeSelected()
 {
-	for(std::vector<Graphic::IteratorBacklightPtr>::const_iterator _it(backlights_.begin());
-		_it != backlights_.end(); ++_it)
-	{
-		delete *_it;
-	}
-
 	ClearSelected();
 
 	QList<QListWidgetItem*> selected(selectedList_->selectedItems());
@@ -257,7 +251,6 @@ void MainWindow::FindGlyph(QPoint point)
 	{
 		selectedList_->clear();
 		selectedMap_.clear();
-		backlights_.clear();
 	}
 }
 
@@ -310,9 +303,13 @@ void MainWindow::adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t 
 
 bool MainWindow::removing(Graphic::GlyphPtr where, size_t position)
 {
-	 bool deleted = where->Remove(position);
-	 mainGlyph_->SetPosition(mainGlyph_->GetPosition());
-	 return deleted;
+	bool deleted = where->Remove(position);
+	mainGlyph_->SetPosition(mainGlyph_->GetPosition());
+
+	ClearSelected();
+	ChangeSelected();
+
+	return deleted;
 }
 
 void MainWindow::ClearSelected()

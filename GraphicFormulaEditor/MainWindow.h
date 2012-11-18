@@ -117,9 +117,6 @@ private:
 	//! Для выбранных глифоф
 	std::map<QListWidgetItem*, Graphic::GlyphPtr> selectedMap_;
 
-	//! Для теста.
-	std::vector<Graphic::IteratorBacklightPtr> backlights_;
-
 	//! GUI
 	boost::shared_ptr<QWidget> window_;
 	boost::shared_ptr<QGraphicsView> view_;
