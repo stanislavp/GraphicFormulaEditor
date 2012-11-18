@@ -7,7 +7,7 @@ namespace Dialog
 CreateFraction::CreateFraction(Graphic::GlyphPtr glyphParent, MainWindow *parent)
 	: QDialog(parent), parent_(glyphParent)
 {
-	hint_ = new QLabel(tr("Name/value: "));
+	hint_ = new QLabel(tr("Are you sure?"));
 	ok_ = new QPushButton(tr("OK"));
 	cancel_ = new QPushButton(tr("Cancel"));
 

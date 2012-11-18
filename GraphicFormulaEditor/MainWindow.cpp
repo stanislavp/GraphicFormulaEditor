@@ -2,6 +2,11 @@
 
 //! Dialogs
 #include "Dialogs/CreateVariable.h"
+#include "Dialogs/CreateFunction.h"
+#include "Dialogs/CreateFraction.h"
+#include "Dialogs/CreateOperation.h"
+#include "Dialogs/CreateBrackets.h"
+#include "Dialogs/CreateLeveled.h"
 
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent), selected_(0)
 {
@@ -144,13 +149,6 @@ void MainWindow::DeleteGlyph()
 
 }
 
-void MainWindow::ClickVariable()
-{
-	Dialog::CreateVariable *create = new Dialog::CreateVariable(selected_->GetGlyph()->Parent(), this);
-	create->setModal(true);
-	create->show();
-}
-
 void MainWindow::Create(Graphic::GlyphPtr newGlyph)
 {
 	std::cerr << "Config, is create slot" << std::endl;
@@ -172,24 +170,41 @@ void MainWindow::Create(Graphic::GlyphPtr newGlyph)
 	}
 }
 
+void MainWindow::ClickVariable()
+{
+	QDialog *create = new Dialog::CreateVariable(selected_->GetGlyph()->Parent(), this);
+	create->setModal(true);
+	create->show();
+}
+
 void MainWindow::ClickFunction()
 {
-
+	QDialog *create = new Dialog::CreateFunction(selected_->GetGlyph()->Parent(), this);
+	create->setModal(true);
+	create->show();
 }
 
 void MainWindow::ClickFraction()
 {
-
+	QDialog *create = new Dialog::CreateFraction(selected_->GetGlyph()->Parent(), this);
+	create->setModal(true);
+	create->show();
 }
 
 void MainWindow::ClickLeveled()
 {
-
+	QDialog *create = new Dialog::CreateLeveled(selected_->GetGlyph()->Parent(), this);
+	create->setModal(true);
+	create->show();
 }
 
 void MainWindow::ClickRadix()
 {
-
+	if(selected_->GetGlyph())
+	{
+		Graphic::GlyphPtr glyph = new Graphic::Function("sqrt", selected_->GetGlyph()->Parent());
+		Create(glyph);
+	}
 }
 
 
