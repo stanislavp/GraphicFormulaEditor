@@ -13,6 +13,9 @@
 //! Graphics
 #include "../GraphicSystem/Variable.h"
 
+//! Own
+#include "../MainWindow.h"
+
 namespace Dialog
 {
 
@@ -21,13 +24,15 @@ class CreateVariable : public QDialog
 	Q_OBJECT
 
 public:
-	CreateVariable(Graphic::GlyphPtr &variable, Graphic::GlyphPtr glyphParent, QWidget *parent = 0);
+	CreateVariable(Graphic::GlyphPtr glyphParent, MainWindow *parent = 0);
+
+signals:
+	void CreateOver(Graphic::GlyphPtr glyph);
 
 private slots:
 	void Create();
 
 private:
-	Graphic::GlyphPtr &variable_;
 	Graphic::GlyphPtr parent_;
 
 	QLineEdit *text_;

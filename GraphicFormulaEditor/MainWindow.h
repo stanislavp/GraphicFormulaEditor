@@ -89,6 +89,9 @@ public slots:
 	void ClickFraction();
 	void ClickLeveled();
 	void ClickRadix();
+
+	//! Create
+	void Create(Graphic::GlyphPtr newGlyph);
 	
 private:
 

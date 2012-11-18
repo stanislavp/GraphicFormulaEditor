@@ -4,8 +4,8 @@ namespace Dialog
 {
 
 
-CreateVariable::CreateVariable(Graphic::GlyphPtr &variable, Graphic::GlyphPtr glyphParent, QWidget *parent)
-	: QDialog(parent), variable_(variable), parent_(glyphParent)
+CreateVariable::CreateVariable(Graphic::GlyphPtr glyphParent, MainWindow *parent)
+	: QDialog(parent), parent_(glyphParent)
 {
 	text_ = new QLineEdit();
 	hint_ = new QLabel(tr("Name/value: "));
@@ -41,7 +41,9 @@ CreateVariable::CreateVariable(Graphic::GlyphPtr &variable, Graphic::GlyphPtr gl
 	 */
 
 	connect(cancel_, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ok_, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ok_, SIGNAL(clicked()), this, SLOT(Create()));
+
+	connect(this, SIGNAL(CreateOver(Graphic::GlyphPtr)), parent, SLOT(Create(Graphic::GlyphPtr)));
 }
 
 void CreateVariable::Create()
@@ -50,7 +52,7 @@ void CreateVariable::Create()
 
 	if(!text.isEmpty())
 	{
-		variable_ = new Graphic::Variable(parent_, text);
+		emit CreateOver(new Graphic::Variable(parent_, text));
 		close();
 	}
 }

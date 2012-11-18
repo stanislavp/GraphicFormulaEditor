@@ -146,21 +146,22 @@ void MainWindow::DeleteGlyph()
 
 void MainWindow::ClickVariable()
 {
-	Graphic::GlyphPtr newGlyph;
-
-	Dialog::CreateVariable *create = new Dialog::CreateVariable(newGlyph, selected_->GetGlyph()->Parent(), this);
+	Dialog::CreateVariable *create = new Dialog::CreateVariable(selected_->GetGlyph()->Parent(), this);
 	create->setModal(true);
-
 	create->show();
+}
 
-	if(newGlyph)
+void MainWindow::Create(Graphic::GlyphPtr newGlyph)
+{
+	std::cerr << "Config, is create slot" << std::endl;
+	if(selected_->GetGlyph() && newGlyph)
 	{
 		if(newGlyph->Parent())
 		{
-			Graphic::GlyphPtr parent = newGlyph->Parent();
+			Graphic::GlyphPtr parent = selected_->GetGlyph()->Parent();
 			try
 			{
-				 size_t position = parent->GetPositionByPtr(newGlyph);
+				 size_t position = parent->GetPositionByPtr(selected_->GetGlyph());
 				 adding(parent, newGlyph, position + 1);
 				 mainGlyph_->Draw(scene_.get());
 
