@@ -32,7 +32,6 @@ void Fraction::Add(GlyphPtr glyph, size_t position)
 void Fraction::Draw(QGraphicsScenePtr scene)
 {
 	 numerator->Draw(scene);
-	 UpdateLine();
 	 scene->addItem(line_);
 	 denominator->Draw(scene);
 }
@@ -54,6 +53,8 @@ void Fraction::SetPosition(const QPoint &point)
 
 	 numerator->SetPosition(position_);
 	 denominator->SetPosition(QPoint(position_.x(), position_.y() + numerator->Bound().height()));
+
+	 UpdateLine();
 }
 
 QPoint Fraction::GetPosition()
