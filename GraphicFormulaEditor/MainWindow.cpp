@@ -8,7 +8,11 @@
 #include "Dialogs/CreateBrackets.h"
 #include "Dialogs/CreateLeveled.h"
 
-MainWindow::MainWindow(QWidget *parent) : QWidget(parent), selected_(0)
+//! Qt
+#include <QPixmap>
+#include <QFileDialog>
+
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), selected_(0)
 {
 	//! GUI Initialization
 	window_.reset(new QWidget);
@@ -35,16 +39,25 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), selected_(0)
 	leveled_.reset(new QPushButton("x^y"));
 	leveled_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
 
-	radix_.reset(new QPushButton("sqrt(x)"));
+	radix_.reset(new QPushButton("sqrt()"));
 	radix_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
 
 	operation_.reset(new QPushButton("*/-+"));
 	operation_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
 
+	menuLayout_.reset(new QHBoxLayout);
 	hlayout_.reset(new QHBoxLayout);
 
 	vlayout_.reset(new QVBoxLayout);
 	buttonsLayout_.reset(new QHBoxLayout);
+
+	//! Actions
+	CreateActions();
+
+	//! Menus
+	CreateMenus();
+
+	menuLayout_->addWidget(menuBar_.get());
 
 	hlayout_->addWidget(view_.get());
 	hlayout_->addWidget(selectedList_.get());
@@ -60,6 +73,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), selected_(0)
 	buttonsLayout_->addWidget(radix_.get());
 	buttonsLayout_->addWidget(operation_.get());
 
+	vlayout_->addLayout(menuLayout_.get());
 	vlayout_->addLayout(buttonsLayout_.get());
 	vlayout_->addLayout(hlayout_.get());
 
@@ -80,7 +94,6 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), selected_(0)
 	connect(leveled_.get(), SIGNAL(clicked()), this, SLOT(ClickLeveled()));
 	connect(radix_.get(), SIGNAL(clicked()), this, SLOT(ClickRadix()));
 	connect(operation_.get(), SIGNAL(clicked()), this, SLOT(ClickOperation()));
-
 }
 
 MainWindow::~MainWindow()
@@ -336,4 +349,42 @@ void MainWindow::ClearSelectedBackLight()
 {
 	delete selected_;
 	selected_ = 0;
+}
+
+//! GUI
+
+void MainWindow::CreateActions()
+{
+	//! Export as image
+	export_.reset(new QAction(tr("&Export as image..."), this));
+	export_->setShortcuts(QKeySequence::SaveAs);
+	export_->setStatusTip(tr("Save formula as image file"));
+	connect(export_.get(), SIGNAL(triggered()), this, SLOT(ExportAsImage()));
+}
+
+void MainWindow::CreateMenus()
+{
+	menuBar_.reset(new QMenuBar(this));
+	menuBar_->setObjectName(tr("MenuBar"));
+	this->setMenuBar(menuBar_.get());
+
+	//! File
+	fileMenu_.reset(menuBar_->addMenu(tr("&File")));
+	fileMenu_->addAction(export_.get());
+}
+
+//! Export
+
+void MainWindow::ExportAsImage()
+{
+	QString fileName = QFileDialog::getSaveFileName(this,
+													tr("Save Document"),
+													QDir::currentPath(),
+													tr("Images (*.png)"));
+
+	if(!fileName.isNull())
+	{
+		QPixmap pixMap = QPixmap::grabWidget(view_.get());
+		pixMap.save(fileName);
+	}
 }

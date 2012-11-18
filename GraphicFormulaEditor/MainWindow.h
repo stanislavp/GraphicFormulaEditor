@@ -16,6 +16,10 @@
 #include <QGraphicsView>
 #include <QPushButton>
 
+#include <QAction>
+#include <QMenu>
+#include <QMenuBar>
+
 //! Boost
 #include <boost/shared_ptr.hpp>
 
@@ -65,7 +69,7 @@ signals:
 	void clickOver(QPoint point);
 };
 
-class MainWindow : public QWidget // : public QMainWindow
+class MainWindow : public QMainWindow
 {
 	Q_OBJECT
 	
@@ -105,6 +109,15 @@ private:
 	void ClearSelected();
 	void ClearSelectedBackLight();
 
+	//! GUI Initialize
+	void CreateActions();
+	void CreateMenus();
+
+private slots:
+
+	//! Export
+	void ExportAsImage();
+
 private:
 
 	//! SHARED PTR ЖЕ :) Нужно хранить!
@@ -119,12 +132,15 @@ private:
 	//! Для выбранных глифоф
 	std::map<QListWidgetItem*, Graphic::GlyphPtr> selectedMap_;
 
-	//! GUI
+	/**  GUI */
+
+	//! Widgets
 	boost::shared_ptr<QWidget> window_;
 	boost::shared_ptr<QGraphicsView> view_;
 	boost::shared_ptr<GraphicsScene> scene_;
 	boost::shared_ptr<QListWidget> selectedList_;
 
+	//! Buttons
 	boost::shared_ptr<QPushButton> delete_;
 	boost::shared_ptr<QPushButton> add_;
 	boost::shared_ptr<QPushButton> variable_;
@@ -134,9 +150,20 @@ private:
 	boost::shared_ptr<QPushButton> radix_;
 	boost::shared_ptr<QPushButton> operation_;
 
+	//! Layouts
+	boost::shared_ptr<QHBoxLayout> menuLayout_;
 	boost::shared_ptr<QHBoxLayout> hlayout_;
 	boost::shared_ptr<QHBoxLayout> buttonsLayout_;
 	boost::shared_ptr<QVBoxLayout> vlayout_;
+
+	//! Menu bars
+	boost::shared_ptr<QMenuBar> menuBar_;
+
+	//! Menus
+	boost::shared_ptr<QMenu> fileMenu_;
+
+	//! Actions
+	boost::shared_ptr<QAction> export_;
 };
 
 #endif // MAINWINDOW_H
