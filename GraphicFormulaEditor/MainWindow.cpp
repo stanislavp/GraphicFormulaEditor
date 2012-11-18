@@ -92,13 +92,6 @@ void MainWindow::AddGlyph()
 {
 	std::cerr << "Confirm. " << std::endl;
 
-	/*
-		 Здесь как-то надо слепить это дело с теми кнопками.
-		 Запилить одну переменную смежную, в которую будем
-		 создавать добавляемый глиф? И тут проверять было
-		 ли все правильно выделено?
-	*/
-
 	if(selected_)
 	{
 		// пихаем после выделенного глифа
@@ -117,6 +110,7 @@ void MainWindow::AddGlyph()
 				 std::cerr << e.what() << std::endl;
 			}
 		}
+		delete selected_;
 	} else
 	{
 		 // пихаем в конец
@@ -163,7 +157,8 @@ void MainWindow::Create(Graphic::GlyphPtr newGlyph)
 				 adding(parent, newGlyph, position + 1);
 				 mainGlyph_->Draw(scene_.get());
 
-			} catch(const std::logic_error &e) {
+			} catch(const std::logic_error &e)
+			{
 				 std::cerr << e.what() << std::endl;
 			}
 		}
@@ -216,7 +211,8 @@ void MainWindow::ChangeSelected()
 		delete *_it;
 	}
 
-	backlights_.clear();
+	delete selected_;
+	selected_ = 0;
 
 	QList<QListWidgetItem*> selected(selectedList_->selectedItems());
 
@@ -230,7 +226,6 @@ void MainWindow::ChangeSelected()
 
 			Graphic::IteratorBacklightPtr iterator = new Graphic::IteratorBacklight(glyph);
 			selected_ = iterator;
-			backlights_.push_back(iterator);
 
 			iterator->Draw(scene_.get());
 		}
@@ -310,6 +305,9 @@ void MainWindow::adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t 
 {
 	 where->Add(what, position);
 	 mainGlyph_->SetPosition(mainGlyph_->GetPosition());
+
+	 delete selected_;
+	 selected_ = 0;
 }
 
 bool MainWindow::removing(Graphic::GlyphPtr where, size_t position)
