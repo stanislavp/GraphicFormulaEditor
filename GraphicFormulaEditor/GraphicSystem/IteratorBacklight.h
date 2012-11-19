@@ -38,8 +38,8 @@ private:
 	void UpdateRectangle();
 
 private:
-	QBrush *brush_;
 	GlyphPtr glyph_;
+	QBrush *brush_;
 	QGraphicsRectItemPtr rectangle_;
 };
 

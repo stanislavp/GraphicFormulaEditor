@@ -13,7 +13,7 @@ Variable::Variable(GlyphPtr parent) : parent_(parent), text_(new QGraphicsTextIt
 }
 
 Variable::Variable(GlyphPtr parent, const QString &text, const QPoint &position)
-	: parent_(parent), position_(position), text_(new QGraphicsTextItem)
+	: parent_(parent), text_(new QGraphicsTextItem), position_(position)
 {
 	text_->setPlainText(text);
 }

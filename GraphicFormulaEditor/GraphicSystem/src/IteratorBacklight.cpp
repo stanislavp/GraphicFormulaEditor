@@ -4,7 +4,7 @@ namespace Graphic
 {
 
 IteratorBacklight::IteratorBacklight(GlyphPtr glyph):
-	glyph_(glyph), rectangle_(new QGraphicsRectItem()), brush_(0)
+	glyph_(glyph), brush_(0), rectangle_(new QGraphicsRectItem())
 {
 	brush_= new QBrush(QColor(0, 0, 255, 50));
 }

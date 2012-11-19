@@ -33,7 +33,7 @@ void Row::Add(GlyphPtr glyph, size_t position)
 		contents_.push_back(glyph);
 	} else
 	{
-		int count = 0;
+		unsigned count = 0;
 		bool inserted = false;
 		for(Content::iterator it = contents_.begin(); it != contents_.end(); ++it, ++count) {
 			if(count == position) {

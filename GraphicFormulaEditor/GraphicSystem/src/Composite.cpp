@@ -116,11 +116,12 @@ GlyphPtr Composite::Get(size_t position) {
 	if(position >= contents_.size())
 		throw std::out_of_range("Index out of range");
 
-	int count = 0;
+	unsigned count = 0;
 	for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it, ++count) {
 		if(count == position)
 			return *it;
 	}
+	return GlyphPtr();
 }
 
 size_t Composite::GetPositionByPtr(GlyphPtr ptr)
