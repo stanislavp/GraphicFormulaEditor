@@ -88,16 +88,13 @@ bool Composite::Remove(size_t position)
 	size_t _count = 0;
 
 	if(contents_.size() == 1) {
-		 try {
-			  DummyPtr ptr = dynamic_cast<DummyPtr>(contents_.back());
-			  if(ptr == 0) {
-				   contents_.erase(contents_.begin());
-				   Add(new Dummy(Parent()), 0);
-				   return true;
-			  } else
-				   return false;
-		 } catch(const std::exception& e) {
-		 }
+		 DummyPtr ptr = dynamic_cast<DummyPtr>(contents_.back());
+		 if(ptr == 0) {
+			  contents_.erase(contents_.begin());
+			  Add(new Dummy(Parent()), 0);
+			  return true;
+		 } else
+			  return false;
 	}
 
 	for(Content::iterator _it(contents_.begin()); _it != contents_.end(); ++_it, ++_count)

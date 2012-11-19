@@ -1,5 +1,6 @@
 #include "../Row.h"
 #include "../Dummy.h"
+#include "../Level.h"
 
 namespace Graphic
 {
@@ -13,17 +14,11 @@ Row::Row(GlyphPtr parent, QPoint position)
 void Row::Add(GlyphPtr glyph, size_t position)
 {
 	if(contents_.size() == 1) {
-		try {
-			DummyPtr ptr = dynamic_cast<DummyPtr>(contents_.back());
-
-			if(ptr != 0) {
-				contents_.erase(contents_.begin());
-				delete ptr;
-			}
-		} catch(const std::exception& e)
-		{
-			//
-		}
+		 DummyPtr ptr = dynamic_cast<DummyPtr>(contents_.back());
+		 if(ptr != 0) {
+			 contents_.erase(contents_.begin());
+			 delete ptr;
+		 }
 	}
 
 	if(contents_.empty())
@@ -85,7 +80,8 @@ void Row::SetPosition(const QPoint &point)
 		int localHeight = (*it)->Bound().height();
 		int topIndent = (rowHeight - localHeight) / 2;
 
-		if((*it)->Type() == "LeveledExpression") {
+		GlyphPtr ptr = dynamic_cast<LeveledExpression*>(*it);
+		if(ptr) {
 			 QPoint position(point.x() + cumlWidth,
 					 std::max(point.y(), point.y() + rowHeight - bottomIndent - localHeight));
 			 (*it)->SetPosition(position);
