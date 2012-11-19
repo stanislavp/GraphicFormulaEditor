@@ -73,26 +73,12 @@ bool LeveledExpression::Intersects(const QPoint &point, GlyphList &list)
 }
 
 void LeveledExpression::SetPosition(const QPoint &point)
-{/*
+{
 	 position_.setX(point.x());
 	 position_.setY(point.y());
 
 	 level_->SetPosition(QPoint(position_.x() + expression_->Bound().width(), position_.y()));
-	 expression_->SetPosition(QPoint(position_.x(), position_.y() + level_->Bound().height()));*/
-
-	 int parentHeight = Parent()->Bound().height();
-	 int exprHeight = expression_->Bound().height();
-
-	 int topIndent = (parentHeight - exprHeight) / 2;
-
-	 expression_->SetPosition(QPoint(point.x(), Parent()->GetPosition().y() + topIndent));
-
-	 level_->SetPosition(QPoint(point.x() + expression_->Bound().width(),
-				    expression_->GetPosition().y() - level_->Bound().height()));
-
-	 position_.setY(level_->GetPosition().y());
-	 position_.setX(point.x());
-
+	 expression_->SetPosition(QPoint(position_.x(), position_.y() + level_->Bound().height()));
 }
 
 QPoint LeveledExpression::GetPosition()
