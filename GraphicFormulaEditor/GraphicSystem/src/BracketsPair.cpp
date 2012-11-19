@@ -108,10 +108,6 @@ QPoint BracketsPair::GetPosition()
 	 return position_;
 }
 
-QPoint BracketsPair::GetMinPosition() {
-	 return row_->GetMinPosition();
-}
-
 size_t BracketsPair::GetPositionByPtr(GlyphPtr ptr)
 {
 	 return row_->GetPositionByPtr(ptr);

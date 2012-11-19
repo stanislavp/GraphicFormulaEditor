@@ -51,14 +51,14 @@ void Fraction::SetPosition(const QPoint &point)
 	 position_.setX(point.x());
 	 position_.setY(point.y());
 
-	 numerator->SetPosition(position_);
+	 numerator->SetPosition(point);
 	 denominator->SetPosition(QPoint(position_.x(), position_.y() + numerator->Bound().height()));
 
-	 UpdateLine();
-}
+	 //numerator->SetPosition(QPoint(point.x(), denominator->GetPosition().y() - numerator->Bound().height()));
 
-QPoint Fraction::GetMinPosition() {
-	 return numerator->GetMinPosition();
+	 position_.setY(numerator->GetPosition().y());
+
+	 UpdateLine();
 }
 
 QPoint Fraction::GetPosition()

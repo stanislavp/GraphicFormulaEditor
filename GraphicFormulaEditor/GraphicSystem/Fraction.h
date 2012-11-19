@@ -34,8 +34,6 @@ public:
 	 */
 	virtual QPoint GetPosition();
 
-	 virtual QPoint GetMinPosition();
-
 	//! Возвращает максимальную прямоугольную область, занимаемую глифом
 	//virtual QRect Bound();
 

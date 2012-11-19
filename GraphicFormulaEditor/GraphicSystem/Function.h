@@ -51,8 +51,6 @@ public:
 	 */
 	virtual GlyphPtr Get(size_t position);
 
-	virtual QPoint GetMinPosition();
-
 	/**
 	* Возвращает позицию глифа в родителе по указателю.
 	* Будет вызываться только у сложных глифов.

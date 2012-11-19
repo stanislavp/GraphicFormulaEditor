@@ -30,8 +30,6 @@ public:
 	 */
 	virtual QPoint GetPosition();
 
-	virtual QPoint GetMinPosition();
-
 	/**
 	 * Добавляет к глифу потомка.
 	 * Будет работать только для глифов, наследуемых от Composite.

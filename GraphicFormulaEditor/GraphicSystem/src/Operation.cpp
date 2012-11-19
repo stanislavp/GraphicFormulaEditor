@@ -49,10 +49,6 @@ QPoint Operation::GetPosition()
 	return position_;
 }
 
-QPoint Operation::GetMinPosition() {
-	 return position_;
-}
-
 bool Operation::Intersects(const QPoint &point, GlyphList &list)
 {
 	if(text_)
