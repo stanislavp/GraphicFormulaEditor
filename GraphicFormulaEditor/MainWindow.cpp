@@ -322,6 +322,8 @@ bool MainWindow::removing(Graphic::GlyphPtr where, size_t position)
 
 	ClearSelected();
 
+	mainGlyph_->Draw(scene_.get());
+
 	return deleted;
 }
 
