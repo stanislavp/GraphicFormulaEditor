@@ -1,5 +1,6 @@
 SOURCES += main.cpp\
     MainWindow.cpp \
+    GraphicScene.cpp \
     GraphicSystem/src/Variable.cpp \
     GraphicSystem/src/Space.cpp \
     GraphicSystem/src/Row.cpp \
@@ -22,6 +23,7 @@ SOURCES += main.cpp\
     GraphicSystem/src/Dummy.cpp
 
 HEADERS  += MainWindow.h \
+    GraphicScene.h \
     GraphicSystem/Variable.h \
     GraphicSystem/Space.h \
     GraphicSystem/Row.h \
