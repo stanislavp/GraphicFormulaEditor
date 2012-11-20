@@ -27,6 +27,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), selected_(0)
 	create_.reset(new QPushButton("New"));
 	create_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
 
+	brackets_.reset(new QPushButton("( )"));
+	brackets_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+
 	variable_.reset(new QPushButton("x"));
 	variable_->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
 
@@ -72,6 +75,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), selected_(0)
 	buttonsLayout_->addWidget(leveled_.get());
 	buttonsLayout_->addWidget(radix_.get());
 	buttonsLayout_->addWidget(operation_.get());
+	buttonsLayout_->addWidget(brackets_.get());
 
 	vlayout_->addLayout(menuLayout_.get());
 	vlayout_->addLayout(buttonsLayout_.get());
@@ -94,6 +98,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), selected_(0)
 	connect(leveled_.get(), SIGNAL(clicked()), this, SLOT(ClickLeveled()));
 	connect(radix_.get(), SIGNAL(clicked()), this, SLOT(ClickRadix()));
 	connect(operation_.get(), SIGNAL(clicked()), this, SLOT(ClickOperation()));
+	connect(brackets_.get(), SIGNAL(clicked()), this, SLOT(ClickBrackets()));
 
 	view_->setScene(scene_.get());
 }
@@ -137,7 +142,7 @@ void MainWindow::DeleteGlyph()
 			Graphic::GlyphPtr parent = glyph->Parent();
 			try {
 				size_t position = parent->GetPositionByPtr(glyph);
-				if(removing(parent, position))
+				if(Removing(parent, position))
 					delete glyph;
 
 				std::cerr << "Deleted." << std::endl;
@@ -159,7 +164,7 @@ void MainWindow::Create(Graphic::GlyphPtr newGlyph)
 			try
 			{
 				 size_t position = parent->GetPositionByPtr(selected_->GetGlyph());
-				 adding(parent, newGlyph, position + 1);
+				 Adding(parent, newGlyph, position + 1);
 				 mainGlyph_->Draw(scene_.get());
 
 				 FindGlyph(newGlyph->GetPosition());
@@ -176,6 +181,13 @@ void MainWindow::Create(Graphic::GlyphPtr newGlyph)
 void MainWindow::ClickVariable()
 {
 	QDialog *create = new Dialog::CreateVariable(selected_->GetGlyph()->Parent(), this);
+	create->setModal(true);
+	create->show();
+}
+
+void MainWindow::ClickBrackets()
+{
+	QDialog *create = new Dialog::CreateBrackets(selected_->GetGlyph()->Parent(), this);
 	create->setModal(true);
 	create->show();
 }
@@ -269,11 +281,7 @@ void MainWindow::FindGlyph(QPoint point)
 	}
 }
 
-void MainWindow::__try2__()
-{
-	Iterator::GlyphIterator _it(mainGlyph_);
-}
-
+/**
 void MainWindow::__try__()
 {
 	using namespace Graphic;
@@ -296,17 +304,17 @@ void MainWindow::__try__()
 	glyphs_->push_back(func2);
 	glyphs_->push_back(var2);
 
-	adding(mainGlyph_, function, 0);
-	adding(function, var, 0);
-	adding(function, oper, 1);
-	adding(function, func2, 2);
-	adding(func2, var2, 0);
+	Adding(mainGlyph_, function, 0);
+	Adding(function, var, 0);
+	Adding(function, oper, 1);
+	Adding(function, func2, 2);
+	Adding(func2, var2, 0);
 
 	mainGlyph_->Draw(scene_.get());
-
 }
+*/
 
-void MainWindow::adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t position)
+void MainWindow::Adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t position)
 {
 	 where->Add(what, position);
 	 mainGlyph_->SetPosition(mainGlyph_->GetPosition());
@@ -315,7 +323,7 @@ void MainWindow::adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t 
 	 ClearSelectedBackLight();
 }
 
-bool MainWindow::removing(Graphic::GlyphPtr where, size_t position)
+bool MainWindow::Removing(Graphic::GlyphPtr where, size_t position)
 {
 	bool deleted = where->Remove(position);
 	mainGlyph_->SetPosition(mainGlyph_->GetPosition());
