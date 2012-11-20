@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../GraphicSystem/Glyph.h"
 
 namespace Iterator
