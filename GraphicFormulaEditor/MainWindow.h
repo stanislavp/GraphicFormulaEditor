@@ -78,10 +78,10 @@ public slots:
 	
 private:
 
-	// Добавление к глифу потомка
+	//! Добавление к глифу потомка
 	void Adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t position);
 
-	// Удаление по позиции
+	//! Удаление по позиции
 	bool Removing(Graphic::GlyphPtr where, size_t position);
 
 	//! Utils
@@ -104,9 +104,6 @@ private slots:
 	void CreateMainGlyph();
 
 private:
-
-	//! SHARED PTR ЖЕ :) Нужно хранить!
-	boost::shared_ptr<std::vector<Graphic::GlyphPtr> > glyphs_;
 
 	//! Row
 	Graphic::GlyphPtr mainGlyph_;

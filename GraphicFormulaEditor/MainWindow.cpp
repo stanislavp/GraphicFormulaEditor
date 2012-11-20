@@ -84,7 +84,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), selected_(0)
 	window_->setLayout(vlayout_.get());
 
 	mainGlyph_ = (new Graphic::Row());
-	glyphs_.reset(new std::vector<Graphic::GlyphPtr>());
 
 	//! Binding
 	connect(scene_.get(), SIGNAL(clickOver(QPoint)), this, SLOT(FindGlyph(QPoint)));
@@ -101,11 +100,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), selected_(0)
 	connect(brackets_.get(), SIGNAL(clicked()), this, SLOT(ClickBrackets()));
 
 	view_->setScene(scene_.get());
-}
-
-MainWindow::~MainWindow()
-{
-
 }
 
 void MainWindow::Show()
@@ -125,7 +119,6 @@ void MainWindow::CreateMainGlyph()
 	delete mainGlyph_;
 
 	mainGlyph_ = (new Graphic::Row());
-	glyphs_.reset(new std::vector<Graphic::GlyphPtr>());
 
 	mainGlyph_->Draw(scene_.get());
 }
@@ -319,39 +312,6 @@ void MainWindow::FindGlyph(QPoint point)
 	}
 }
 
-/**
-void MainWindow::__try__()
-{
-	using namespace Graphic;
-
-	mainGlyph_->SetPosition(QPoint(100, 100));
-
-	GlyphPtr function(new Function(QString("sin"), mainGlyph_));
-
-	GlyphPtr var(new Variable(function));
-
-	GlyphPtr oper(new Operation(function, QString("+")));
-
-	GlyphPtr func2(new Function(QString("cos"), function));
-
-	GlyphPtr var2(new Variable(func2, QString("x")));
-
-	glyphs_->push_back(function);
-	glyphs_->push_back(var);
-	glyphs_->push_back(oper);
-	glyphs_->push_back(func2);
-	glyphs_->push_back(var2);
-
-	Adding(mainGlyph_, function, 0);
-	Adding(function, var, 0);
-	Adding(function, oper, 1);
-	Adding(function, func2, 2);
-	Adding(func2, var2, 0);
-
-	mainGlyph_->Draw(scene_.get());
-}
-*/
-
 void MainWindow::Adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t position)
 {
 	 where->Add(what, position);
@@ -465,4 +425,9 @@ void MainWindow::ExportAsImage()
 		pixMap.save(fileName);
 	} else
 		std::cerr << "MainWindow::ExportAsImage(): bad file name. " << std::endl;
+}
+
+MainWindow::~MainWindow()
+{
+	delete mainGlyph_;
 }
