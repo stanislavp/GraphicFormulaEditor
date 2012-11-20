@@ -113,13 +113,6 @@ size_t BracketsPair::GetPositionByPtr(GlyphPtr ptr)
 	 return row_->GetPositionByPtr(ptr);
 }
 
-BracketsPair::~BracketsPair()
-{
-	 delete frontBracket_;
-	 delete row_;
-	 delete backBracket_;
-}
-
 GlyphPtr BracketsPair::Get(size_t position)
 {
 	if(position	> 0)
@@ -136,6 +129,13 @@ QString BracketsPair::__Type()
 QString BracketsPair::Type() const
 {
 	return __Type();
+}
+
+BracketsPair::~BracketsPair()
+{
+	 delete frontBracket_;
+	 delete row_;
+	 delete backBracket_;
 }
 
 }
