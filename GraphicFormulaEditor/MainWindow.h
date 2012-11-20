@@ -57,7 +57,6 @@ public:
 
 	void Show();
 
-	void __try__();
 	void __try2__();
 
 public slots:
@@ -72,6 +71,7 @@ public slots:
 	void ClickLeveled();
 	void ClickRadix();
 	void ClickOperation();
+	void ClickBrackets();
 
 	//! Create
 	void Create(Graphic::GlyphPtr newGlyph);
@@ -79,13 +79,17 @@ public slots:
 private:
 
 	// Добавление к глифу потомка
-	void adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t position);
+	void Adding(Graphic::GlyphPtr where, Graphic::GlyphPtr what, size_t position);
 
 	// Удаление по позиции
-	bool removing(Graphic::GlyphPtr where, size_t position);
+	bool Removing(Graphic::GlyphPtr where, size_t position);
 
+	//! Utils
 	void ClearSelected();
 	void ClearSelectedBackLight();
+
+	bool CheckSelected() const;
+	bool CheckGlyph(Graphic::GlyphPtr glyph) const;
 
 	//! GUI Initialize
 	void CreateActions();
@@ -124,6 +128,7 @@ private:
 	//! Buttons
 	boost::shared_ptr<QPushButton> delete_;
 	boost::shared_ptr<QPushButton> create_;
+	boost::shared_ptr<QPushButton> brackets_;
 	boost::shared_ptr<QPushButton> variable_;
 	boost::shared_ptr<QPushButton> function_;
 	boost::shared_ptr<QPushButton> fraction_;

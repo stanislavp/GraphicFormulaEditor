@@ -8,8 +8,7 @@ int main(int argc, char *argv[])
 
 	w.Show();
 
-	w.__try__();
-	w.__try2__();
+	// w.__try__();
 
 	return a.exec();
 }
