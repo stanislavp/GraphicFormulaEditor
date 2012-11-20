@@ -1,3 +1,5 @@
+#pragma once
+
 //! STDEXCEPT
 #include <stdexcept>
 
