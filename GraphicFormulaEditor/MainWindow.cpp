@@ -178,8 +178,28 @@ void MainWindow::Create(Graphic::GlyphPtr newGlyph)
 		std::cerr << "MainWindow::Create(): !GetGlyph && newGlyph" << std::endl;
 }
 
+bool MainWindow::CheckSelected() const
+{
+	if(selected_)
+		if(CheckGlyph(selected_->GetGlyph()))
+			return true;
+
+	return false;
+}
+
+bool MainWindow::CheckGlyph(Graphic::GlyphPtr glyph) const
+{
+	if(glyph && glyph->Parent())
+		return true;
+
+	return false;
+}
+
 void MainWindow::ClickVariable()
 {
+	if(!CheckSelected())
+		return;
+
 	QDialog *create = new Dialog::CreateVariable(selected_->GetGlyph()->Parent(), this);
 	create->setModal(true);
 	create->show();
@@ -187,6 +207,9 @@ void MainWindow::ClickVariable()
 
 void MainWindow::ClickBrackets()
 {
+	if(!CheckSelected())
+		return;
+
 	QDialog *create = new Dialog::CreateBrackets(selected_->GetGlyph()->Parent(), this);
 	create->setModal(true);
 	create->show();
@@ -194,6 +217,9 @@ void MainWindow::ClickBrackets()
 
 void MainWindow::ClickFunction()
 {
+	if(!CheckSelected())
+		return;
+
 	QDialog *create = new Dialog::CreateFunction(selected_->GetGlyph()->Parent(), this);
 	create->setModal(true);
 	create->show();
@@ -201,6 +227,9 @@ void MainWindow::ClickFunction()
 
 void MainWindow::ClickFraction()
 {
+	if(!CheckSelected())
+		return;
+
 	QDialog *create = new Dialog::CreateFraction(selected_->GetGlyph()->Parent(), this);
 	create->setModal(true);
 	create->show();
@@ -208,6 +237,9 @@ void MainWindow::ClickFraction()
 
 void MainWindow::ClickLeveled()
 {
+	if(!CheckSelected())
+		return;
+
 	QDialog *create = new Dialog::CreateLeveled(selected_->GetGlyph()->Parent(), this);
 	create->setModal(true);
 	create->show();
@@ -215,6 +247,9 @@ void MainWindow::ClickLeveled()
 
 void MainWindow::ClickRadix()
 {
+	if(!CheckSelected())
+		return;
+
 	if(selected_->GetGlyph())
 	{
 		Graphic::GlyphPtr glyph = new Graphic::Function("sqrt", selected_->GetGlyph()->Parent());
@@ -224,6 +259,9 @@ void MainWindow::ClickRadix()
 
 void MainWindow::ClickOperation()
 {
+	if(!CheckSelected())
+		return;
+
 	QDialog *create = new Dialog::CreateOperation(selected_->GetGlyph()->Parent(), this);
 	create->setModal(true);
 	create->show();

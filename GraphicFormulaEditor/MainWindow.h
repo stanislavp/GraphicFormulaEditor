@@ -84,8 +84,12 @@ private:
 	// Удаление по позиции
 	bool Removing(Graphic::GlyphPtr where, size_t position);
 
+	//! Utils
 	void ClearSelected();
 	void ClearSelectedBackLight();
+
+	bool CheckSelected() const;
+	bool CheckGlyph(Graphic::GlyphPtr glyph) const;
 
 	//! GUI Initialize
 	void CreateActions();
