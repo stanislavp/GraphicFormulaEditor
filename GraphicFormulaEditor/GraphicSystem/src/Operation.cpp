@@ -29,7 +29,7 @@ void Operation::Draw(QGraphicsScenePtr scene)
 	}
 }
 
-QRect Operation::Bound()
+QRect Operation::Bound() const
 {
 	if(text_)
 		return text_->boundingRect().toRect();
@@ -44,12 +44,12 @@ void Operation::SetPosition(const QPoint &point)
 	text_->setPos(position_);
 }
 
-QPoint Operation::GetPosition()
+QPoint Operation::GetPosition() const
 {
 	return position_;
 }
 
-bool Operation::Intersects(const QPoint &point, GlyphList &list)
+bool Operation::Intersects(const QPoint &point, GlyphList &list) const
 {
 	if(text_)
 	{
@@ -59,19 +59,19 @@ bool Operation::Intersects(const QPoint &point, GlyphList &list)
 
 		if(tempBound.contains(point))
 		{
-			list.push_back(this);
+			list.push_back(const_cast<OperationPtr>(this));
 			return true;
 		}
 	}
 	return false;
 }
 
-GlyphPtr Operation::Get(size_t position)
+GlyphPtr Operation::Get(size_t position) const
 {
 	throw Exception::IsPlainGlyph("Operation::Get(): is plain. ");
 }
 
-GlyphPtr Operation::Parent() throw()
+GlyphPtr Operation::Parent() const throw()
 {
 	return parent_;
 }

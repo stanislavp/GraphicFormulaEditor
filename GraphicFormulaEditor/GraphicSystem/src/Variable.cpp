@@ -27,12 +27,12 @@ void Variable::Draw(QGraphicsScenePtr scene)
 	}
 }
 
-QRect Variable::Bound()
+QRect Variable::Bound() const
 {
 	return text_->boundingRect().toRect();
 }
 
-bool Variable::Intersects(const QPoint &point, GlyphList &list)
+bool Variable::Intersects(const QPoint &point, GlyphList &list) const
 {
 	/**
 	 * Эталонный bound.
@@ -47,13 +47,13 @@ bool Variable::Intersects(const QPoint &point, GlyphList &list)
 					_textBound.width(),_textBound.height());
 	if(tempBound.contains(point))
 	{
-		list.push_back(this);
+		list.push_back(const_cast<VariablePtr>(this));
 		return true;
 	}
 	return false;
 }
 
-GlyphPtr Variable::Parent() throw()
+GlyphPtr Variable::Parent()  const throw()
 {
 	return parent_;
 }
@@ -71,12 +71,12 @@ void Variable::SetPosition(const QPoint &point)
 	text_->setPos(position_);
 }
 
-QPoint Variable::GetPosition()
+QPoint Variable::GetPosition() const
 {
 	return position_;
 }
 
-GlyphPtr Variable::Get(size_t position)
+GlyphPtr Variable::Get(size_t position) const
 {
 	throw Exception::IsPlainGlyph("Operation::Get(): is plain. ");
 }

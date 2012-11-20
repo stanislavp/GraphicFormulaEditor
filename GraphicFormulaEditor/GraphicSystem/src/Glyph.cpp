@@ -19,13 +19,13 @@ bool Glyph::Remove(size_t position)
 	 return false;
 }
 
-GlyphPtr Glyph::Parent() throw()
+GlyphPtr Glyph::Parent() const throw()
 {
 	//! Default implementation
 	return GlyphPtr();
 }
 
-size_t Glyph::GetPositionByPtr(GlyphPtr ptr)
+size_t Glyph::GetPositionByPtr(GlyphPtr ptr) const
 {
 	 //! Default implementation
 	 return 0;

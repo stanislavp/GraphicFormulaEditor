@@ -24,7 +24,7 @@ void Function::Draw(QGraphicsScenePtr scene)
 	 brackets_->Draw(scene);
 }
 
-QRect Function::Bound()
+QRect Function::Bound() const
 {
 	 QRect result = name_->Bound();
 
@@ -54,20 +54,20 @@ void Function::SetPosition(const QPoint &point)
 	 position_.setY(point.y());
 }
 
-QPoint Function::GetPosition()
+QPoint Function::GetPosition() const
 {
 	 return position_;
 }
 
-bool Function::Intersects(const QPoint &point, GlyphList &list)
+bool Function::Intersects(const QPoint &point, GlyphList &list) const
 {
 	if(brackets_->Intersects(point, list))
 	{
-		list.back() = this;
+		list.back() = const_cast<FunctionPtr>(this);
 		return true;
 	} else if(name_->Intersects(point, list))
 	{
-		list.back() = this;
+		list.back() = const_cast<FunctionPtr>(this);
 		return true;
 	}
 	return false;
@@ -83,7 +83,7 @@ bool Function::Remove(size_t position)
 	return brackets_->Remove(position);
 }
 
-GlyphPtr Function::Get(size_t position)
+GlyphPtr Function::Get(size_t position) const
 {
 	if(position > 0)
 		throw std::out_of_range("Index out of range");
@@ -91,7 +91,7 @@ GlyphPtr Function::Get(size_t position)
 	return brackets_;
 }
 
-size_t Function::GetPositionByPtr(GlyphPtr ptr)
+size_t Function::GetPositionByPtr(GlyphPtr ptr) const
 {
 	 return brackets_->GetPositionByPtr(ptr);
 }

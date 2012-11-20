@@ -30,7 +30,7 @@ void LeveledExpression::Draw(QGraphicsScenePtr scene)
 	level_->Draw(scene);
 }
 
-QRect LeveledExpression::Bound()
+QRect LeveledExpression::Bound() const
 {
 	QRect expressionBound;
 	if(expression_)
@@ -47,13 +47,13 @@ QRect LeveledExpression::Bound()
 	return QRect(0, 0, expressionBound.width() + levelBound.width(), expressionBound.height() + levelBound.height());
 }
 
-bool LeveledExpression::Intersects(const QPoint &point, GlyphList &list)
+bool LeveledExpression::Intersects(const QPoint &point, GlyphList &list) const
 {    
 	if(expression_)
 	{
 		if(expression_->Intersects(point, list))
 		{
-			list.push_back(this);
+			list.push_back(const_cast<LeveledExpressionPtr>(this));
 			return true;
 		}
 	} else
@@ -63,7 +63,7 @@ bool LeveledExpression::Intersects(const QPoint &point, GlyphList &list)
 	{
 		if(level_->Intersects(point, list))
 		{
-			list.push_back(this);
+			list.push_back(const_cast<LeveledExpressionPtr>(this));
 			return true;
 		}
 	} else
@@ -81,7 +81,7 @@ void LeveledExpression::SetPosition(const QPoint &point)
 	 expression_->SetPosition(QPoint(position_.x(), position_.y() + level_->Bound().height()));
 }
 
-QPoint LeveledExpression::GetPosition()
+QPoint LeveledExpression::GetPosition() const
 {
 	return position_;
 }
@@ -118,7 +118,7 @@ bool LeveledExpression::Remove(size_t position)
 	 return false;
 }
 
-GlyphPtr LeveledExpression::Get(size_t position)
+GlyphPtr LeveledExpression::Get(size_t position) const
 {
 	if(position > 1)
 		throw std::out_of_range("Index out of range");
@@ -126,7 +126,7 @@ GlyphPtr LeveledExpression::Get(size_t position)
 	return (position == 0 ? expression_ : level_);
 }
 
-size_t LeveledExpression::GetPositionByPtr(GlyphPtr ptr)
+size_t LeveledExpression::GetPositionByPtr(GlyphPtr ptr) const
 {
 	 size_t position = 0;
 
