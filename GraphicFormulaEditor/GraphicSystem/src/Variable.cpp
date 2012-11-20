@@ -76,10 +76,6 @@ QPoint Variable::GetPosition()
 	return position_;
 }
 
-QPoint Variable::GetMinPosition() {
-	 return position_;
-}
-
 GlyphPtr Variable::Get(size_t position)
 {
 	throw Exception::IsPlainGlyph("Operation::Get(): is plain. ");

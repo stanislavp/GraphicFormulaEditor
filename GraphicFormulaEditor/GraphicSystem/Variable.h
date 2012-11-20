@@ -50,8 +50,6 @@ public:
 	 */
 	virtual QPoint GetPosition();
 
-	virtual QPoint GetMinPosition();
-
 	virtual QString Type() const;
 
 	virtual ~Variable();

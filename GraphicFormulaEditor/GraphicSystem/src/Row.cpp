@@ -1,5 +1,6 @@
 #include "../Row.h"
 #include "../Dummy.h"
+#include "../Level.h"
 
 namespace Graphic
 {
@@ -13,17 +14,11 @@ Row::Row(GlyphPtr parent, QPoint position)
 void Row::Add(GlyphPtr glyph, size_t position)
 {
 	if(contents_.size() == 1) {
-		try {
-			DummyPtr ptr = dynamic_cast<DummyPtr>(contents_.back());
-
-			if(ptr != 0) {
-				contents_.erase(contents_.begin());
-				delete ptr;
-			}
-		} catch(const std::exception& e)
-		{
-			//
-		}
+		 DummyPtr ptr = dynamic_cast<DummyPtr>(contents_.back());
+		 if(ptr != 0) {
+			 contents_.erase(contents_.begin());
+			 delete ptr;
+		 }
 	}
 
 	if(contents_.empty())
@@ -68,11 +63,31 @@ void Row::SetPosition(const QPoint &point)
 	int cumlWidth = 0;
 	int rowHeight = Bound().height();
 
+	int maxIndent = 0;
+	int bottomIndent = 0;
+
+	for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it) {
+		 int localHeight = (*it)->Bound().height();
+		 int topIndent = (rowHeight - localHeight) / 2;
+
+		 if(maxIndent < topIndent) {
+			   maxIndent = topIndent;
+			   bottomIndent = rowHeight - topIndent - localHeight;
+		 }
+	}
+
 	for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it) {
 		int localHeight = (*it)->Bound().height();
 		int topIndent = (rowHeight - localHeight) / 2;
 
-		(*it)->SetPosition(QPoint(point.x() + cumlWidth, point.y() + topIndent));
+		GlyphPtr ptr = dynamic_cast<LeveledExpression*>(*it);
+		if(ptr) {
+			 QPoint position(point.x() + cumlWidth,
+					 std::max(point.y(), point.y() + rowHeight - bottomIndent - localHeight));
+			 (*it)->SetPosition(position);
+		} else
+			 (*it)->SetPosition(QPoint(point.x() + cumlWidth, point.y() + topIndent));
+
 		cumlWidth += (*it)->Bound().width();
 	}
 }
@@ -80,15 +95,6 @@ void Row::SetPosition(const QPoint &point)
 QPoint Row::GetPosition()
 {
 	return position_;
-}
-
-QPoint Row::GetMinPosition() {
-	 int y = position_.y();
-	 for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it) {
-		  y = std::min(y, (*it)->GetMinPosition().y());
-	 }
-
-	 return QPoint(position_.x(), y);
 }
 
 QString Row::__Type()
