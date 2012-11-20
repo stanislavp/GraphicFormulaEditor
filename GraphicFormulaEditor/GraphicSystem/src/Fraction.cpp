@@ -51,12 +51,12 @@ void Fraction::SetPosition(const QPoint &point)
 	 position_.setX(point.x());
 	 position_.setY(point.y());
 
-	 numerator->SetPosition(point);
-	 denominator->SetPosition(QPoint(position_.x(), position_.y() + numerator->Bound().height()));
+	 int numWidth = numerator->Bound().width();
+	 int denWidth = denominator->Bound().width();
+	 int width = std::max(numWidth, denWidth);
 
-	 //numerator->SetPosition(QPoint(point.x(), denominator->GetPosition().y() - numerator->Bound().height()));
-
-	 position_.setY(numerator->GetPosition().y());
+	 numerator->SetPosition(QPoint(point.x() + (width - numWidth) / 2, point.y()));
+	 denominator->SetPosition(QPoint(position_.x() + (width - denWidth) / 2, position_.y() + numerator->Bound().height()));
 
 	 UpdateLine();
 }
