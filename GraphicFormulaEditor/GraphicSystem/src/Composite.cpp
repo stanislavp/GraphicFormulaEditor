@@ -24,7 +24,7 @@ void Composite::Draw(QGraphicsScenePtr scene)
 	}
 }
 
-QRect Composite::Bound()
+QRect Composite::Bound() const
 {
 	 int width = 0, height = 0;
 
@@ -39,13 +39,13 @@ QRect Composite::Bound()
 	 return QRect(0, 0, width, height);
 }
 
-bool Composite::Intersects(const QPoint &point, GlyphList &list)
+bool Composite::Intersects(const QPoint &point, GlyphList &list) const
 {
 	for(Content::const_iterator _it(contents_.begin()); _it != contents_.end(); ++_it)
 	{
 		if((*_it)->Intersects(point, list))
 		{
-			list.push_back(this);
+			list.push_back(const_cast<CompositePtr>(this));
 			return true;
 		}
 	}
@@ -109,7 +109,8 @@ bool Composite::Remove(size_t position)
 	return false;
 }
 
-GlyphPtr Composite::Get(size_t position) {
+GlyphPtr Composite::Get(size_t position) const
+{
 	if(position >= contents_.size())
 		throw std::out_of_range("Index out of range");
 
@@ -121,7 +122,7 @@ GlyphPtr Composite::Get(size_t position) {
 	return GlyphPtr();
 }
 
-size_t Composite::GetPositionByPtr(GlyphPtr ptr)
+size_t Composite::GetPositionByPtr(GlyphPtr ptr) const
 {
 	 size_t result = 0;
 	 for(Content::const_iterator it = contents_.begin(); it != contents_.end(); ++it, ++result) {
@@ -132,7 +133,7 @@ size_t Composite::GetPositionByPtr(GlyphPtr ptr)
 	 throw std::logic_error("This glyph is not here.");
 }
 
-GlyphPtr Composite::Parent() throw()
+GlyphPtr Composite::Parent() const throw()
 {
 	return parent_;
 }

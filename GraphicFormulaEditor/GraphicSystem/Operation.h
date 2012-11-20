@@ -30,7 +30,7 @@ public:
 	virtual void Draw(QGraphicsScenePtr scene);
 
 	//! Возвращает максимальную прямоугольную область, занимаемую глифом
-	virtual QRect Bound();
+	virtual QRect Bound() const ;
 
 	/**
 	 * У каждого глифа есть позиция.
@@ -41,10 +41,10 @@ public:
 	/**
 	 * Возвращает позицию глифа.
 	 */
-	virtual QPoint GetPosition();
+	virtual QPoint GetPosition() const ;
 
 	//! Определяет пересечение точки с областью глифа
-	virtual bool Intersects(const QPoint &point, GlyphList &list);
+	virtual bool Intersects(const QPoint &point, GlyphList &list) const ;
 
 	/**
 	 * Добавляет к глифу потомка.
@@ -58,13 +58,13 @@ public:
 	 */
 	//virtual bool Remove(size_t position);
 
-	virtual GlyphPtr Get(size_t position);
+	virtual GlyphPtr Get(size_t position) const ;
 
 	/**
 	 * Возвращает родителя глифа.
 	 * Пустой указатель, если родителя нет.
 	 */
-	virtual GlyphPtr Parent() throw();
+	virtual GlyphPtr Parent()  const throw();
 
 	virtual QString Type() const;
 

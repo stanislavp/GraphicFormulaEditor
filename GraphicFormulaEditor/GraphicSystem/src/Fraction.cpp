@@ -37,7 +37,7 @@ void Fraction::Draw(QGraphicsScenePtr scene)
 }
 
 
-QRect Fraction::Bound()
+QRect Fraction::Bound() const
 {
 	QRect top = numerator->Bound();
 	QRect bottom = denominator->Bound();
@@ -61,20 +61,20 @@ void Fraction::SetPosition(const QPoint &point)
 	 UpdateLine();
 }
 
-QPoint Fraction::GetPosition()
+QPoint Fraction::GetPosition() const
 {
 	 return position_;
 }
 
-bool Fraction::Intersects(const QPoint &point, GlyphList &list)
+bool Fraction::Intersects(const QPoint &point, GlyphList &list) const
 {
 	if(numerator->Intersects(point, list))
 	{
-		list.push_back(this);
+		list.push_back(const_cast<FractionPtr>(this));
 		return true;
 	} else if(denominator->Intersects(point, list))
 	{
-		list.push_back(this);
+		list.push_back(const_cast<FractionPtr>(this));
 		return true;
 	}
 	return false;
@@ -107,7 +107,7 @@ void Fraction::UpdateLine()
 			position_.y() + _top.height());
 }
 
-GlyphPtr Fraction::Get(size_t position)
+GlyphPtr Fraction::Get(size_t position) const
 {
 	if(position > 1)
 		throw std::out_of_range("Index out of range");
@@ -115,7 +115,7 @@ GlyphPtr Fraction::Get(size_t position)
 	return (position == 0 ? numerator : denominator);
 }
 
-size_t Fraction::GetPositionByPtr(GlyphPtr ptr)
+size_t Fraction::GetPositionByPtr(GlyphPtr ptr) const
 {
 	 size_t position = 0;
 

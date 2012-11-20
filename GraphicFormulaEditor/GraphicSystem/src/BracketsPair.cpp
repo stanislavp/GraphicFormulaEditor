@@ -24,7 +24,7 @@ void BracketsPair::Draw(QGraphicsScenePtr scene)
 	backBracket_->Draw(scene);
 }
 
-QRect BracketsPair::Bound()
+QRect BracketsPair::Bound() const
 {
 	 using std::max;
 
@@ -46,19 +46,19 @@ QRect BracketsPair::Bound()
 	 return QRect(0, 0, width, height);
 }
 
-bool BracketsPair::Intersects(const QPoint &point, GlyphList &list)
+bool BracketsPair::Intersects(const QPoint &point, GlyphList &list) const
 {
 	if(frontBracket_->Intersects(point, list))
 	{
-		list.back() = this;
+		list.back() = const_cast<BracketsPairPtr>(this);
 		return true;
 	} else if(backBracket_->Intersects(point, list))
 	{
-		list.back() = this;
+		list.back() = const_cast<BracketsPairPtr>(this);
 		return true;
 	} else if(row_->Intersects(point, list))
 	{
-		list.push_back(this);
+		list.push_back(const_cast<BracketsPairPtr>(this));
 		return true;
 	}
 	return false;
@@ -103,17 +103,17 @@ void BracketsPair::SetPosition(const QPoint &point)
 	 position_.setY(point.y());
 }
 
-QPoint BracketsPair::GetPosition()
+QPoint BracketsPair::GetPosition() const
 {
 	 return position_;
 }
 
-size_t BracketsPair::GetPositionByPtr(GlyphPtr ptr)
+size_t BracketsPair::GetPositionByPtr(GlyphPtr ptr) const
 {
 	 return row_->GetPositionByPtr(ptr);
 }
 
-GlyphPtr BracketsPair::Get(size_t position)
+GlyphPtr BracketsPair::Get(size_t position) const
 {
 	if(position	> 0)
 		throw std::out_of_range("Index out of range");

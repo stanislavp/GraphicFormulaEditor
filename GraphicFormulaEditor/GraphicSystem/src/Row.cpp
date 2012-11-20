@@ -92,7 +92,7 @@ void Row::SetPosition(const QPoint &point)
 	}
 }
 
-QPoint Row::GetPosition()
+QPoint Row::GetPosition() const
 {
 	return position_;
 }

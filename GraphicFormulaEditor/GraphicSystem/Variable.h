@@ -33,22 +33,22 @@ public:
 
 	virtual void Draw(QGraphicsScenePtr scene);
 
-	virtual QRect Bound();
+	virtual QRect Bound() const ;
 
-	virtual bool Intersects(const QPoint &point, GlyphList &list);
+	virtual bool Intersects(const QPoint &point, GlyphList &list) const ;
 
-	virtual GlyphPtr Parent() throw();
+	virtual GlyphPtr Parent() const throw();
 
 	virtual void SetText(const QString &text);
 
 	virtual void SetPosition(const QPoint &point);
 
-	virtual GlyphPtr Get(size_t position);
+	virtual GlyphPtr Get(size_t position) const ;
 
 	/**
 	 * Возвращает позицию глифа.
 	 */
-	virtual QPoint GetPosition();
+	virtual QPoint GetPosition() const ;
 
 	virtual QString Type() const;
 

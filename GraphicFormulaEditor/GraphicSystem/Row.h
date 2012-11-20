@@ -28,7 +28,7 @@ public:
 	/**
 	 * Возвращает позицию глифа.
 	 */
-	virtual QPoint GetPosition();
+	virtual QPoint GetPosition() const ;
 
 	/**
 	 * Добавляет к глифу потомка.
