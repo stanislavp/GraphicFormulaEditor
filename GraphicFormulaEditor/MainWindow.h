@@ -3,12 +3,11 @@
 
 #pragma once
 
-#include <QMainWindow>
+//! Own
+#include "GraphicScene.h"
 
 //! QT
-#include <QGraphicsScene>
-#include <QGraphicsSceneMouseEvent>
-
+#include <QMainWindow>
 #include <QListWidget>
 #include <QListWidgetItem>
 
@@ -47,29 +46,6 @@
 
 //! TEMP
 #include <iostream>
-
-class GraphicsScene : public QGraphicsScene
-{
-	Q_OBJECT
-public:
-	GraphicsScene(QObject* parent = 0) : QGraphicsScene(parent)
-	{
-
-	}
-protected:
-	void mousePressEvent(QGraphicsSceneMouseEvent* event)
-	{
-		QPoint position = event->scenePos().toPoint();
-		std::cerr << "X: " << position.x();
-		std::cerr << " Y: " << position.y();
-		std::cerr << std::endl;
-
-		emit clickOver(position);
-	}
-
-signals:
-	void clickOver(QPoint point);
-};
 
 class MainWindow : public QMainWindow
 {
